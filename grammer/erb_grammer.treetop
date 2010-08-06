@@ -1,0 +1,23 @@
+grammar ERBGrammer
+        rule erb_string
+             '<%=' (!'%>' . )* '%>'
+        end
+
+        rule erb_block
+             '<%' (!'%>' . )* '%>'
+        end
+
+        rule html_self_contained
+             '<' (!'/>' .)+ '/>'
+        end     
+
+        rule html_end_tag
+             '</' (!'>' .)+ '>'
+        end
+
+        rule html_start_tag
+             '<' (!'>' .)+ '>'
+        end     
+
+end
+        
