@@ -13,6 +13,7 @@ task :test_compilation do
     else
       complitaion_test_success = false
       puts "Failed #{full_path_to_file}"
+      puts "For reason: #{ErbFile.debug( full_path_to_file ) }"
     end
   end
 

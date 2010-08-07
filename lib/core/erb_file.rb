@@ -8,6 +8,13 @@ class ErbFile
     parser = ERBGrammerParser.new
     ErbFile.new( parser.parse( File.read( file_path ) ) )
   end
+
+  def ErbFile.debug( file_path )
+    Treetop.load( $ERB_GRAMMER_FILE )
+    parser = ERBGrammerParser.new
+    ErbFile.new( parser.parse( File.read( file_path ) ) )
+    parser.failure_reason
+  end
   
   def compiled?
     !@node_set.nil?

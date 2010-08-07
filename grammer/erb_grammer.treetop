@@ -1,6 +1,10 @@
 grammar ERBGrammer
+        rule erb
+             (erb_string)* (erb_block)* (html_self_contained)* (html_start_tag)* (html_end_tag)* (text)* 
+        end
+
         rule erb_string
-             '<%=' (!'%>' . )* '%>'
+             '<%=' (!'%>' .)* '%>' 
         end
 
         rule erb_block
@@ -18,6 +22,10 @@ grammar ERBGrammer
         rule html_start_tag
              '<' (!'>' .)+ '>'
         end     
+
+        rule text
+             (.)+
+        end
 
 end
         
