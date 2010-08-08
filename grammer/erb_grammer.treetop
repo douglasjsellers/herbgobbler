@@ -1,26 +1,36 @@
 grammar ERBGrammer
         rule erb
-             ( erb_string /erb_block / html_self_contained / html_start_tag / html_end_tag / text ) (erb)?
+             ( erb_string /
+               erb_block  / 
+               html_self_contained / 
+               html_start_tag / 
+               html_end_tag / 
+               text 
+             ) (erb)?      
         end
 
         rule erb_string
-             '<%=' (!'%>' text)* '%>' <NonTextNode>
+             '<%=' (!erb_block_end text)* erb_block_end <NonTextNode>
         end
 
         rule erb_block
-             '<%' (!'%>' text)* '%>' <NonTextNode>
+             '<%' (!erb_block_end text)* erb_block_end <NonTextNode>
+        end
+        
+        rule erb_block_end
+             '%>' / '-%>'
         end
 
         rule html_self_contained
-             '<' (!'/>' text)+ '/>' <NonTextNode>
+             '<' (!'/>' erb)+ '/>' <NonTextNode>
         end     
 
         rule html_end_tag
-             '</' (!'>' text)+ '>' <NonTextNode>
+             '</' (!'>' erb)+ '>' <NonTextNode>
         end
 
         rule html_start_tag
-             '<' (!'>' text)+ '>' <NonTextNode>
+             '<' (!'>' erb)+ '>' <NonTextNode>
         end     
 
         rule text
