@@ -1,6 +1,7 @@
 class ErbFile
   def initialize( node_set )
-    @node_set = node_set
+    @node_set = flatten(node_set)
+    
   end
   
   def compiled?
@@ -24,5 +25,13 @@ class ErbFile
     @node_set.to_s
   end
   
+
+  private
+
+  # This just goes through and get's rid of all of the heirarchy.
+  # Being that the erb heirarchy is not actually that valuable to use
+  def flatten( node_set )
+    node_set
+  end
   
 end

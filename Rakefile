@@ -25,8 +25,13 @@ task :test_compilation do
   end
 end
 
+task :test_specs do
+  puts "Running specs"
+  puts `spec tests/specs/*.rb`
+end
+
 desc "Run all of the tests"
-task :test => [:test_compilation] do
+task :test => [:test_compilation, :test_specs] do
 end
 
 task :default => [:test]
