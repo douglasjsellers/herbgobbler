@@ -6,7 +6,7 @@ grammar ERBGrammer
                html_start_tag / 
                html_end_tag / 
                text 
-             ) (erb)?      
+             ) (erb)*
         end
 
         rule erb_string
