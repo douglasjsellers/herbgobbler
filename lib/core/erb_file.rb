@@ -1,6 +1,6 @@
 class ErbFile
   def initialize( node_set )
-    @node_set = flatten(node_set)
+    @node_set = node_set
   end
 
   def accumulate_top_levels
@@ -25,19 +25,12 @@ class ErbFile
     ErbFile.parse( File.read( file_path ) )
   end
 
-  
   def to_s
     @node_set.inspect
   end
   
 
   private
-
-  # This just goes through and get's rid of all of the heirarchy.
-  # Being that the erb heirarchy is not actually that valuable to use
-  def flatten( node_set )
-    node_set
-  end
 
   def ErbFile.parse( data_to_parse )
     Treetop.load( $ERB_GRAMMER_FILE )
