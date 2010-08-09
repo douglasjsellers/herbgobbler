@@ -67,6 +67,55 @@ describe ErbFile do
     terminals[2].text?.should == false
     terminals[2].node_name.should == "html_self_contained"    
     terminals[2].text_value.should == "<br/>" 
+  end
+
+  it "should be able to correctly roll up text when that text is surrounded by html tags" do
+    
+    erb_file = ErbFile.from_string( "<b>Doug</b>" )
+    terminals = erb_file.accumulate_top_levels    
+    terminals.size.should == 3
+    
+    terminals[0].top_level?.should == true
+    terminals[0].text?.should == false
+    terminals[0].node_name.should == "html_start_tag"
+    terminals[0].text_value.should == "<b>" 
+    
+    terminals[1].top_level?.should == true
+    terminals[1].text?.should == true
+    terminals[1].node_name.should == "text"
+    terminals[1].text_value.should == "Doug" 
+
+    terminals[2].top_level?.should == true
+    terminals[2].text?.should == false
+    terminals[2].node_name.should == "html_end_tag"    
+    terminals[2].text_value.should == "</b>" 
+    
+  end
+
+  it "should be able to roll up text when it is surrounded by erb blocks and strings" do
+    erb_file = ErbFile.from_string( "Doug<%= is? %>Great<% @title='blah' %>" )
+    terminals = erb_file.accumulate_top_levels    
+    terminals.size.should == 4
+
+    terminals[0].top_level?.should == true
+    terminals[0].text?.should == true
+    terminals[0].node_name.should == "text"
+    terminals[0].text_value.should == "Doug" 
+
+    terminals[1].top_level?.should == true
+    terminals[1].text?.should == false
+    terminals[1].node_name.should == "erb_string"
+    terminals[1].text_value.should == "<%= is? %>" 
+
+    terminals[2].top_level?.should == true
+    terminals[2].text?.should == true
+    terminals[2].node_name.should == "text"
+    terminals[2].text_value.should == "Great" 
+
+    terminals[3].top_level?.should == true
+    terminals[3].text?.should == false
+    terminals[3].node_name.should == "erb_block"
+    terminals[3].text_value.should == "<% @title='blah' %>" 
     
   end
   
