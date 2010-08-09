@@ -5,16 +5,28 @@ grammar ERBGrammer
                html_self_contained / 
                html_start_tag / 
                html_end_tag / 
-               text 
+               free_text 
              ) (erb)*
         end
 
         rule erb_string
              '<%=' (!erb_block_end text)* erb_block_end <NonTextNode>
+             {
+                def node_name
+                    "erb_string"
+                end
+             }
+
         end
 
         rule erb_block
              '<%' (!erb_block_end text)* erb_block_end <NonTextNode>
+             {
+                def node_name
+                    "erb_block"
+                end
+             }
+
         end
         
         rule erb_block_end
@@ -22,17 +34,44 @@ grammar ERBGrammer
         end
 
         rule html_self_contained
-             '<' (!'/>' text)+ '/>' <NonTextNode>
+             '<' (!'/>' text)+ '/>' <NonTextNode> 
+             {
+                def node_name
+                    "html_self_contained"
+                end
+             }
         end     
 
         rule html_end_tag
              '</' (!'>' text)+ '>' <NonTextNode>
+             {
+                def node_name
+                    "html_end_tag"
+                end
+             }
+
         end
 
         rule html_start_tag
              '<' (!'>' text)+ '>' <NonTextNode>
-        end     
+             {
+                def node_name
+                    "html_start_tag"
+                end
+             }
 
+        end     
+        
+        rule free_text
+             (!html_self_contained .)+ <TextNode>
+             {
+                def node_name
+                    "text"
+                end
+             }
+
+        end
+        
         rule text
             . <TextNode>
         end

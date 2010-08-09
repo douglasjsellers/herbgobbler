@@ -1,6 +1,6 @@
 module NonTextNode 
   def text?
-    true
+    false
   end
 
   def top_level?
