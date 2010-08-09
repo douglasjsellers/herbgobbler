@@ -1,5 +1,10 @@
-class NonTextNode < Treetop::Runtime::SyntaxNode
+module NonTextNode 
   def text?
     true
   end
+
+  def top_level?
+    true
+  end  
+  
 end

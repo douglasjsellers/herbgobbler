@@ -22,19 +22,19 @@ grammar ERBGrammer
         end
 
         rule html_self_contained
-             '<' (!'/>' erb)+ '/>' <NonTextNode>
+             '<' (!'/>' text)+ '/>' <NonTextNode>
         end     
 
         rule html_end_tag
-             '</' (!'>' erb)+ '>' <NonTextNode>
+             '</' (!'>' text)+ '>' <NonTextNode>
         end
 
         rule html_start_tag
-             '<' (!'>' erb)+ '>' <NonTextNode>
+             '<' (!'>' text)+ '>' <NonTextNode>
         end     
 
         rule text
-             . <TextNode>
+            . <TextNode>
         end
 
 end
