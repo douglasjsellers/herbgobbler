@@ -10,7 +10,7 @@ class TextExtractor
   # This takes in a text node and returns one or more nodes that will
   # then be output.  The nodes that are output should implement
   # node_name and text_value
-  def text( text_node )
+  def html_text( text_node )
     raise "Please implement me"
   end
 

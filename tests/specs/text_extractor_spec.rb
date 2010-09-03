@@ -15,7 +15,7 @@ class TestTextExtractor < TextExtractor
     @found_start_text_extraction = true
   end
   
-  def text( text_node )
+  def html_text( text_node )
     @text_found << text_node
     nil
   end
