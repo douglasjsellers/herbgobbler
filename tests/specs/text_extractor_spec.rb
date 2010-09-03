@@ -17,6 +17,7 @@ class TestTextExtractor < TextExtractor
   
   def text( text_node )
     @text_found << text_node
+    nil
   end
 
 
@@ -68,5 +69,19 @@ describe TextExtractor do
     text_extractor.text_found.last.should == "Great"
   end
 
+  it "should replace the text nodes in the original erb file" do
+    html_text = "<b>Doug is</b>Great"
+    erb_file = ErbFile.from_string( html_text )
+    text_extractor = TestTextExtractor.new
+    erb_file.extract_text( text_extractor )
+
+    text_extractor.text_found.size.should == 2
+
+    nil_count = 0
+    erb_file.nodes.each do |node|
+      nil_count += 1 if node.nil?
+    end
+    nil_count.should == 2
+  end
   
 end

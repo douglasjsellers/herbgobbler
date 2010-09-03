@@ -1,6 +1,9 @@
 class ErbFile
+  
+  attr_accessor :nodes
   def initialize( node_set )
     @node_set = node_set
+    @nodes = accumulate_top_levels if compiled?
   end
 
   def accumulate_top_levels
@@ -24,11 +27,16 @@ class ErbFile
     # 3.  Finally replace the nodes in the top levels (not sure how
     # this is going to work with any of the nested stuff)
     text_extractor.starting_text_extraction
-    accumulate_top_levels.each do |node|
+    new_node_set = []
+    @nodes.each do |node|
       if( node.text? )
         node_string = node.text_value.strip
-        text_extractor.text( node_string )
+        new_node_set << text_extractor.text( node_string )        
+      else
+        new_node_set << node
       end
+      @nodes = new_node_set
+      self
     end
     
     text_extractor.completed_text_extraction
@@ -42,6 +50,7 @@ class ErbFile
     ErbFile.parse( File.read( file_path ) )
   end
 
+  
   def to_s
     @node_set.inspect
   end
