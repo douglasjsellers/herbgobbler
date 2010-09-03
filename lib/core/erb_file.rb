@@ -17,6 +17,23 @@ class ErbFile
     @parser.failure_reason
   end
 
+  def extract_text( text_extractor )
+    # 1.  Going to have to loop over all of the elements and find all of
+    # the text.
+    # 2.  Then make the call back to the text_extractor
+    # 3.  Finally replace the nodes in the top levels (not sure how
+    # this is going to work with any of the nested stuff)
+    text_extractor.starting_text_extraction
+    accumulate_top_levels.each do |node|
+      if( node.text? )
+        node_string = node.text_value.strip
+        text_extractor.text( node_string )
+      end
+    end
+    
+    text_extractor.completed_text_extraction
+  end
+  
   def ErbFile.from_string( string_to_parse )
     ErbFile.parse( string_to_parse )
   end
@@ -29,7 +46,6 @@ class ErbFile
     @node_set.inspect
   end
   
-
   private
 
   def ErbFile.parse( data_to_parse )

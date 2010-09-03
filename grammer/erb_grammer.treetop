@@ -61,9 +61,9 @@ grammar ERBGrammer
              }
 
         end     
-        
+
         rule text
-             ((!html_self_contained !html_start_tag !html_end_tag !erb_string !erb_block) .)+ <TextNode>
+             ((!html_self_contained !html_start_tag !html_end_tag !erb_string !erb_block) . )+ <TextNode>
              {
                 def node_name
                     "text"
