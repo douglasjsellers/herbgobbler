@@ -50,6 +50,15 @@ class ErbFile
     ErbFile.parse( File.read( file_path ) )
   end
 
+  def serialize
+    to_return = ""
+    nodes.each do |node|
+      to_return << node.text_value
+    end
+
+    to_return
+  end
+  
   
   def to_s
     @node_set.inspect

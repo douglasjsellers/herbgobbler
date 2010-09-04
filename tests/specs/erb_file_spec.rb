@@ -119,6 +119,15 @@ describe ErbFile do
     
   end
   
+  it "should be able to correctly serialize a simple html snippet" do
+        html_text = "<b>
+        Doug is great
+</b>"
+    erb_file = ErbFile.from_string( html_text )
+
+    erb_file.serialize.should == html_text
+  end
+  
   
   
   
