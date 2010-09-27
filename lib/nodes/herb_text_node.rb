@@ -4,7 +4,7 @@ class HerbTextNode
   def initialize( text )
     @text_value = text
   end
-
+  
   def to_s
     @text_value
   end

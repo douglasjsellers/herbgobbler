@@ -18,7 +18,7 @@ class TestTextExtractor < BaseTextExtractor
   def html_text( text_node )
     # I must not understand how this works
     text_node = super( text_node )
-    @text_found << text_node.to_s
+    @text_found << text_node.text_value
     nil
   end
 
