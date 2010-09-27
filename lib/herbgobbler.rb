@@ -4,3 +4,4 @@ $ERB_GRAMMER_FILE = File.expand_path( "#{File.expand_path( File.dirname( __FILE_
 require 'rubygems'
 require 'treetop'
 require 'core/core'
+require 'nodes/nodes'

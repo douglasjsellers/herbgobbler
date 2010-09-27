@@ -30,8 +30,7 @@ class ErbFile
     new_node_set = []
     @nodes.each do |node|
       if( node.text? )
-        node_string = node.text_value.strip
-        new_node_set << text_extractor.html_text( node_string )        
+        new_node_set << text_extractor.html_text( node )        
       else
         new_node_set << node
       end

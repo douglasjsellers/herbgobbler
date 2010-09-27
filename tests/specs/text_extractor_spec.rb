@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-class TestTextExtractor < TextExtractor
+class TestTextExtractor < BaseTextExtractor
   attr_accessor :found_start_text_extraction
   attr_accessor :found_completed_text_extraction
   attr_accessor :text_found
@@ -16,7 +16,9 @@ class TestTextExtractor < TextExtractor
   end
   
   def html_text( text_node )
-    @text_found << text_node
+    # I must not understand how this works
+    text_node = super( text_node )
+    @text_found << text_node.to_s
     nil
   end
 

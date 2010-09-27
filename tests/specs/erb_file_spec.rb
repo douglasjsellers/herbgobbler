@@ -124,7 +124,6 @@ describe ErbFile do
         Doug is great
 </b>"
     erb_file = ErbFile.from_string( html_text )
-
     erb_file.serialize.should == html_text
   end
   
