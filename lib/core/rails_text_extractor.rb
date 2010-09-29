@@ -1,7 +1,8 @@
 class RailsTextExtractor < TextExtractor
+  
   # This is called when text extraction has begun
   def starting_text_extraction
-
+    
   end
   
   # This takes in a text node and returns one or more nodes that will
@@ -15,5 +16,6 @@ class RailsTextExtractor < TextExtractor
   # This is called when text extraction has finished
   def completed_text_extraction
 
-  end  
+  end
+  
 end
