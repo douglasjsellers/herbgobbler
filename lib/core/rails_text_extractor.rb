@@ -1,4 +1,4 @@
-class RailsTextExtractor < TextExtractor
+class RailsTextExtractor < BaseTextExtractor
   
   # This is called when text extraction has begun
   def starting_text_extraction
@@ -9,7 +9,7 @@ class RailsTextExtractor < TextExtractor
   # then be output.  The nodes that are output should implement
   # node_name and text_value
   def html_text( text_node )
-
+    HerbErbTextCallNode.new( [super( text_node ).text_value], 't :' )
   end
 
 

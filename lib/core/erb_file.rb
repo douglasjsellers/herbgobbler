@@ -37,7 +37,6 @@ class ErbFile
       @nodes = new_node_set
       self
     end
-    
     text_extractor.completed_text_extraction
   end
   
