@@ -59,7 +59,11 @@ class ErbFile
   
   
   def to_s
-    @node_set.inspect
+    to_return = ""
+    nodes.each do |node|
+      to_return += node.text_value
+    end
+    to_return
   end
   
   private
