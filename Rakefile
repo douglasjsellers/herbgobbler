@@ -25,13 +25,33 @@ task :test_compilation do
   end
 end
 
+task :test_integration do
+  puts "Running integration tests"
+  puts ""
+  
+  test_directory = 'tests/integration/test'
+  result_directory = 'tests/integration/result'
+  
+  Dir.new( test_directory ).reject {|f| [".", ".."].include? f}.each do |file|
+    text_extractor = RailsTextExtractor.new
+    erb_file = ErbFile.load(  "#{test_directory}/#{file}" )
+    erb_file.extract_text(text_extractor )
+    if( erb_file.to_s == File.read( "#{result_directory}/#{file}.result" ) )
+      puts "Successfully processed #{file}"
+    else
+      puts "Failed #{file}"
+    end
+  end
+  
+end
+
 task :test_specs do
   puts "Running specs"
   puts `spec tests/specs/*.rb`
 end
 
 desc "Run all of the tests"
-task :test => [:test_compilation, :test_specs] do
+task :test => [:test_compilation, :test_specs, :test_integration] do
 end
 
 task :default => [:test]
