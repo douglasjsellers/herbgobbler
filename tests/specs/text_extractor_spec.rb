@@ -17,8 +17,10 @@ class TestTextExtractor < BaseTextExtractor
   
   def html_text( text_node )
     # I must not understand how this works
-    text_node = super( text_node )
-    @text_found << text_node.text_value
+    super( text_node ).each do |node|
+      @text_found << node.text_value
+    end
+    
     nil
   end
 
@@ -56,8 +58,11 @@ describe TextExtractor do
     erb_file = ErbFile.from_string( html_text )
     text_extractor = TestTextExtractor.new
     erb_file.extract_text( text_extractor )    
-    text_extractor.text_found.size.should == 1
-    text_extractor.text_found.first.should == "Doug is great"
+    text_extractor.text_found.size.should == 3
+    text_extractor.text_found.first.should == "\n        "
+    text_extractor.text_found[1].should == "Doug is great"
+    text_extractor.text_found.last.should == "\n"
+    
   end
 
   it "should be able to extract multiple pieces of text" do
@@ -79,11 +84,7 @@ describe TextExtractor do
 
     text_extractor.text_found.size.should == 2
 
-    nil_count = 0
-    erb_file.nodes.each do |node|
-      nil_count += 1 if node.nil?
-    end
-    nil_count.should == 2
+    erb_file.nodes.size == 0
   end
   
 end

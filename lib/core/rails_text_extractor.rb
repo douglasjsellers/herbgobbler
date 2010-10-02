@@ -9,7 +9,15 @@ class RailsTextExtractor < BaseTextExtractor
   # then be output.  The nodes that are output should implement
   # node_name and text_value
   def html_text( text_node )
-    HerbErbTextCallNode.new( [super( text_node ).text_value], 't :' )
+    to_return = []
+    super(text_node).each do |text_node|
+      if( text_node.white_space? )
+        to_return << text_node
+      else
+        to_return << HerbErbTextCallNode.new( [text_node.text_value], 't :' )
+      end
+    end
+    to_return
   end
 
 

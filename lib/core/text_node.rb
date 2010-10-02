@@ -3,6 +3,10 @@ module TextNode
     true
   end
 
+  def white_space?
+    false
+  end
+  
   def top_level?
     true
   end  
