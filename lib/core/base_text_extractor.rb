@@ -20,18 +20,23 @@ class BaseTextExtractor < TextExtractor
   
   def remove_leading_and_trailing_whitespace( text_node )
     to_return = []
-    
-    if( text_node.text_value =~ /^(\s+)/ )
-      start_whitespace = $1
-      to_return << HerbWhiteSpaceTextNode.new( start_whitespace )
-    end
 
-    to_return << HerbTextNode.new( text_node.text_value.strip )
+    if( text_node.text_value.strip.empty? ) # is this only whitespace
+      to_return << HerbWhiteSpaceTextNode.new( text_node.text_value )
+    else # otherwise it has some text
+      if( text_node.text_value =~ /^(\s+)/ )
+        start_whitespace = $1
+        to_return << HerbWhiteSpaceTextNode.new( start_whitespace )
+      end
+
+      to_return << HerbTextNode.new( text_node.text_value.strip )
     
-    if( text_node.text_value =~ /(\s+)$/ )
-      end_whitespace = $1
-      to_return << HerbWhiteSpaceTextNode.new( end_whitespace )      
+      if( text_node.text_value =~ /(\s+)$/ )
+        end_whitespace = $1
+        to_return << HerbWhiteSpaceTextNode.new( end_whitespace )      
+      end
     end
+    
     
     to_return
   end

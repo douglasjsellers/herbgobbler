@@ -86,5 +86,18 @@ describe TextExtractor do
 
     erb_file.nodes.size == 0
   end
+
+  it "should return only whitespace nodes" do
+    html_text = "<b>
+</b>"
+
+    erb_file = ErbFile.from_string( html_text )
+    text_extractor = TestTextExtractor.new
+    erb_file.extract_text( text_extractor )
+    
+    text_extractor.text_found.size.should == 1
+    text_extractor.text_found.first == "\n"
+
+  end
   
 end
