@@ -2,6 +2,7 @@ grammar ERBGrammer
         rule erb
              ( erb_string /
                erb_block  / 
+               ignorable_script_tag_content /
                html_self_contained / 
                html_end_tag / 
                html_start_tag / 
@@ -32,6 +33,16 @@ grammar ERBGrammer
         rule erb_block_end
              '%>' / '-%>'
         end
+
+        rule ignorable_script_tag_content
+             '<script' (!'</script' .)+ <IgnorableTagNode>
+             {
+                def node_name
+                   "ignorable_tage_name"
+                end
+             }
+        end
+
 
         rule html_self_contained
              '<' (!'/>' .)+ '/>' <NonTextNode> 
