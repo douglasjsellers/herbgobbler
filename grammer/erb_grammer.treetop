@@ -6,6 +6,7 @@ grammar ERBGrammer
                html_self_contained / 
                html_end_tag / 
                html_start_tag / 
+               whitespace / 
                text 
              ) (erb)*
         end
@@ -81,6 +82,15 @@ grammar ERBGrammer
                 end
              }
 
+        end
+
+        rule whitespace
+            ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+)) . )+ <NonTextNode>
+            {
+               def node_name    
+                    "whitespace"
+               end
+            }
         end
         
 end
