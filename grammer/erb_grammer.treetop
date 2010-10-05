@@ -38,6 +38,10 @@ grammar ERBGrammer
         rule ignorable_script_tag_content
              '<script' (!'</script' .)+ <IgnorableTagNode>
              {
+                def can_be_combined?
+                    false
+                end
+
                 def node_name
                    "ignorable_tage_name"
                 end
@@ -46,8 +50,12 @@ grammar ERBGrammer
 
 
         rule html_self_contained
-             '<' (!'/>' .)+ '/>' <NonTextNode> 
+             '<' tag_name:([a-zA-Z])+ (!'/>' .)* '/>' <NonTextNode> 
              {
+                def can_be_combined?
+                   true
+                end
+
                 def node_name
                     "html_self_contained"
                 end
@@ -55,8 +63,12 @@ grammar ERBGrammer
         end     
 
         rule html_end_tag
-             '</' (!'>' .)+ '>' <NonTextNode>
+             '</' tag_name:([a-zA-Z])+ (!'>' .)* '>' <NonTextNode>
              {
+                def can_be_combined?
+                    tag_name.text_value.downcase == 'a'
+                end
+
                 def node_name
                     "html_end_tag"
                 end
@@ -65,8 +77,12 @@ grammar ERBGrammer
         end
 
         rule html_start_tag
-             '<' (!'>' .)+ '>' <NonTextNode>
+             '<'  tag_name:([a-zA-Z])+ (!'>' .)* '>' <NonTextNode>
              {
+                def can_be_combined?
+                    tag_name.text_value.downcase == 'a'
+                end
+
                 def node_name
                     "html_start_tag"
                 end
@@ -77,6 +93,10 @@ grammar ERBGrammer
         rule text
              ((!html_self_contained !html_start_tag !html_end_tag !erb_string !erb_block) . )+ <TextNode>
              {
+                def can_be_combined?
+                    true
+                end
+
                 def node_name
                     "text"
                 end
@@ -87,6 +107,10 @@ grammar ERBGrammer
         rule whitespace
             ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+)) . )+ <NonTextNode>
             {
+                def can_be_combined?
+                    false
+                end
+
                def node_name    
                     "whitespace"
                end

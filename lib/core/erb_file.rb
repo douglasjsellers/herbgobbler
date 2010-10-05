@@ -20,6 +20,28 @@ class ErbFile
     @parser.failure_reason
   end
 
+  
+  def combine_nodes( node_list )
+    to_return = []
+    @nodes.each do |node|
+      if( can_be_combined?( node ) )
+        if( !to_return.empty? && can_be_combined?( to_return.last) )
+          to_return << ( HerbCombinedNode.new( to_return.pop, node ) )
+        else
+          to_return << node
+        end
+      else
+        to_return << node
+      end
+    end
+    to_return
+  end
+
+  def can_be_combined?( node )
+    (node.respond_to? :can_be_combined?) && node.can_be_combined?    
+  end
+  
+
   def extract_text( text_extractor )
     # 1.  Going to have to loop over all of the elements and find all of
     # the text.

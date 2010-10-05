@@ -126,6 +126,13 @@ describe ErbFile do
     erb_file = ErbFile.from_string( html_text )
     erb_file.serialize.should == html_text
   end
+
+  it "it should be able to combine simple nodes" do
+    erb_file = ErbFile.from_string( "<a>Yay!</a>" )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+    nodes.size.should == 1
+    nodes.first.text_value.should == "<a>Yay!</a>"
+  end
   
   
   
