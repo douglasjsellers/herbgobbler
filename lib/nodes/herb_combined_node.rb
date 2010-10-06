@@ -4,7 +4,15 @@ class HerbCombinedNode
     @combined_nodes = [node_a, node_b]
   end
 
+  def node_name
+    "herb_combined_nodes"
+  end
+
   def can_be_combined?
+    true
+  end
+
+  def text?
     true
   end
   

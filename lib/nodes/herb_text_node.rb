@@ -4,6 +4,10 @@ class HerbTextNode
   def initialize( text )
     @text_value = text
   end
+
+  def can_be_combined?
+    true
+  end
   
   def to_s
     @text_value

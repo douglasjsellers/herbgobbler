@@ -37,9 +37,6 @@ class ErbFile
     to_return
   end
 
-  def can_be_combined?( node )
-    (node.respond_to? :can_be_combined?) && node.can_be_combined?    
-  end
   
 
   def extract_text( text_extractor )
@@ -50,6 +47,7 @@ class ErbFile
     # this is going to work with any of the nested stuff)
     text_extractor.starting_text_extraction
     new_node_set = []
+    @nodes = combine_nodes( @nodes )    
     @nodes.each do |node|
       if( node.text? )
         returned_nodes = text_extractor.html_text( node )
@@ -58,10 +56,10 @@ class ErbFile
         new_node_set << node
       end
       @nodes = new_node_set
-      
       self
     end
     text_extractor.completed_text_extraction
+
   end
   
   def ErbFile.from_string( string_to_parse )
@@ -107,6 +105,10 @@ class ErbFile
       end
     end
     terminals
+  end
+
+  def can_be_combined?( node )
+    (node.respond_to? :can_be_combined?) && node.can_be_combined?    
   end
   
 end

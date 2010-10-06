@@ -57,9 +57,10 @@ describe TextExtractor do
 </b>"
     erb_file = ErbFile.from_string( html_text )
     text_extractor = TestTextExtractor.new
-    erb_file.extract_text( text_extractor )    
-    text_extractor.text_found.size.should == 2
-    text_extractor.text_found.first.should == "Doug is great"
+    erb_file.extract_text( text_extractor )
+    text_extractor.text_found.size.should == 3
+    text_extractor.text_found.first.should == "\n        "
+    text_extractor.text_found[1].should == "Doug is great"
     text_extractor.text_found.last.should == "\n"
     
   end
@@ -97,5 +98,5 @@ describe TextExtractor do
     text_extractor.text_found.size.should == 0
 
   end
-  
+    
 end

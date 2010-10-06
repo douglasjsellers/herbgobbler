@@ -10,8 +10,16 @@ class HerbErbTextCallNode
     @text_values << text
   end
 
+  def can_be_combined?
+    true
+  end
+  
   def key_value
     I18nKey.new( original_text ).key_value
+  end
+
+  def node_name
+    "herb_erb_text_call_node"
   end
   
   def original_text
