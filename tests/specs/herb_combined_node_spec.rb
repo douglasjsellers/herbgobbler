@@ -41,5 +41,13 @@ describe HerbCombinedNode do
     node.text?.should == true
     
   end
+
+  it "should be able to un-roll itself" do
+    node = HerbCombinedNode.new( TestCombinedNode.new( "abc", "text" ), TestCombinedNode.new( "<br/>", "html_self_contained" ) )
+
+    node.unroll.first.text_value.should == 'abc'
+    node.unroll.last.text_value.should == '<br/>'
+    
+  end
   
 end

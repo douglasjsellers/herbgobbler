@@ -12,6 +12,10 @@ class HerbCombinedNode
     true
   end
 
+  def should_be_unrolled?
+    @combined_nodes.last.white_space?
+  end
+  
   def text?
     @combined_nodes.first.text? || @combined_nodes.last.text?
   end
@@ -26,6 +30,14 @@ class HerbCombinedNode
 
   def to_s
     self.text_value
+  end
+
+  def whitespace?
+    @combined_nodes.first.whitespace? || @combined_nodes.last.whitespace?    
+  end
+  
+  def unroll
+    @combined_nodes
   end
   
 end

@@ -4,6 +4,7 @@ class ErbFile
   def initialize( node_set )
     @node_set = node_set
     @nodes = accumulate_top_levels if compiled?
+    @debug = false
   end
 
   def accumulate_top_levels
@@ -24,6 +25,7 @@ class ErbFile
   def combine_nodes( node_list )
     to_return = []
     @nodes.each do |node|
+      puts "Node: #{node.node_name} = #{can_be_combined?( node )}" if @debug      
       if( can_be_combined?( node ) )
         if( !to_return.empty? && can_be_combined?( to_return.last) )
           to_return << ( HerbCombinedNode.new( to_return.pop, node ) )
@@ -31,6 +33,10 @@ class ErbFile
           to_return << node
         end
       else
+        if( last_node_should_be_unrolled?( to_return.last ) )
+          last_combined_node = to_return.pop
+          to_return += last_combined_node.unroll
+        end        
         to_return << node
       end
     end
@@ -96,6 +102,11 @@ class ErbFile
     ErbFile.new( @parser.parse( data_to_parse ) )
   end
 
+  def last_node_should_be_unrolled?( last_node )
+    !last_node.nil? && last_node.node_name == "herb_combined_nodes" && last_node.should_be_unrolled?  
+  end
+  
+                                     
   def process_element_for_top_levels( element, terminals )
     if element.respond_to?( 'top_level?' ) && element.top_level?
       terminals << element

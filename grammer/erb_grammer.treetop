@@ -110,9 +110,12 @@ grammar ERBGrammer
                 def can_be_combined?
                    true
                 end
-
+               
                def node_name    
                     "whitespace"
+               end
+               def white_space?
+                  true
                end
             }
         end
