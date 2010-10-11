@@ -13,8 +13,4 @@ class TextExtractor
   def html_text( text_node )
     raise "Please implement me"
   end
-
-
-
-
 end

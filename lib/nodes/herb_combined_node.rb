@@ -13,7 +13,7 @@ class HerbCombinedNode
   end
 
   def text?
-    true
+    @combined_nodes.first.text? || @combined_nodes.last.text?
   end
   
   def text_value

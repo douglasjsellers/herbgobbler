@@ -43,7 +43,7 @@ grammar ERBGrammer
                 end
 
                 def node_name
-                   "ignorable_tage_name"
+                   "ignorable_tag_name"
                 end
              }
         end
