@@ -40,5 +40,10 @@ TEXT
     text_call = I18nKey.new( text )
     text_call.key_value.should == "doug_is_great"
   end
+
+  it "should be able to eliminate the pipe character as a possible character" do
+    text_call = I18nKey.new( "It|was " )
+    text_call.key_value.should == "it_was"
+  end
 end
 

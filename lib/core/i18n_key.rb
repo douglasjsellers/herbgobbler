@@ -7,8 +7,7 @@ class I18nKey
 
   def key_value
     to_return = remove_html_tags( @text )
-    to_return = to_return.gsub( /\n/, '_' )
-    to_return = to_return.gsub( /_/, ' ' )
+    to_return = to_return.gsub( /[^a-zA-Z0-9]/, ' ' )
     to_return = to_return.squeeze.strip.downcase.chomp    
     to_return = to_return.gsub( / /, '_' )
 

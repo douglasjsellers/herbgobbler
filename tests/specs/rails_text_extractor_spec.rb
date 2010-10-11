@@ -7,7 +7,7 @@ describe RailsTextExtractor do
     text_extractor = RailsTextExtractor.new    
     erb_file.extract_text( text_extractor )
     erb_file.nodes.size.should == 1
-    erb_file.nodes.first.text_value.should == "<%= t :yay! %>"
+    erb_file.nodes.first.text_value.should == "<%= t :yay %>"
     
   end
 
