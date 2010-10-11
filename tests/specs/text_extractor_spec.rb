@@ -33,7 +33,7 @@ end
 
 describe TextExtractor do
   it "should be able to mark things as started and completed" do
-    erb_file = ErbFile.from_string( "<b>Doug is great</b>" )
+    erb_file = ErbFile.from_string( "<div>Doug is great</div>" )
     text_extractor = TestTextExtractor.new
     erb_file.extract_text( text_extractor )
 
@@ -42,7 +42,7 @@ describe TextExtractor do
   end
 
   it "should be able to perform very simple text extraction from an html element" do
-    erb_file = ErbFile.from_string( "<b>Doug is great</b>" )
+    erb_file = ErbFile.from_string( "<div>Doug is great</div>" )
     text_extractor = TestTextExtractor.new
     erb_file.extract_text( text_extractor )
 
@@ -52,9 +52,9 @@ describe TextExtractor do
 
 
   it "should be able to remove extra white space from around text" do
-    html_text = "<b>
+    html_text = "<div>
         Doug is great
-</b>"
+</div>"
     erb_file = ErbFile.from_string( html_text )
     text_extractor = TestTextExtractor.new
     erb_file.extract_text( text_extractor )
@@ -66,7 +66,7 @@ describe TextExtractor do
   end
 
   it "should be able to extract multiple pieces of text" do
-    html_text = "<b>Doug is</b>Great"
+    html_text = "<div>Doug is</div>Great"
     erb_file = ErbFile.from_string( html_text )
     text_extractor = TestTextExtractor.new
     erb_file.extract_text( text_extractor )
@@ -77,7 +77,7 @@ describe TextExtractor do
   end
 
   it "should replace the text nodes in the original erb file" do
-    html_text = "<b>Doug is</b>Great"
+    html_text = "<div>Doug is</div>Great"
     erb_file = ErbFile.from_string( html_text )
     text_extractor = TestTextExtractor.new
     erb_file.extract_text( text_extractor )
