@@ -45,5 +45,18 @@ TEXT
     text_call = I18nKey.new( "It|was " )
     text_call.key_value.should == "it_was"
   end
+
+  it "should not generate duplicate key names when a valid keystore is passed in" do
+    key_store = []
+    key_1 = I18nKey.new( "key", key_store )
+    key_2 = I18nKey.new( "key", key_store )
+    key_3 = I18nKey.new( "key", key_store )
+
+    key_1.key_value.should == "key"
+    key_2.key_value.should == "key_1"
+    key_3.key_value.should == "key_2"
+    
+  end
+  
 end
 

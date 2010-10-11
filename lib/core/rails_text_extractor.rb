@@ -1,4 +1,8 @@
 class RailsTextExtractor < BaseTextExtractor
+
+  def initialize
+    @key_store = []
+  end
   
   # This is called when text extraction has begun
   def starting_text_extraction
@@ -14,7 +18,7 @@ class RailsTextExtractor < BaseTextExtractor
       if( text_node.white_space? )
         to_return << text_node
       else
-        to_return << HerbErbTextCallNode.new( [text_node.text_value], 't :' )
+        to_return << HerbErbTextCallNode.new( [text_node.text_value], @key_store, 't :' )
       end
     end
     to_return
