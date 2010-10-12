@@ -6,4 +6,6 @@ require 'core/base_text_extractor'
 require 'core/rails_text_extractor'
 require 'core/i18n_key'
 require 'core/ignorable_tag_node'
+require 'core/base_translation_store'
+require 'core/rails_translation_store'
 
