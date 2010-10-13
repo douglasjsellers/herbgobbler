@@ -9,8 +9,13 @@ class RailsTranslationStore < BaseTranslationStore
     to_return = "#{@language}:\n"
     last_context = nil
     self.each do |context, key, value|
-      to_return << "#{build_whitespace( 2 )}#{context}:\n" unless context == last_context
-      to_return << "#{build_whitespace( 4 )}#{key}: \"#{value}\"\n"
+      whitespace_depth = 2
+      context_array = context.split('/')
+      context_array.each do |split_context|
+        to_return << "#{build_whitespace( whitespace_depth )}#{split_context}:\n" 
+        whitespace_depth += 2
+      end unless context == last_context
+      to_return << "#{build_whitespace( 2 + 2 * context_array.length )}#{key}: \"#{value}\"\n"
       last_context = context
     end
     

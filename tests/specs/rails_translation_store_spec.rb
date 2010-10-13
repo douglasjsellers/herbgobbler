@@ -40,6 +40,59 @@ en:
 SIMPLE_KEY_VALUE
     store.serialize.should == resulting_string.strip
   end
+
+
+  it "should be able to double nest contexts" do
+    store = RailsTranslationStore.new
+    store.start_new_context( "test/test2" )
+    store.add_translation( "key", "value" )
+    resulting_string =<<SIMPLE_KEY_VALUE
+en:
+  test:
+    test2:
+      key: "value"
+SIMPLE_KEY_VALUE
+
+    store.serialize.should == resulting_string.strip
+      
+  end
+
+  it "should be able to handle multiple keys with a double nested context" do
+    store = RailsTranslationStore.new
+    store.start_new_context( "test/test2" )
+    store.add_translation( "key", "value" )
+    store.add_translation( "key1", "value1" )
+    
+    resulting_string =<<SIMPLE_KEY_VALUE
+en:
+  test:
+    test2:
+      key: "value"
+      key1: "value1"
+SIMPLE_KEY_VALUE
+
+    store.serialize.should == resulting_string.strip    
+  end
+
+  it "should be able to handle very deep contexts" do
+    store = RailsTranslationStore.new
+    store.start_new_context( "test/test2/test3/test4/test5" )
+    store.add_translation( "key", "value" )
+    store.add_translation( "key1", "value1" )
+    
+    resulting_string =<<SIMPLE_KEY_VALUE
+en:
+  test:
+    test2:
+      test3:
+        test4:
+          test5:
+            key: "value"
+            key1: "value1"
+SIMPLE_KEY_VALUE
+  end
+  
+  
   
   
 end
