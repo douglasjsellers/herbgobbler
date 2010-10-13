@@ -7,13 +7,14 @@ class RailsTranslationStore < BaseTranslationStore
   
   def serialize
     to_return = "#{@language}:\n"
-
+    last_context = nil
     self.each do |context, key, value|
-      to_return << "#{build_whitespace( 2 )}#{context}:\n"
-      to_return << "#{build_whitespace( 4 )}#{key}: \"#{value}\""
+      to_return << "#{build_whitespace( 2 )}#{context}:\n" unless context == last_context
+      to_return << "#{build_whitespace( 4 )}#{key}: \"#{value}\"\n"
+      last_context = context
     end
     
-    to_return
+    to_return.chomp
   end
 
   private

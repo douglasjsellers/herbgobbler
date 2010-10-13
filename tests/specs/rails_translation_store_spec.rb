@@ -26,5 +26,20 @@ SIMPLE_KEY_VALUE
 
     store.serialize.should == resulting_string.strip
   end
+
+  it "should be able to serialize out two entries in the same context" do
+    store = RailsTranslationStore.new
+    store.start_new_context( "test" )
+    store.add_translation( "key", "value" )
+    store.add_translation( "key1", "value1" )
+    resulting_string =<<SIMPLE_KEY_VALUE
+en:
+  test:
+    key: "value"
+    key1: "value1"
+SIMPLE_KEY_VALUE
+    store.serialize.should == resulting_string.strip
+  end
+  
   
 end
