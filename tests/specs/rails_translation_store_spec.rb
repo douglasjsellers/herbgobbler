@@ -91,6 +91,27 @@ en:
             key1: "value1"
 SIMPLE_KEY_VALUE
   end
+
+  it "should be able to handle multiple contexts" do
+    store = RailsTranslationStore.new
+    store.start_new_context( "test" )
+    store.add_translation( "key", "value" )
+    store.start_new_context( "test2" )
+    store.add_translation( "key", "value" )
+    
+    resulting_string =<<SIMPLE_KEY_VALUE
+en:
+  test:
+    key: "value"
+  test2:
+    key: "value"
+
+SIMPLE_KEY_VALUE
+
+    store.serialize.should == resulting_string.strip
+    
+  end
+  
   
   
   
