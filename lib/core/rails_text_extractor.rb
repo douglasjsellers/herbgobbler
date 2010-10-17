@@ -20,7 +20,7 @@ class RailsTextExtractor < BaseTextExtractor
         to_return << text_node
       else
         to_return << HerbErbTextCallNode.new( [text_node.text_value], @key_store, 't :' )
-      @translation_store.add_translation( @key_store.last, to_return.last.text_value )        
+      @translation_store.add_translation( to_return.last.key_value, to_return.last.original_text )        
       end
 
     end
