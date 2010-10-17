@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
-
+require 'yaml'
 describe RailsTranslationStore do
   it "should be able to add a context, value, and interate over it" do
     store = RailsTranslationStore.new
@@ -25,6 +25,10 @@ en:
 SIMPLE_KEY_VALUE
 
     store.serialize.should == resulting_string.strip
+    yaml_result = YAML.load( store.serialize.strip )
+    yaml_result.nil?.should == false
+    yaml_result['en']['test']['key'].should == 'value'
+    
   end
 
   it "should be able to serialize out two entries in the same context" do
@@ -39,6 +43,12 @@ en:
     key1: "value1"
 SIMPLE_KEY_VALUE
     store.serialize.should == resulting_string.strip
+
+    yaml_result = YAML.load( store.serialize )
+    yaml_result.nil?.should == false    
+    yaml_result['en']['test']['key'].should == 'value'
+    yaml_result['en']['test']['key1'].should == 'value1'
+    
   end
 
 
@@ -54,6 +64,10 @@ en:
 SIMPLE_KEY_VALUE
 
     store.serialize.should == resulting_string.strip
+    
+    yaml_result = YAML.load( store.serialize )
+    yaml_result.nil?.should == false    
+    yaml_result['en']['test']['test2']['key'].should == 'value'
       
   end
 
@@ -71,7 +85,13 @@ en:
       key1: "value1"
 SIMPLE_KEY_VALUE
 
-    store.serialize.should == resulting_string.strip    
+    store.serialize.should == resulting_string.strip
+
+    yaml_result = YAML.load( store.serialize )
+    yaml_result.nil?.should == false    
+    yaml_result['en']['test']['test2']['key'].should == 'value'
+    yaml_result['en']['test']['test2']['key1'].should == 'value1'
+    
   end
 
   it "should be able to handle very deep contexts" do
@@ -90,6 +110,12 @@ en:
             key: "value"
             key1: "value1"
 SIMPLE_KEY_VALUE
+
+    yaml_result = YAML.load( store.serialize )
+    yaml_result.nil?.should == false    
+    yaml_result['en']['test']['test2']['test3']['test4']['test5']['key'].should == 'value'
+    yaml_result['en']['test']['test2']['test3']['test4']['test5']['key1'].should == 'value1'
+    
   end
 
   it "should be able to handle multiple contexts" do
@@ -108,6 +134,12 @@ en:
 
 SIMPLE_KEY_VALUE
     store.serialize.should == resulting_string.strip
+
+    yaml_result = YAML.load( store.serialize )
+    yaml_result.nil?.should == false    
+    yaml_result['en']['test']['key'].should == 'value'
+    yaml_result['en']['test2']['key'].should == 'value'
+    
   end
 
   it "should be able to handle multiple contexts with multiple keys" do
@@ -130,6 +162,13 @@ en:
 SIMPLE_KEY_VALUE
     store.serialize.should == resulting_string.strip
     
+    yaml_result = YAML.load( store.serialize )
+    yaml_result.nil?.should == false    
+    yaml_result['en']['test']['key'].should == 'value'
+    yaml_result['en']['test']['key2'].should == 'value2'
+    yaml_result['en']['test2']['key'].should == 'value'
+    yaml_result['en']['test2']['key3'].should == 'value3'
+    
   end
   
   it "should escape keys that have double quotes in them" do
@@ -143,11 +182,31 @@ en:
 SIMPLE_KEY_VALUE
 
     store.serialize.should == resulting_string.strip
+
+    yaml_result = YAML.load( store.serialize )
+    yaml_result.nil?.should == false    
+    yaml_result['en']['test']['key'].should == '"value"'
     
   end
-  
-  
-  
-  
-  
+
+  it "should correctly convert values with multilines into valid yml" do
+    store = RailsTranslationStore.new
+    store.start_new_context( "test" )
+    store.add_translation( "key", "value\ndoug" )
+    resulting_string =<<SIMPLE_KEY_VALUE
+en:
+  test:
+    key:  |
+          value
+          doug
+SIMPLE_KEY_VALUE
+
+    store.serialize.should == resulting_string.strip
+    
+    yaml_result = YAML.load( store.serialize )
+    yaml_result.nil?.should == false    
+    yaml_result['en']['test']['key'].should == "value\ndoug"
+
+
+  end
 end
