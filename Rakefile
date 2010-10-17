@@ -36,7 +36,7 @@ task :test_integration do
     text_extractor = RailsTextExtractor.new
     erb_file = ErbFile.load(  "#{test_directory}/#{file}" )
     erb_file.extract_text(text_extractor )
-    if( erb_file.to_s == File.read( "#{result_directory}/#{file}.result" ) )
+    if( erb_file.to_s == File.read( "#{result_directory}/erb/#{file}.result" ) )
       puts "Successfully processed #{file}"
     else
       puts "Failed #{file}"
