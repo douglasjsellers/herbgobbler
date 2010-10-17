@@ -132,6 +132,19 @@ SIMPLE_KEY_VALUE
     
   end
   
+  it "should escape keys that have double quotes in them" do
+    store = RailsTranslationStore.new
+    store.start_new_context( "test" )
+    store.add_translation( "key", '"value"' )
+    resulting_string =<<SIMPLE_KEY_VALUE
+en:
+  test:
+    key: "\\"value\\""
+SIMPLE_KEY_VALUE
+
+    store.serialize.should == resulting_string.strip
+    
+  end
   
   
   
