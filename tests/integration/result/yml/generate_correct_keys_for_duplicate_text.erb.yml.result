@@ -1,0 +1,7 @@
+en:
+  tests:
+    integration:
+      test:
+        generate_correct_keys_for_duplicate_text:
+          coments: "<a href=\"newest\">comments</a>"
+          coments_1: "<a href=\"newcomments\">comments</a>"

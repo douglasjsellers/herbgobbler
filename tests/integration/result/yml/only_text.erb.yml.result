@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        only_text:
+          the_quick: "The quick brown fox jumped over the hedge"

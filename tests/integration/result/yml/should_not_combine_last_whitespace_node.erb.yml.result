@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        should_not_combine_last_whitespace_node:
+          jobs_submit: "<a href=\"jobs\">jobs</a> | \n                  <a href=\"submit\">submit</a>"
