@@ -19,13 +19,7 @@ class RailsTranslationStore < BaseTranslationStore
         to_return << "#{build_whitespace( whitespace_depth )}#{split_context}:\n" 
         whitespace_depth += 2
       end unless context == last_context
-      if( value.index( "\n" ) )
-        to_return << "#{build_whitespace( 2 + 2 * context_array.length )}#{key}:  |\n#{add_value_whitespace( 2 + 2 * (context_array.length + 3), value )}\n"
-        
-      else
         to_return << "#{build_whitespace( 2 + 2 * context_array.length )}#{key}: \"#{escape(value)}\"\n"
-      end
-      
       last_context = context
     end
     
@@ -40,12 +34,9 @@ class RailsTranslationStore < BaseTranslationStore
 
   private
 
-  def add_value_whitespace( amount, value )
-    "#{build_whitespace( amount )}#{value.gsub( "\n", "\n#{build_whitespace( amount )}" )}"
-  end
   
   def escape( key )
-    key.gsub( /"/, '\"' )
+    key.gsub( /"/, '\"' ).gsub( "\n", "\\n" )
   end
   
 end

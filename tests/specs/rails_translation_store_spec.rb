@@ -196,9 +196,7 @@ SIMPLE_KEY_VALUE
     resulting_string =<<SIMPLE_KEY_VALUE
 en:
   test:
-    key:  |
-          value
-          doug
+    key: "value\\ndoug"
 SIMPLE_KEY_VALUE
 
     store.serialize.should == resulting_string.strip
@@ -209,4 +207,21 @@ SIMPLE_KEY_VALUE
 
 
   end
+
+  it "should escape indented multi-line strings correctly" do
+    value_string =<<VALUE_STRING
+                  <a href="jobs">jobs</a> | 
+                  <a href="submit">submit</a>
+VALUE_STRING
+    
+    store = RailsTranslationStore.new
+    store.start_new_context( "test" )
+    store.add_translation( "key", value_string )
+
+    yaml_result = YAML.load( store.serialize )
+    yaml_result.nil?.should == false    
+    yaml_result['en']['test']['key'].should == value_string
+    
+  end
+  
 end
