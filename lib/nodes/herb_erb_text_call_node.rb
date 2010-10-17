@@ -5,6 +5,7 @@ class HerbErbTextCallNode
     @prepend = prepend
     @postpend = postpend
     @key_store = key_store
+    @key_value = nil
   end
 
   def add_text( text )
@@ -16,7 +17,11 @@ class HerbErbTextCallNode
   end
   
   def key_value
-    I18nKey.new( original_text, @key_store ).key_value
+    if( @key_value.nil? )
+      @key_value = I18nKey.new( original_text, @key_store ).key_value
+    end
+
+    @key_value
   end
 
   def node_name
