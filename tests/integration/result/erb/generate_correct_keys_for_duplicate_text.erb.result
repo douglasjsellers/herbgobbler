@@ -1,2 +1,2 @@
-<div><%= t :coments %></div>
-<div><%= t :coments_1 %></div>
+<div><%= t '.coments' %></div>
+<div><%= t '.coments_1' %></div>

@@ -27,7 +27,7 @@
       return false; // cancel browser nav
       } 
       </script>
-      <title><%= t :hacker_news %></title>
+      <title><%= t '.hacker_news' %></title>
 </head>
 <body>
   <center>
@@ -44,9 +44,9 @@
              </td>
              <td style="line-height:12pt; height:10px;">
                <span class="pagetop">
-                 <%= t :hacker_news_1 %>
+                 <%= t '.hacker_news_1' %>
                 <img src="http://ycombinator.com/images/s.gif" height=1 width=10>
-                  <%= t :new_coments %> 
+                  <%= t '.new_coments' %> 
               </span>
             </td>
           </tr>

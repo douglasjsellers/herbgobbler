@@ -19,7 +19,7 @@ class RailsTextExtractor < BaseTextExtractor
       if( text_node.white_space? )
         to_return << text_node
       else
-        to_return << HerbErbTextCallNode.new( [text_node.text_value], @key_store, 't :' )
+        to_return << HerbErbTextCallNode.new( [text_node.text_value], @key_store, "t '.", "'" )
       @translation_store.add_translation( to_return.last.key_value, to_return.last.original_text )        
       end
 
