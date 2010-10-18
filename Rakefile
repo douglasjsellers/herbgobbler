@@ -43,7 +43,7 @@ task :test_integration do
     if( erb_file.to_s == File.read( "#{result_directory}/#{file}.result" ) )
       puts "Successfully processed erb file #{file}"
     else
-      "**** Failed to process erb #{file}"
+      puts "**** Failed to process erb #{file}"
     end
     
     if( rails_translation_store.serialize == File.read( "#{yml_directory}/#{file}.yml.result" ) )
