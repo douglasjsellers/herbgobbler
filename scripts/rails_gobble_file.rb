@@ -15,7 +15,7 @@ else
   
   rails_translation_store = RailsTranslationStore.new
   text_extractor = RailsTextExtractor.new( rails_translation_store )
-  rails_translation_store.start_new_context( '') #erb_file_path.split('.').first )
+  rails_translation_store.start_new_context( erb_file_path.split('.').first.gsub( "app/views/", '') )
   erb_file = ErbFile.load( full_erb_file_path )
   erb_file.extract_text( text_extractor )
 
