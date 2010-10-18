@@ -30,16 +30,26 @@ task :test_integration do
   puts ""
   
   test_directory = 'tests/integration/test'
-  result_directory = 'tests/integration/result'
+  result_directory = 'tests/integration/result/erb'
+  yml_directory = 'tests/integration/result/yml'
   
   Dir.new( test_directory ).reject {|f| [".", ".."].include? f}.each do |file|
-    text_extractor = RailsTextExtractor.new
+    rails_translation_store = RailsTranslationStore.new
+    text_extractor = RailsTextExtractor.new(rails_translation_store)
+    rails_translation_store.start_new_context( "#{test_directory}/#{file.split('.').first}" )
+    
     erb_file = ErbFile.load(  "#{test_directory}/#{file}" )
     erb_file.extract_text(text_extractor )
-    if( erb_file.to_s == File.read( "#{result_directory}/erb/#{file}.result" ) )
-      puts "Successfully processed #{file}"
+    if( erb_file.to_s == File.read( "#{result_directory}/#{file}.result" ) )
+      puts "Successfully processed erb file #{file}"
     else
-      puts "Failed #{file}"
+      "**** Failed to process erb #{file}"
+    end
+    
+    if( rails_translation_store.serialize == File.read( "#{yml_directory}/#{file}.yml.result" ) )
+      puts "Successfully processed yml file #{file}"        
+    else
+      puts "**** Failed to process yml file #{file}"
     end
   end
   
