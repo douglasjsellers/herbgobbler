@@ -4,7 +4,7 @@ class ErbFile
   def initialize( node_set )
     @node_set = node_set
     @nodes = accumulate_top_levels if compiled?
-    @debug = true
+    @debug = false
   end
 
   def accumulate_top_levels

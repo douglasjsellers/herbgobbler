@@ -105,7 +105,7 @@ grammar ERBGrammer
         end
 
         rule whitespace
-            ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+)) . )+ <NonTextNode>
+            ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+) !'<%') . )+ <NonTextNode>
             {
                 def can_be_combined?
                    true
