@@ -9,7 +9,7 @@ class ErbFile
 
   def accumulate_top_levels
     terminals = []
-    process_element_for_top_levels( @node_set, terminals )    
+    process_element_for_top_levels( @node_set, terminals )
   end
   
   def compiled?
@@ -108,9 +108,17 @@ class ErbFile
   
                                      
   def process_element_for_top_levels( element, terminals )
-    if element.respond_to?( 'top_level?' ) && element.top_level?
+    
+    if can_shatter?( element )
+      puts "Shattering element: #{element.text_value}" if @debug
+      terminals << element.shattered_elements
+      terminals.flatten!
+      puts "shattered to: #{terminals.collect { |term| term.text_value } }" if @debug
+    elsif is_top_level?( element )
+      puts "Top level: #{element.text_value}" if @debug      
       terminals << element
     elsif( !element.terminal? )
+      puts "Not Terminal: #{element.text_value}" if @debug      
       element.elements.each do |new_element|
         process_element_for_top_levels( new_element, terminals )
       end
@@ -118,6 +126,15 @@ class ErbFile
     terminals
   end
 
+  def is_top_level?( element )
+    element.respond_to?( 'top_level?' ) && element.top_level?    
+  end
+
+  def can_shatter?( element )
+    element.respond_to?( 'shatter?' ) && element.shatter?        
+  end
+  
+  
   def can_be_combined?( node )
     (node.respond_to? :can_be_combined?) && node.can_be_combined?    
   end

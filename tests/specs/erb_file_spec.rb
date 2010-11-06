@@ -5,34 +5,42 @@ describe ErbFile do
     ErbFile.from_string( "<%= 'doug is great' %>" ).should_not == nil
   end
 
-  it "should be able to gather all of the top level elements together when there is only one element" do
-    erb_file = ErbFile.from_string( "<%= 'doug is great' %>" )
+  it "should parse and shatter and erb string into it's component parts" do
+    erb_file = ErbFile.from_string( "<%= \"doug is great\" %>" )
     terminals = erb_file.accumulate_top_levels
-    terminals.size.should == 1
+    terminals.size.should == 5
+
+    terminals[0].node_name.should == "erb_string_start"
+    terminals[2].node_name.should == "double_quoted_ruby_string"
+    terminals[4].node_name.should == "erb_block_end"
+  end
+  
+  it "should be able to gather all of the top level elements together when there is only one element" do
+    erb_file = ErbFile.from_string( "<%= \"doug is great\" %>" )
+    terminals = erb_file.accumulate_top_levels
+    terminals.size.should == 5
     terminals.first.top_level?.should == true
-    terminals.first.text_value.should == "<%= 'doug is great' %>" 
+    terminals.first.text_value.should == "<%=" 
   end
 
   it "should be able to gather all of the top level elements together where are are two elemest" do
-    erb_file = ErbFile.from_string( "<%= 'doug is great' %>D" )
+    erb_file = ErbFile.from_string( "<%= \"doug is great\" %>D" )
     terminals = erb_file.accumulate_top_levels
-    terminals.size.should == 2
+    terminals.size.should == 6
     terminals.first.top_level?.should == true
-    terminals.first.text_value.should == "<%= 'doug is great' %>" 
+    terminals.first.text_value.should == "<%=" 
 
     terminals.last.top_level?.should == true
     terminals.last.text_value.should == "D"
   end
 
   it "should be able to gather all of the top level elements when there are three and one of them is an html element" do
-    erb_file = ErbFile.from_string( "<%= 'doug is great' %><br/>D" )
+    erb_file = ErbFile.from_string( "<%= \"doug is great\" %><br/>D" )
     terminals = erb_file.accumulate_top_levels
-    terminals.size.should == 3
-    terminals.first.top_level?.should == true
-    terminals.first.text_value.should == "<%= 'doug is great' %>" 
+    terminals.size.should == 7
 
-    terminals[1].top_level?.should == true
-    terminals[1].text_value.should == "<br/>"
+    terminals[5].top_level?.should == true
+    terminals[5].text_value.should == "<br/>"
     
     terminals.last.top_level?.should == true
     terminals.last.text_value.should == "D"
@@ -94,28 +102,19 @@ describe ErbFile do
 
   it "should be able to roll up text when it is surrounded by erb blocks and strings" do
     erb_file = ErbFile.from_string( "Doug<%= is? %>Great<% @title='blah' %>" )
-    terminals = erb_file.accumulate_top_levels    
-    terminals.size.should == 4
+    terminals = erb_file.accumulate_top_levels
+    
+    terminals.size.should == 7
 
     terminals[0].top_level?.should == true
     terminals[0].text?.should == true
     terminals[0].node_name.should == "text"
     terminals[0].text_value.should == "Doug" 
 
-    terminals[1].top_level?.should == true
-    terminals[1].text?.should == false
-    terminals[1].node_name.should == "erb_string"
-    terminals[1].text_value.should == "<%= is? %>" 
-
-    terminals[2].top_level?.should == true
-    terminals[2].text?.should == true
-    terminals[2].node_name.should == "text"
-    terminals[2].text_value.should == "Great" 
-
-    terminals[3].top_level?.should == true
-    terminals[3].text?.should == false
-    terminals[3].node_name.should == "erb_block"
-    terminals[3].text_value.should == "<% @title='blah' %>" 
+    terminals[6].top_level?.should == true
+    terminals[6].text?.should == false
+    terminals[6].node_name.should == "erb_block"
+    terminals[6].text_value.should == "<% @title='blah' %>" 
     
   end
   

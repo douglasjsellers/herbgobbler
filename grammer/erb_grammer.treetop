@@ -12,10 +12,33 @@ grammar ERBGrammer
         end
 
         rule erb_string
-             '<%=' (!erb_block_end .)* erb_block_end <NonTextNode>
+             start_erb:erb_string_start start_space:(space) text:(double_quoted_ruby_string)?  everything_else:(!erb_block_end .)* end_erb:(erb_block_end) <NonTextNode>
              {
+                def shattered_elements
+                    [start_erb, start_space, text, HerbNonTextNode.new(everything_else.text_value), end_erb].reject {|terminal| terminal.nil? || terminal.text_value.empty? }
+                end
+
+                def shatter?
+                   true
+                end
+
                 def node_name
                     "erb_string"
+                end
+
+             }
+
+        end
+        
+        rule double_quoted_ruby_string
+        '"' (!'"' .)* '"' <TextNode>
+             {
+                def can_be_combined?
+                    false
+                end
+
+                def node_name
+                    "double_quoted_ruby_string"
                 end
              }
 
@@ -31,8 +54,24 @@ grammar ERBGrammer
 
         end
         
+        rule erb_string_start
+           '<%=' <NonTextNode>
+             {
+                def node_name
+                    "erb_string_start"
+                end
+             }
+
+        end
+
         rule erb_block_end
-             '%>' / '-%>'
+             ('%>' / '-%>') <NonTextNode>
+             {
+                def node_name
+                    "erb_block_end"
+                end
+             }
+
         end
 
         rule ignorable_script_tag_content
@@ -104,8 +143,17 @@ grammar ERBGrammer
 
         end
 
+        rule space
+           (' ')+ <NonTextNode>
+           {
+                      def node_name
+                         "space"
+                      end
+           }
+        end
+
         rule whitespace
-            ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+) !'<%') . )+ <NonTextNode>
+            ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+) !'<%' ) . )+ <NonTextNode>
             {
                 def can_be_combined?
                    true
