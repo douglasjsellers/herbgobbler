@@ -36,6 +36,10 @@ grammar ERBGrammer
                 def can_be_combined?
                     false
                 end
+                
+                def html?
+                    false
+                end
 
                 def node_name
                     "double_quoted_ruby_string"

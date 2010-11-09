@@ -1,4 +1,8 @@
 module TextNode
+  def html?
+    true
+  end
+  
   def text?
     true
   end

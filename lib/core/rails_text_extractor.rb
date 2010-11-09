@@ -13,13 +13,13 @@ class RailsTextExtractor < BaseTextExtractor
   # This takes in a text node and returns one or more nodes that will
   # then be output.  The nodes that are output should implement
   # node_name and text_value
-  def html_text( text_node )
+  def html_text( original_text_node )
     to_return = []
-    super(text_node).each do |text_node|
+    super(original_text_node).each do |text_node|
       if( text_node.white_space? )
         to_return << text_node
       else
-        to_return << HerbErbTextCallNode.new( [text_node.text_value], @key_store, "t '.", "'" )
+        to_return << HerbErbTextCallNode.new( [text_node.text_value], @key_store, "t '.", "'", original_text_node.html? )
       @translation_store.add_translation( to_return.last.key_value, to_return.last.original_text )        
       end
 

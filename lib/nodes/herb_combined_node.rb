@@ -15,6 +15,10 @@ class HerbCombinedNode
   def should_be_unrolled?
     @combined_nodes.last.white_space?
   end
+
+  def html?
+    true
+  end
   
   def text?
     @combined_nodes.first.text? || @combined_nodes.last.text?
