@@ -31,7 +31,7 @@ grammar ERBGrammer
         end
         
         rule double_quoted_ruby_string
-        '"' (!'"' .)* '"' <TextNode>
+        '"' unquoted_text:((!'"' .)*) '"' <TextNode>
              {
                 def can_be_combined?
                     false
@@ -39,6 +39,10 @@ grammar ERBGrammer
                 
                 def html?
                     false
+                end
+
+                def text_value
+                    unquoted_text.text_value
                 end
 
                 def node_name
