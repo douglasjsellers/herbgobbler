@@ -3,9 +3,9 @@ grammar ERBGrammer
              ( erb_string /
                erb_block  / 
                ignorable_script_tag_content /
-               html_self_contained / 
                html_end_tag / 
                html_start_tag / 
+               html_self_contained / 
                whitespace / 
                text 
              ) (erb)*
@@ -42,7 +42,7 @@ grammar ERBGrammer
                 end
 
                 def text_value
-                    unquoted_text.text_value
+                    unquoted_text.text_value            
                 end
 
                 def node_name
@@ -97,7 +97,7 @@ grammar ERBGrammer
 
 
         rule html_self_contained
-             '<' tag_name:([a-zA-Z])+ (!'/>' .)* '/>' <NonTextNode> 
+             '<' tag_name:([a-zA-Z])+ (!'/>' (erb_string / .))* '/>' <NonTextNode> 
              {
                 def can_be_combined?
                    true
@@ -124,7 +124,7 @@ grammar ERBGrammer
         end
 
         rule html_start_tag
-             '<'  tag_name:([a-zA-Z])+ (!'>' .)* '>' <NonTextNode>
+             '<'  tag_name:([a-zA-Z])+ (!'>' !'/>' (erb_string / .))* '>' <NonTextNode>
              {
                 def can_be_combined?
                     !(['a', 'b'].index(tag_name.text_value.downcase).nil?)
