@@ -11,7 +11,7 @@ class ErbFile
     terminals = []
     process_element_for_top_levels( @node_set, terminals )
   end
-  
+
   def compiled?
     !@node_set.nil?
   end
@@ -65,7 +65,6 @@ class ErbFile
       self
     end
     text_extractor.completed_text_extraction
-
   end
   
   def ErbFile.from_string( string_to_parse )
@@ -108,7 +107,6 @@ class ErbFile
   
                                      
   def process_element_for_top_levels( element, terminals )
-    
     if can_shatter?( element )
       puts "Shattering element: #{element.text_value}" if @debug
       terminals << element.shattered_elements

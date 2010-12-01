@@ -122,9 +122,18 @@ grammar ERBGrammer
              }
 
         end
+        
+        rule tag_text
+            (!'>' !'/>' (erb_string / .) ) <NonTextNode>
+            {
+              def text_value
+                 "tag text"
+               end
+            }
+        end
 
         rule html_start_tag
-             '<'  tag_name:([a-zA-Z])+ (!'>' !'/>' (erb_string / .))* '>' <NonTextNode>
+             '<'  tag_name:([a-zA-Z])+  tag_text* '>' <NonTextNode>
              {
                 def can_be_combined?
                     !(['a', 'b'].index(tag_name.text_value.downcase).nil?)
