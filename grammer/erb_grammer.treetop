@@ -14,24 +14,15 @@ grammar ERBGrammer
         rule erb_string
              start_erb:erb_string_start start_space:(space) text:(double_quoted_ruby_string)?  everything_else:(!erb_block_end .)* end_erb:(erb_block_end) <NonTextNode>
              {
-                def shattered_elements
-                    [start_erb, start_space, text, HerbNonTextNode.new(everything_else.text_value), end_erb].reject {|terminal| terminal.nil? || terminal.text_value.empty? }
-                end
-
-                def shatter?
-                   true
-                end
-
                 def node_name
                     "erb_string"
                 end
-
              }
 
         end
         
         rule double_quoted_ruby_string
-        '"' unquoted_text:((!'"' .)*) '"' <TextNode>
+        start_quote:'"' unquoted_text:((!'"' .)*) end_quote:'"' <TextNode>
              {
                 def can_be_combined?
                     false
@@ -53,7 +44,7 @@ grammar ERBGrammer
         end
 
         rule erb_block
-             '<%' (!erb_block_end .)* erb_block_end <NonTextNode>
+             start_block:'<%' block_contents:((!erb_block_end .)*) end_block:erb_block_end <NonTextNode>
              {
                 def node_name
                     "erb_block"
@@ -97,7 +88,7 @@ grammar ERBGrammer
 
 
         rule html_self_contained
-             '<' tag_name:([a-zA-Z])+ (!'/>' (erb_string / .))* '/>' <NonTextNode> 
+             start_tag:'<' tag_name:([a-zA-Z])+ tag_contents:(!'/>' (erb_string / .))* end_tag:'/>' <NonTextNode> 
              {
                 def can_be_combined?
                    true
@@ -106,6 +97,7 @@ grammar ERBGrammer
                 def node_name
                     "html_self_contained"
                 end
+
              }
         end     
 
@@ -124,16 +116,16 @@ grammar ERBGrammer
         end
         
         rule tag_text
-            (!'>' !'/>' (erb_string / .) ) <NonTextNode>
+            (!'>' !'/>' (erb_string / .) )* <NonTextNode>
             {
-              def text_value
-                 "tag text"
+               def node_name
+                   "tag_text"
                end
             }
         end
 
         rule html_start_tag
-             '<'  tag_name:([a-zA-Z])+  tag_text* '>' <NonTextNode>
+             start_bracket:'<'  tag_name:([a-zA-Z])+  extra_text:tag_text end_bracket:'>' <NonTextNode>
              {
                 def can_be_combined?
                     !(['a', 'b'].index(tag_name.text_value.downcase).nil?)
