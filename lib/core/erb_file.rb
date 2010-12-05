@@ -1,15 +1,18 @@
 class ErbFile
   
   attr_accessor :nodes
+  attr_accessor :node_set
+  
   def initialize( node_set )
     @node_set = node_set
-    @nodes = accumulate_top_levels if compiled?
+    @nodes = flatten_elements if compiled?
     @debug = false
   end
 
-  def accumulate_top_levels
+  def flatten_elements
     terminals = []
-    process_element_for_top_levels( @node_set, terminals )
+    flatten( @node_set, terminals )
+    terminals
   end
 
   def compiled?
@@ -21,28 +24,27 @@ class ErbFile
     @parser.failure_reason
   end
 
-  
-  def combine_nodes( node_list )
-    to_return = []
-    @nodes.each do |node|
-      puts "Node: #{node.node_name} = #{can_be_combined?( node )}" if @debug      
-      if( can_be_combined?( node ) )
-        if( !to_return.empty? && can_be_combined?( to_return.last) )
-          to_return << ( HerbCombinedNode.new( to_return.pop, node ) )
-        else
-          to_return << node
-        end
+  def combine_nodes( leaves )
+    combined_nodes = []  
+    leaves.each do |node|
+      last_combined_node = combined_nodes.pop
+      if( last_combined_node.nil? )
+        combined_nodes << node
+      elsif( !node.is_a?(TextNode)  && !last_combined_node.is_a?(TextNode) )
+        combined_nodes << combine_two_nodes( last_combined_node, node, HerbNonTextNode )
+      elsif( last_combined_node.is_a?(TextNode) && node.is_a?(TextNode) )
+        combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )
+      elsif( combined_nodes.last.is_a?(NonTextNode) && last_combined_node && node.is_a?(TextNode) )
+        combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )
+      elsif( node.is_a?(NonTextNode) && node.can_be_combined? && last_combined_node.is_a?(TextNode ) )
+        combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )
       else
-        if( last_node_should_be_unrolled?( to_return.last ) )
-          last_combined_node = to_return.pop
-          to_return += last_combined_node.unroll
-        end        
-        to_return << node
+        combined_nodes << last_combined_node
+        combined_nodes << node
       end
     end
-    to_return
+    combined_nodes
   end
-
   
 
   def extract_text( text_extractor )
@@ -95,46 +97,35 @@ class ErbFile
   
   private
 
+  def combine_two_nodes( node_a, node_b, resulting_node_type )
+    resulting_node_type.new( node_a.text_value + node_b.text_value )
+  end
+  
+    
+  def flatten(node, leaves = [])
+    # This finds all of the leaves, where a leaf is defined as an
+    # element with no sub elements.  This also treats combindable nodes
+    # and text nodes as leaves because we want to keep them intact for
+    # extraction and combination
+    if( !node.respond_to?( :elements) ||
+        node.elements.nil? ||
+        node.elements.empty? ||
+        node.is_a?( TextNode ) ||
+        ( node.is_a?(NonTextNode) && node.can_be_combined? ) )
+      leaves << node if( !node.text_value.empty? )
+      leaves
+    else
+      node.elements.each do |sub_node|
+        flatten( sub_node, leaves )
+      end
+      leaves    
+    end
+  end
+  
   def ErbFile.parse( data_to_parse )
     Treetop.load( $ERB_GRAMMER_FILE )
     @parser = ERBGrammerParser.new
     ErbFile.new( @parser.parse( data_to_parse ) )
-  end
-
-  def last_node_should_be_unrolled?( last_node )
-    !last_node.nil? && last_node.node_name == "herb_combined_nodes" && last_node.should_be_unrolled?  
-  end
-  
-                                     
-  def process_element_for_top_levels( element, terminals )
-    if can_shatter?( element )
-      puts "Shattering element: #{element.text_value}" if @debug
-      terminals << element.shattered_elements
-      terminals.flatten!
-      puts "shattered to: #{terminals.collect { |term| term.text_value } }" if @debug
-    elsif is_top_level?( element )
-      puts "Top level: #{element.text_value}" if @debug      
-      terminals << element
-    elsif( !element.terminal? )
-      puts "Not Terminal: #{element.text_value}" if @debug      
-      element.elements.each do |new_element|
-        process_element_for_top_levels( new_element, terminals )
-      end
-    end
-    terminals
-  end
-
-  def is_top_level?( element )
-    element.respond_to?( 'top_level?' ) && element.top_level?    
-  end
-
-  def can_shatter?( element )
-    element.respond_to?( 'shatter?' ) && element.shatter?        
-  end
-  
-  
-  def can_be_combined?( node )
-    (node.respond_to? :can_be_combined?) && node.can_be_combined?    
   end
   
 end
