@@ -28,7 +28,6 @@ class BaseTextExtractor < TextExtractor
         to_return << HerbWhiteSpaceTextNode.new( start_whitespace )
       end
       to_return << HerbTextNode.new( text_node.text_value.strip )
-    
       if( text_node.text_value =~ /(\s+)$/ )
         end_whitespace = $1
         to_return << HerbWhiteSpaceTextNode.new( end_whitespace )      

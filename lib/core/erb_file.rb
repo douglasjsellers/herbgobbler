@@ -30,7 +30,7 @@ class ErbFile
       last_combined_node = combined_nodes.pop
       if( last_combined_node.nil? )
         combined_nodes << node
-      elsif( !node.is_a?(TextNode)  && !last_combined_node.is_a?(TextNode) )
+      elsif( !node.is_a?(TextNode)  && !last_combined_node.is_a?(TextNode) && !(node.is_a?(NonTextNode) && node.can_be_combined? ) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbNonTextNode )
       elsif( last_combined_node.is_a?(TextNode) && node.is_a?(TextNode) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )

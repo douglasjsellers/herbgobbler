@@ -127,4 +127,22 @@ describe ErbFile do
     nodes.size.should == 1
     nodes.first.text_value.should == "<a>Yay!</a>"
   end
+
+  it "should correctly combine a tags with attributes attached to them" do
+    erb_file = ErbFile.from_string( '<a href="newest">comments</a>' )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+    nodes.size.should == 1
+    nodes.first.text_value.should == '<a href="newest">comments</a>'
+  end
+
+  it "should not combine a non combinable node followed by a combinadable node" do
+    erb_file = ErbFile.from_string( '<div><a href="newest">' )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+    nodes.size.should == 2
+    nodes.first.text_value.should == '<div>'
+    nodes.last.text_value.should == '<a href="newest">'
+    
+  end
+  
+  
 end
