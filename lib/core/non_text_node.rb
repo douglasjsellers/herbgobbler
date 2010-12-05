@@ -1,4 +1,9 @@
-module NonTextNode 
+module NonTextNode
+  include BaseNode
+  def can_be_combined?
+    false
+  end
+  
   def text?
     false
   end

@@ -1,4 +1,6 @@
 module TextNode
+  include BaseNode
+  
   def html?
     true
   end
