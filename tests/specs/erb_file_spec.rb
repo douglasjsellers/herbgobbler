@@ -7,7 +7,7 @@ describe ErbFile do
 
   it "should parse and shatter and erb string into it's component parts" do
     erb_file = ErbFile.from_string( "<%= \"doug is great\" %>" )
-    terminals = erb_file.accumulate_top_levels
+    terminals = erb_file.flatten_elements
     terminals.size.should == 5
 
     terminals[0].node_name.should == "erb_string_start"
@@ -17,7 +17,7 @@ describe ErbFile do
   
   it "should be able to gather all of the top level elements together when there is only one element" do
     erb_file = ErbFile.from_string( "<%= \"doug is great\" %>" )
-    terminals = erb_file.accumulate_top_levels
+    terminals = erb_file.flatten_elements
     terminals.size.should == 5
     terminals.first.top_level?.should == true
     terminals.first.text_value.should == "<%=" 
@@ -25,7 +25,7 @@ describe ErbFile do
 
   it "should be able to gather all of the top level elements together where are are two elemest" do
     erb_file = ErbFile.from_string( "<%= \"doug is great\" %>D" )
-    terminals = erb_file.accumulate_top_levels
+    terminals = erb_file.flatten_elements
     terminals.size.should == 6
     terminals.first.top_level?.should == true
     terminals.first.text_value.should == "<%=" 
@@ -36,7 +36,7 @@ describe ErbFile do
 
   it "should be able to gather all of the top level elements when there are three and one of them is an html element" do
     erb_file = ErbFile.from_string( "<%= \"doug is great\" %><br/>D" )
-    terminals = erb_file.accumulate_top_levels
+    terminals = erb_file.flatten_elements
     terminals.size.should == 7
 
     terminals[5].top_level?.should == true
@@ -49,7 +49,7 @@ describe ErbFile do
 
   it "should be able to roll up multiple characters into a single top level element" do
     erb_file = ErbFile.from_string( "Doug" )
-    terminals = erb_file.accumulate_top_levels    
+    terminals = erb_file.flatten_elements
     terminals.size.should == 1
     terminals.first.top_level?.should == true
     terminals.first.text_value.should == "Doug" 
@@ -58,7 +58,7 @@ describe ErbFile do
   
   it "should be able to roll up multiple characters into a single top level element when surrounded by <br/> tags" do
     erb_file = ErbFile.from_string( "<br/>Doug<br/>" )
-    terminals = erb_file.accumulate_top_levels    
+    terminals = erb_file.flatten_elements
     terminals.size.should == 3
     
     terminals[0].top_level?.should == true
@@ -80,7 +80,7 @@ describe ErbFile do
   it "should be able to correctly roll up text when that text is surrounded by html tags" do
     
     erb_file = ErbFile.from_string( "<b>Doug</b>" )
-    terminals = erb_file.accumulate_top_levels    
+    terminals = erb_file.flatten_elements
     terminals.size.should == 3
     
     terminals[0].top_level?.should == true
@@ -102,19 +102,14 @@ describe ErbFile do
 
   it "should be able to roll up text when it is surrounded by erb blocks and strings" do
     erb_file = ErbFile.from_string( "Doug<%= is? %>Great<% @title='blah' %>" )
-    terminals = erb_file.accumulate_top_levels
+    terminals = erb_file.flatten_elements
     
-    terminals.size.should == 7
+    terminals.size.should == 26
 
     terminals[0].top_level?.should == true
     terminals[0].text?.should == true
     terminals[0].node_name.should == "text"
     terminals[0].text_value.should == "Doug" 
-
-    terminals[6].top_level?.should == true
-    terminals[6].text?.should == false
-    terminals[6].node_name.should == "erb_block"
-    terminals[6].text_value.should == "<% @title='blah' %>" 
     
   end
   
