@@ -46,7 +46,7 @@
                <span class="pagetop">
                  <%= t '.hacker_news_1' %>
                 <img src="http://ycombinator.com/images/s.gif" height=1 width=10>
-                  <%= t '.new_coments' %> 
+                  <%= t '.new_coments' %>
               </span>
             </td>
           </tr>
