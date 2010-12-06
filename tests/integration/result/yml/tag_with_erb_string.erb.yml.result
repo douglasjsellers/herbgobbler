@@ -1,0 +1,7 @@
+en:
+  tests:
+    integration:
+      test:
+        tag_with_erb_string:
+          stack_5: "stack-5"
+          ads_stuf_you: "ADS / STUFF <br/> YOU'VE CREATED"
