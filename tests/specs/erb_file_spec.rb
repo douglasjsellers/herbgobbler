@@ -141,7 +141,12 @@ describe ErbFile do
     nodes.size.should == 2
     nodes.first.text_value.should == '<div>'
     nodes.last.text_value.should == '<a href="newest">'
-    
+  end
+
+  it "should combine two non-text combinadble nodes into a single node" do
+    erb_file = ErbFile.from_string( '' )
+    nodes = erb_file.combine_nodes( [ CombindableHerbNonTextNode.new( "<b>" ), CombindableHerbNonTextNode.new( "     " ) ] )
+    nodes.size.should == 1
   end
   
   

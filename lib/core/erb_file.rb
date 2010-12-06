@@ -30,11 +30,13 @@ class ErbFile
       last_combined_node = combined_nodes.pop
       if( last_combined_node.nil? )
         combined_nodes << node
+      elsif( combindable_node?( node ) && combindable_node?( last_combined_node ) )
+        combined_nodes << CombindableHerbNonTextNode.new( last_combined_node.text_value + node.text_value )
       elsif( !node.is_a?(TextNode)  && !last_combined_node.is_a?(TextNode) && !(node.is_a?(NonTextNode) && node.can_be_combined? ) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbNonTextNode )
       elsif( last_combined_node.is_a?(TextNode) && node.is_a?(TextNode) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )
-      elsif( last_combined_node.is_a?(NonTextNode) && last_combined_node.can_be_combined? && node.is_a?(TextNode) )
+      elsif( combindable_node?( last_combined_node ) && node.is_a?(TextNode) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )
       elsif( node.is_a?(NonTextNode) && node.can_be_combined? && last_combined_node.is_a?(TextNode ) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )
@@ -101,7 +103,11 @@ class ErbFile
     resulting_node_type.new( node_a.text_value + node_b.text_value )
   end
   
-    
+
+  def combindable_node?( node )
+    node.is_a?( NonTextNode) && node.can_be_combined?
+  end
+  
   def flatten(node, leaves = [])
     # This finds all of the leaves, where a leaf is defined as an
     # element with no sub elements.  This also treats combindable nodes
