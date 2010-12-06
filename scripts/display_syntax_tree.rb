@@ -13,6 +13,6 @@ top_levels.each do |top_level|
 end
 puts "---------- Combined Syntax Tree -------------"
 erb_file.combine_nodes( erb_file.flatten_elements ).each do |element|
-  puts "`#{element.text_value}`(text=#{element.is_a?(TextNode)})"
+  puts "`#{element.text_value}`(text=#{element.is_a?(TextNode)})(combindable=#{element.is_a?(NonTextNode) && element.can_be_combined?})"
 end
 
