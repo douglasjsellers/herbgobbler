@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        combindable_node_followed_by_whitespace:
+          hacker_news: "<b>\n                   <a href=\"news\">Hacker News</a>\n                </b>"
