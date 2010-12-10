@@ -1,5 +1,6 @@
-module TextNode
+module TextNode 
   include BaseNode
+  include NodeProcessing
   
   def html?
     true
@@ -16,5 +17,9 @@ module TextNode
   def top_level?
     true
   end  
-  
+
+  def has_variables?
+    false
+  end
+    
 end

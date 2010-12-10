@@ -21,8 +21,12 @@ grammar ERBGrammer
 
         end
         
+        rule string_variable 
+             '#{' (!'}' .)* '}' <HerbStringVariable>
+        end
+
         rule double_quoted_ruby_string
-        start_quote:'"' unquoted_text:((!'"' .)*) end_quote:'"' <TextNode>
+        start_quote:'"' unquoted_text:((!'"' (string_variable / .))*) end_quote:'"' <DoubleQuotedTextNode>
              {
                 def can_be_combined?
                     false
@@ -30,8 +34,8 @@ grammar ERBGrammer
                 
                 def html?
                     false
-                end
-
+                end 
+                
                 def text_value
                     unquoted_text.text_value            
                 end

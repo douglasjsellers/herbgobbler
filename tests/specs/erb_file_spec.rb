@@ -148,6 +148,6 @@ describe ErbFile do
     nodes = erb_file.combine_nodes( [ CombindableHerbNonTextNode.new( "<b>" ), CombindableHerbNonTextNode.new( "     " ) ] )
     nodes.size.should == 1
   end
-  
+
   
 end

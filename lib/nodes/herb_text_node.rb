@@ -1,6 +1,7 @@
 class HerbTextNode
   include TextNode
   attr_accessor :text_value
+  
   def initialize( text )
     @text_value = text
   end

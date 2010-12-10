@@ -1,4 +1,5 @@
 require 'core/base_node'
+require 'core/node_processing'
 require 'core/erb_file'
 require 'core/text_node'
 require 'core/non_text_node'
@@ -9,4 +10,5 @@ require 'core/i18n_key'
 require 'core/ignorable_tag_node'
 require 'core/base_translation_store'
 require 'core/rails_translation_store'
+require 'core/double_quoted_text_node'
 
