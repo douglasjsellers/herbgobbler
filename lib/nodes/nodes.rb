@@ -5,4 +5,6 @@ require 'nodes/herb_erb_text_call_node'
 require 'nodes/herb_combined_node'
 require 'nodes/herb_string_variable'
 require 'nodes/combindable_herb_non_text_node'
+require 'nodes/herb_node_retaining_node'
+require 'nodes/herb_node_retaining_text_node'
 
