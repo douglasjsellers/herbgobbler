@@ -11,8 +11,17 @@ grammar ERBGrammer
              ) (erb)*
         end
 
+        rule erb_string_non_text_content
+             (!erb_block_end .)* <ErbStringNonTextContent>
+             {
+                def can_be_combined?
+                    true
+                end
+             }
+        end
+
         rule erb_string
-             start_erb:erb_string_start start_space:(space) text:(double_quoted_ruby_string)?  everything_else:(!erb_block_end .)* end_erb:(erb_block_end) <NonTextNode>
+             start_erb:erb_string_start start_space:(space) text:(double_quoted_ruby_string)?  everything_else:erb_string_non_text_content end_erb:(erb_block_end) <NonTextNode>
              {
                 def node_name
                     "erb_string"
@@ -63,6 +72,10 @@ grammar ERBGrammer
                 def node_name
                     "erb_string_start"
                 end
+                
+                def can_be_combined?
+                    true
+                end
              }
 
         end
@@ -73,6 +86,11 @@ grammar ERBGrammer
                 def node_name
                     "erb_block_end"
                 end
+
+                def can_be_combined?
+                    true
+                end
+
              }
 
         end
@@ -162,6 +180,10 @@ grammar ERBGrammer
                       def node_name
                          "space"
                       end
+
+                      def can_be_combined?
+                          true
+                      end                      
            }
         end
 

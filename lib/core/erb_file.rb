@@ -59,7 +59,7 @@ class ErbFile
     text_extractor.starting_text_extraction
     new_node_set = []
     @nodes = combine_nodes( @nodes )    
-    @nodes.each do |node|      
+    @nodes.each do |node|
       if( node.text? )
         returned_nodes = text_extractor.html_text( node )
         new_node_set += returned_nodes unless returned_nodes.nil?

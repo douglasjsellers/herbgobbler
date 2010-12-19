@@ -149,5 +149,14 @@ describe ErbFile do
     nodes.size.should == 1
   end
 
+  it "should be able to combine a text node followed by an erb string into a combined text node" do
+    erb_file = ErbFile.from_string( 'text<%= "!" %>' )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+
+    node.size.should == 3
+    nodes[1].text_value. should == "text!"
+    
+  end
+
   
 end

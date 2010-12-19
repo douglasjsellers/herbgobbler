@@ -11,4 +11,5 @@ require 'core/ignorable_tag_node'
 require 'core/base_translation_store'
 require 'core/rails_translation_store'
 require 'core/double_quoted_text_node'
+require 'core/erb_string_non_text_content'
 
