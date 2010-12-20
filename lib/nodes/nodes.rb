@@ -7,4 +7,6 @@ require 'nodes/herb_string_variable'
 require 'nodes/combindable_herb_non_text_node'
 require 'nodes/herb_node_retaining_node'
 require 'nodes/herb_node_retaining_text_node'
-
+require 'nodes/herb_node_retaining_node'
+require 'nodes/herb_node_retaining_text_node'
+require 'nodes/herb_node_retaining_non_text_node'

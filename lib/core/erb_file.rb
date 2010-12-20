@@ -32,15 +32,17 @@ class ErbFile
       if( last_combined_node.nil? )
         combined_nodes << node
       elsif( combindable_node?( node ) && combindable_node?( last_combined_node ) )
-        combined_nodes << CombindableHerbNonTextNode.new( last_combined_node.text_value + node.text_value )
+        new_node = HerbNodeRetainingNonTextNode.new( last_combined_node )
+        new_node << node
+        combined_nodes << new_node
       elsif( !node.is_a?(TextNode)  && !last_combined_node.is_a?(TextNode) && !(node.is_a?(NonTextNode) && node.can_be_combined? ) )
-        combined_nodes << combine_two_nodes( last_combined_node, node, HerbNonTextNode )
+        combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingNonTextNode )
       elsif( last_combined_node.is_a?(TextNode) && node.is_a?(TextNode) )
-        combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )
+        combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingTextNode )
       elsif( combindable_node?( last_combined_node ) && node.is_a?(TextNode) )
-        combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )
+        combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingTextNode )
       elsif( node.is_a?(NonTextNode) && node.can_be_combined? && last_combined_node.is_a?(TextNode ) )
-        combined_nodes << combine_two_nodes( last_combined_node, node, HerbTextNode )
+        combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingTextNode )
       else
         combined_nodes << last_combined_node
         combined_nodes << node
@@ -61,8 +63,7 @@ class ErbFile
     @nodes = combine_nodes( @nodes )    
     @nodes.each do |node|
       if( node.text? )
-        returned_nodes = text_extractor.html_text( node )
-        new_node_set += returned_nodes unless returned_nodes.nil?
+        node.extract_text( text_extractor, new_node_set )
       else
         new_node_set << node
       end
@@ -101,7 +102,14 @@ class ErbFile
   private
 
   def combine_two_nodes( node_a, node_b, resulting_node_type )
-    resulting_node_type.new( node_a.text_value + node_b.text_value )
+    if node_a.class == resulting_node_type
+      node_a << node_b
+      node_a
+    else
+      new_node = resulting_node_type.new( node_a )
+      new_node << node_b
+      new_node
+    end
   end
   
 
