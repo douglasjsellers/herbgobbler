@@ -5,6 +5,18 @@ class HerbNodeRetainingNode
     @sub_nodes << first_node unless first_node.nil?
   end
 
+  def nodes
+    to_return = []
+    @sub_nodes.each do|node|
+      if( node.is_a?( HerbNodeRetainingNode ) )
+        to_return += node.nodes
+      else
+        to_return << node
+      end
+    end
+    to_return
+  end
+  
   def <<(node)
     if( node.is_a?(Array) )
       @sub_nodes+= node
@@ -13,7 +25,7 @@ class HerbNodeRetainingNode
     end
     self
   end
-
+  
   def text_value
     to_return = ""
     @sub_nodes.each do |node|
