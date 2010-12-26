@@ -109,5 +109,6 @@ describe TextExtractor do
     text_extractor.text_found[0].should == "test"
     text_extractor.text_found[1].should == "!"
   end
+
   
 end

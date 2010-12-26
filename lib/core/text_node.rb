@@ -43,8 +43,6 @@ module TextNode
     false
   end
 
-  protected
-
   def amount_of_ending_whitespace
     self.text_value.length - self.text_value.rstrip.length    
   end
