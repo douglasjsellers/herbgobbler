@@ -4,26 +4,30 @@ class TestTextExtractor < BaseTextExtractor
   attr_accessor :found_start_text_extraction
   attr_accessor :found_completed_text_extraction
   attr_accessor :text_found
-
+  attr_accessor :variables_found
+  
   def initialize
     @found_completed_text_extraction = false
     @found_start_text_extraction = false
     @text_found = []
+    @variables_found = []
   end
   
   def starting_text_extraction
     @found_start_text_extraction = true
   end
   
-  def html_text( text_node )
-    # I must not understand how this works
-    super( text_node ).each do |node|
-      @text_found << node.text_value
-    end
-    
-    nil
+  def add_html_text( text_node )
+    @text_found << text_node.text_value
+    [ text_node ]
   end
 
+  def end_html_text
+  end
+  
+  def start_html_text
+  end
+  
 
   # This is called when text extraction has finished
   def completed_text_extraction
@@ -58,10 +62,8 @@ describe TextExtractor do
     erb_file = ErbFile.from_string( html_text )
     text_extractor = TestTextExtractor.new
     erb_file.extract_text( text_extractor )
-    text_extractor.text_found.size.should == 3
-    text_extractor.text_found.first.should == "\n        "
-    text_extractor.text_found[1].should == "Doug is great"
-    text_extractor.text_found.last.should == "\n"
+    text_extractor.text_found.size.should == 1
+    text_extractor.text_found[0].should == "Doug is great"
     
   end
 
@@ -98,5 +100,14 @@ describe TextExtractor do
     text_extractor.text_found.size.should == 0
 
   end
-    
+
+  it "should successfully extract text strings contained within an erb string block" do
+    erb_file = ErbFile.from_string( 'test<%= "!" %>' )
+    text_extractor = TestTextExtractor.new
+    erb_file.extract_text( text_extractor )
+    text_extractor.text_found.size.should == 2
+    text_extractor.text_found[0].should == "test"
+    text_extractor.text_found[1].should == "!"
+  end
+  
 end

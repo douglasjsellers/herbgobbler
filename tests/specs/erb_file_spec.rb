@@ -153,10 +153,9 @@ describe ErbFile do
     erb_file = ErbFile.from_string( 'text<%= "!" %>' )
     nodes = erb_file.combine_nodes( erb_file.nodes )
 
-    node.size.should == 3
-    nodes[1].text_value. should == "text!"
+    nodes.size.should == 1
+    nodes.first.text_value. should == "text<%= ! %>"
     
   end
-
   
 end

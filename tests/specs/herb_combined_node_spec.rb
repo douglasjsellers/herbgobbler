@@ -49,5 +49,6 @@ describe HerbCombinedNode do
     node.unroll.last.text_value.should == '<br/>'
     
   end
+
   
 end
