@@ -57,7 +57,7 @@ end
 
 task :test_specs do
   puts "Running specs"
-  puts `spec tests/specs/*.rb`
+  puts `spec tests/specs/*.rb --backtrace`
 end
 
 desc "Run all of the tests"
