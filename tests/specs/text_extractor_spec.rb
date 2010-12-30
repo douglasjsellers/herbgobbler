@@ -11,6 +11,7 @@ class TestTextExtractor < BaseTextExtractor
     @found_start_text_extraction = false
     @text_found = []
     @variables_found = []
+    @nodes = []
   end
   
   def starting_text_extraction
@@ -19,13 +20,21 @@ class TestTextExtractor < BaseTextExtractor
   
   def add_html_text( text_node )
     @text_found << text_node.text_value
-    [ text_node ]
+    @nodes << text_node
   end
 
+  def add_non_text( node )
+  end
+  
   def end_html_text
+    @nodes
   end
   
   def start_html_text
+  end
+
+  def white_space( node )
+    @nodes << node
   end
   
 

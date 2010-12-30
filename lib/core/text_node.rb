@@ -5,22 +5,17 @@ module TextNode
   def extract_text( text_extractor, node_tree )
     if( self.is_a?( HerbNodeRetainingNode ) )
       self.nodes.each do |node|
-        node_tree = node.extract_text( text_extractor, node_tree ) if node.is_a?( TextNode )
+          node.extract_text( text_extractor, node_tree )
       end
     else
       if( self.has_leading_or_trailing_whitespace? )
         self.remove_leading_and_trailing_whitespace.each do |node|
-          if( node.is_a?( TextNode ) && !node.white_space?)
-            node_tree = node.extract_text( text_extractor, node_tree )
-          else
-            node_tree << node
-          end
+          node.extract_text( text_extractor, node_tree )
         end
       else
-        node_tree = node_tree + text_extractor.add_html_text( self )
+        text_extractor.add_html_text( self )
       end
     end
-    node_tree
   end
   
   def html?

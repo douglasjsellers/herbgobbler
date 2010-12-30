@@ -41,6 +41,8 @@ class ErbFile
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingTextNode )
       elsif( combindable_node?( last_combined_node ) && node.is_a?(TextNode) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingTextNode )
+      elsif( combindable_node?( node ) && last_combined_node.is_a?(TextNode))
+        combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingTextNode )        
       elsif( node.is_a?(NonTextNode) && node.can_be_combined? && last_combined_node.is_a?(TextNode ) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingTextNode )
       else
@@ -64,8 +66,8 @@ class ErbFile
     @nodes.each do |node|
       if( node.text? )
         text_extractor.start_html_text
-        new_node_set = node.extract_text( text_extractor, new_node_set )
-        text_extractor.end_html_text
+        node.extract_text( text_extractor, new_node_set )
+        new_node_set += text_extractor.end_html_text
       else
         new_node_set << node
       end

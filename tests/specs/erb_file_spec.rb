@@ -104,7 +104,7 @@ describe ErbFile do
     erb_file = ErbFile.from_string( "Doug<%= is? %>Great<% @title='blah' %>" )
     terminals = erb_file.flatten_elements
     
-    terminals.size.should == 26
+    terminals.size.should == 23
 
     terminals[0].top_level?.should == true
     terminals[0].text?.should == true
@@ -157,5 +157,24 @@ describe ErbFile do
     nodes.first.text_value. should == "text<%= ! %>"
     
   end
+
+  it "shoud combine nodes together that have an attribute associated with an html tag" do
+    html = '<a href="blah">Doug</a>'
+    erb_file = ErbFile.from_string( html )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+
+    nodes.size.should == 1
+    nodes.first.text_value.should == html
+  end
+
+  it "shoud combine nodes together that have an attribute and whitespace associated with an html tag" do
+    html = "<a href=\"blah\">\nDoug\n</a>"
+    erb_file = ErbFile.from_string( html )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+
+    nodes.size.should == 1
+    nodes.first.text_value.should == html
+  end
+  
   
 end

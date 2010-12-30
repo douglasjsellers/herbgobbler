@@ -4,7 +4,7 @@ class HerbNodeRetainingNode
     @sub_nodes = []
     @sub_nodes << first_node unless first_node.nil?
   end
-
+  
   def nodes
     to_return = []
     @sub_nodes.each do|node|

@@ -3,6 +3,10 @@ module NonTextNode
   def can_be_combined?
     false
   end
+
+  def extract_text( text_extractor, node_tree )
+    text_extractor.add_non_text( self )
+  end
   
   def text?
     false
