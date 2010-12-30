@@ -5,7 +5,12 @@ module NonTextNode
   end
 
   def extract_text( text_extractor, node_tree )
-    text_extractor.add_non_text( self )
+    if( self.white_space? )
+      text_extractor.white_space( self )
+    else
+      text_extractor.add_non_text( self )
+    end
+    
   end
   
   def text?
