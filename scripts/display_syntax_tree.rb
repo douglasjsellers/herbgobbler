@@ -8,8 +8,8 @@ top_levels = erb_file.flatten_elements
 puts "---------- Original ----------------"
 puts File.read( file_name )
 puts "---------- Un-Combined Syntax Tree -------------"
-top_levels.each do |top_level|
-  puts top_level.text_value
+top_levels.each_with_index do |top_level, index|
+  puts "(#{index}): #{top_level.text_value}"
 end
 puts "---------- Combined Syntax Tree -------------"
 erb_file.combine_nodes( erb_file.flatten_elements ).each do |element|
