@@ -5,7 +5,7 @@ module TextNode
   def extract_text( text_extractor, node_tree )
     if( self.is_a?( HerbNodeRetainingNode ) )
       self.nodes.each do |node|
-          node.extract_text( text_extractor, node_tree )
+        node.extract_text( text_extractor, node_tree )
       end
     else
       if( self.has_leading_or_trailing_whitespace? )

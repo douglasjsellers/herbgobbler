@@ -35,7 +35,7 @@ class ErbFile
         new_node = HerbNodeRetainingNonTextNode.new( last_combined_node )
         new_node << node
         combined_nodes << new_node
-      elsif( !node.is_a?(TextNode)  && !last_combined_node.is_a?(TextNode) && !(node.is_a?(NonTextNode) && node.can_be_combined? ) )
+      elsif( !node.is_a?(TextNode)  && !last_combined_node.is_a?(TextNode) && !(last_combined_node.is_a?(BaseNode) && last_combined_node.can_be_combined? ) && !(node.is_a?(NonTextNode) && node.can_be_combined? ) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingNonTextNode )
       elsif( last_combined_node.is_a?(TextNode) && node.is_a?(TextNode) )
         combined_nodes << combine_two_nodes( last_combined_node, node, HerbNodeRetainingTextNode )
