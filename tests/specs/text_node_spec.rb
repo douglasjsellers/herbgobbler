@@ -33,9 +33,6 @@ describe TextNode do
 
   it "should make the appropriate text call backs for a simple string with erb text in it" do
     erb_file = ErbFile.from_string " test <%= 'this' %> works  "
-    erb_file.combine_nodes( erb_file.nodes ).each do |node|
-      puts "#{node.text_value}( #{node.class} ) = #{node.text?}"
-    end
   end
 
 
