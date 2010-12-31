@@ -67,7 +67,7 @@ grammar ERBGrammer
         end
         
         rule erb_string_start
-           '<%=' <NonTextNode>
+           '<%=' <NonExtractingNonTextNode>
              {
                 def node_name
                     "erb_string_start"
@@ -81,7 +81,7 @@ grammar ERBGrammer
         end
 
         rule erb_block_end
-             ('%>' / '-%>') <NonTextNode>
+             ('%>' / '-%>') <NonExtractingNonTextNode>
              {
                 def node_name
                     "erb_block_end"

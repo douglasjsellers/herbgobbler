@@ -89,6 +89,5 @@ describe RailsTextExtractor do
     
   end
   
-
 end
 

@@ -176,5 +176,13 @@ describe ErbFile do
     nodes.first.text_value.should == html
   end
   
+
+  it "should discard the <%= and the %> around everything when exctarcting text" do
+    html = "<%= 'test' %>"
+    erb_file = ErbFile.from_string( html )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+
+    
+  end
   
 end

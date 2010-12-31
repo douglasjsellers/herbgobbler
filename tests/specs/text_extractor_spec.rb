@@ -5,11 +5,13 @@ class TestTextExtractor < BaseTextExtractor
   attr_accessor :found_completed_text_extraction
   attr_accessor :text_found
   attr_accessor :variables_found
+  attr_accessor :non_text_found
   
   def initialize
     @found_completed_text_extraction = false
     @found_start_text_extraction = false
     @text_found = []
+    @non_text_found = []
     @variables_found = []
     @nodes = []
   end
@@ -24,6 +26,7 @@ class TestTextExtractor < BaseTextExtractor
   end
 
   def add_non_text( node )
+    @non_text_found << node
   end
   
   def end_html_text
@@ -119,5 +122,18 @@ describe TextExtractor do
     text_extractor.text_found[1].should == "!"
   end
 
+  it "should discard the <%= and the %> around everything when extracting text" do
+    erb_file = ErbFile.from_string( 'test<%="!"%>' )
+    text_extractor = TestTextExtractor.new
+    erb_file.extract_text( text_extractor )
+    text_extractor.non_text_found.empty?.should == true
+  end
+
+  it "should discard the <%= and the %> and the white space around everything when extracting text" do
+    erb_file = ErbFile.from_string( 'test<%= "!" %>' )
+    text_extractor = TestTextExtractor.new
+    erb_file.extract_text( text_extractor )
+    text_extractor.non_text_found.empty?.should == true
+  end
   
 end
