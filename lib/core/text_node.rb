@@ -3,18 +3,12 @@ module TextNode
   include NodeProcessing
 
   def extract_text( text_extractor, node_tree )
-    if( self.is_a?( HerbNodeRetainingNode ) )
-      self.nodes.each do |node|
+    if( self.has_leading_or_trailing_whitespace? )
+      self.remove_leading_and_trailing_whitespace.each do |node|
         node.extract_text( text_extractor, node_tree )
       end
     else
-      if( self.has_leading_or_trailing_whitespace? )
-        self.remove_leading_and_trailing_whitespace.each do |node|
-          node.extract_text( text_extractor, node_tree )
-        end
-      else
-        text_extractor.add_html_text( self )
-      end
+      text_extractor.add_html_text( self )
     end
   end
   
