@@ -18,9 +18,9 @@ class DoubleQuotedTextNode < Treetop::Runtime::SyntaxNode
   
   def elements
     if( has_variables? )
-      variable_elements
+      strip_leading_and_trailing_double_quotes( variable_elements )
     else
-      original_elements
+      strip_leading_and_trailing_double_quotes( original_elements )
     end
   end
 
@@ -51,6 +51,32 @@ class DoubleQuotedTextNode < Treetop::Runtime::SyntaxNode
 
   private
 
+  def strip_leading_and_trailing_double_quotes( list_of_elements )
+    first_element = list_of_elements.first
+    last_element = list_of_elements.last
+
+    list_of_elements = list_of_elements[ 1..list_of_elements.length - 2 ]
+    first_element = remove_double_quote_at_position( first_element, 0 )
+    last_element = remove_double_quote_at_position( last_element, last_element.text_value.length - 1 )
+    ([first_element,list_of_elements,last_element]).flatten.compact
+  end
+
+  def remove_double_quote_at_position( element, position )
+    if( element.text_value[position..position] == '"' )
+      new_text = ""
+      new_text += element.text_value[0..position-1] if position > 0
+      new_text += element.text_value[position+1..element.text_value.length - 1] if (position + 1) < (element.text_value.length - 1)
+      if( new_text.length == 0 )
+        element = nil
+      else
+        element = HerbTextNode.new( new_text )
+      end
+    end
+
+    element
+  end
+  
+  
   def add_text_to_array( array, text )
     unless( text.empty? )
       array << HerbTextNode.new( text )

@@ -46,7 +46,7 @@ grammar ERBGrammer
                 end 
                 
                 def text_value
-                    unquoted_text.text_value            
+                    self.elements.inject("") { |text, node| text += node.text_value }
                 end
 
                 def node_name
