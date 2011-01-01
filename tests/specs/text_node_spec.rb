@@ -12,7 +12,7 @@ end
 describe TextNode do
   it "should be able to see that a double quoted string has a variable in it" do
     erb_file = ErbFile.from_string( '<%= "test #{"data"}" %>' )
-    erb_file.nodes.size.should == 7
+    erb_file.nodes.size.should == 6
     erb_file.nodes[2].text_value == '"test '
     erb_file.nodes[3].text_value == '#{"data"}'
     erb_file.nodes[4].text_value == '"'

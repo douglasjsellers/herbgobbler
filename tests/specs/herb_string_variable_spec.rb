@@ -9,7 +9,7 @@ describe HerbStringVariable do
     
     nodes.size.should == 1
     nodes.first.is_a?( HerbNodeRetainingTextNode )
-    nodes.first.nodes.size.should == 7
+    nodes.first.nodes.size.should == 6
     nodes.first.nodes[3].is_a?(HerbStringVariable).should == true
   end
 
@@ -20,7 +20,7 @@ describe HerbStringVariable do
     
     nodes.size.should == 1
     nodes.first.is_a?( HerbNodeRetainingTextNode )
-    nodes.first.nodes.size.should == 9
+    nodes.first.nodes.size.should == 8
     nodes.first.nodes[3].is_a?(HerbStringVariable).should == true
     nodes.first.nodes[5].is_a?(HerbStringVariable).should == true
     

@@ -3,7 +3,7 @@ module TextNode
   include NodeProcessing
 
   def extract_text( text_extractor, node_tree )
-    if( self.has_leading_or_trailing_whitespace? )
+    if( self.strip_whitespace? && self.has_leading_or_trailing_whitespace? )
       self.remove_leading_and_trailing_whitespace.each do |node|
         node.extract_text( text_extractor, node_tree )
       end
@@ -11,26 +11,31 @@ module TextNode
       text_extractor.add_html_text( self )
     end
   end
+
+  def has_variables?
+    false
+  end
   
   def html?
+    true
+  end
+
+  def strip_whitespace?
     true
   end
   
   def text?
     true
   end
-
-  def white_space?
-    false
-  end
   
   def top_level?
     true
   end  
 
-  def has_variables?
+  def white_space?
     false
   end
+  
 
   def amount_of_ending_whitespace
     self.text_value.length - self.text_value.rstrip.length    

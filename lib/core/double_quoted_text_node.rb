@@ -1,5 +1,6 @@
 class DoubleQuotedTextNode < Treetop::Runtime::SyntaxNode  
   include TextNode
+
   
   def has_variables?
     leaves.any? { |node| node.is_a?( HerbStringVariable ) }
@@ -69,7 +70,7 @@ class DoubleQuotedTextNode < Treetop::Runtime::SyntaxNode
       if( new_text.length == 0 )
         element = nil
       else
-        element = HerbTextNode.new( new_text )
+        element = HerbTextNode.new( new_text, false )
       end
     end
 
