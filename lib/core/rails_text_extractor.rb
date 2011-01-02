@@ -6,6 +6,7 @@ class RailsTextExtractor < BaseTextExtractor
     @translation_store = translation_store
     @current_text = []
     @current_nodes = []
+    @current_variables = []
   end
   
   # This is called when text extraction has begun
@@ -15,12 +16,13 @@ class RailsTextExtractor < BaseTextExtractor
   def start_html_text
     @current_text = []
     @current_nodes = []
+    @current_variables = []
   end
 
   def end_html_text
     whitespace, @current_text = strip_ending_whitespace_nodes( @current_text )
     total_text = @current_text.inject("") { |all_text, node| all_text + node.text_value }
-    @current_nodes << HerbErbTextCallNode.new( [total_text], @key_store, "t '.", "'" )
+    @current_nodes << HerbErbTextCallNode.new( [total_text], @key_store, "t '.", "'", @current_variables )
     @translation_store.add_translation( @current_nodes.last.key_value, @current_nodes.last.original_text )
     # Just reset everything here to be cautious
     to_return = @current_nodes
@@ -35,6 +37,13 @@ class RailsTextExtractor < BaseTextExtractor
     else
       @current_text << node
     end
+  end
+
+  # This is used to add a new variable into the current html element
+  def add_variable( variable_name, variable_value)
+    variable_node = RailsTextVariableNode.new( variable_name, variable_value )
+    @current_text << variable_node
+    @current_variables << variable_node
   end
   
   # This takes in a text node and returns one or more nodes that will

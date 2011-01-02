@@ -86,7 +86,25 @@ describe RailsTextExtractor do
     resulting_nodes.first.text_value.should == "<%= t '.test' %>"
     extractor.translation_store.translations.size.should == 1
     extractor.translation_store.translations.values.first.should == "test"
-    
+  end
+
+  it "should be able to add a variable and have it show up in the erb string generated" do
+    extractor = RailsTextExtractor.new( TestTranslationStore.new )
+    extractor.start_html_text
+    extractor.add_html_text( TestExtractorTextNode.new( "test " ) )
+    extractor.add_variable( "count", "\"1\"" )
+    resulting_nodes = extractor.end_html_text
+    resulting_nodes.first.text_value.should == "<%= t '.test', :count => (\"1\") %>"
+  end
+  
+  it "should be able to add a variable and have it show up in the yml key" do
+    translation_store = TestTranslationStore.new
+    extractor = RailsTextExtractor.new( translation_store )
+    extractor.start_html_text
+    extractor.add_html_text( TestExtractorTextNode.new( "test " ) )
+    extractor.add_variable( "count", "1" )
+    resulting_nodes = extractor.end_html_text
+    translation_store.translations["1"].should == "test %{count}"
   end
   
 end

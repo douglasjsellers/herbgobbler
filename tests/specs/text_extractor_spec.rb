@@ -36,6 +36,10 @@ class TestTextExtractor < BaseTextExtractor
   def start_html_text
   end
 
+  def add_variable( variable_name, variable_value)
+    @variables_found << [variable_name, variable_value]
+  end
+  
   def white_space( node )
     @nodes << node
   end
@@ -135,5 +139,32 @@ describe TextExtractor do
     erb_file.extract_text( text_extractor )
     text_extractor.non_text_found.empty?.should == true
   end
+
+  it "should extract a string variable and report the text before it as regular text" do
+    erb_file = ErbFile.from_string( '<%= "doug is #{"great"}" %>' )
+    text_extractor = TestTextExtractor.new
+    erb_file.extract_text( text_extractor )
+    text_extractor.text_found.size.should == 1
+    text_extractor.text_found.first.should == "doug is "
+  end
+
+  it "should extract a string variable and report the variable using add variable" do
+    erb_file = ErbFile.from_string( '<%= "doug is #{"great"}" %>' )
+    text_extractor = TestTextExtractor.new
+    erb_file.extract_text( text_extractor )
+    text_extractor.variables_found.size.should == 1
+    text_extractor.variables_found.first.last.should == "great"
+  end
+
+  it "should extract multiple variables and report them back using add_variable" do
+    erb_file = ErbFile.from_string( '<%= "doug is #{"great"} #{"!"}" %>' )
+    text_extractor = TestTextExtractor.new
+    erb_file.extract_text( text_extractor )
+    text_extractor.variables_found.size.should == 2
+    text_extractor.variables_found.first.last.should == "great"
+    text_extractor.variables_found.last.last.should == "!"
+    
+  end
+  
   
 end
