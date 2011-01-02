@@ -57,6 +57,11 @@ TEXT
     key_3.key_value.should == "key_2"
     
   end
+
+  it "should remove %{} blocks that are common in rails i18n" do
+    text_call = I18nKey.new( "doug %{count}" )
+    text_call.key_value.should == "doug"    
+  end
   
 end
 
