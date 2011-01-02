@@ -24,6 +24,14 @@ describe HerbErbTextCallNode do
   it "should be able to correctly postpend data" do
     node = HerbErbTextCallNode.new( ['the quick brown fox jumps over'], [], '"', '"' )
     node.text_value.should == '<%= "the_quick" %>'
-  end  
+  end
+
+  it "should be able to correctly attach variables to the resulting call" do
+    node = HerbErbTextCallNode.new( ['the quick brown fox jumps over'], [], 't :', '', [RailsTextVariableNode.new( "doug", "\"great\"" ) ]  )
+   
+    node.text_value.should == '<%= t :the_quick, :doug => ("great") %>'
+    
+  end
+  
 end
 

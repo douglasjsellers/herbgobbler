@@ -1,12 +1,13 @@
 class HerbErbTextCallNode
 
-  def initialize( text_values = [], key_store = [], prepend = nil, postpend = nil, include_markup = true )
+  def initialize( text_values = [], key_store = [], prepend = nil, postpend = nil, variables = [], include_markup = true )
     @text_values = text_values
     @prepend = prepend
     @postpend = postpend
     @key_store = key_store
     @key_value = nil
     @include_markup = include_markup
+    @variables = variables
   end
 
   def add_text( text )
@@ -35,6 +36,7 @@ class HerbErbTextCallNode
   
   def text_value
     string_to_return = "#{@prepend}#{key_value}#{@postpend}"
+    string_to_return += ", #{@variables.join( ', ' )}" unless @variables.empty?
     if( @include_markup )
       "<%= #{string_to_return} %>"
     else
