@@ -153,7 +153,7 @@ describe TextExtractor do
     text_extractor = TestTextExtractor.new
     erb_file.extract_text( text_extractor )
     text_extractor.variables_found.size.should == 1
-    text_extractor.variables_found.first.last.should == "great"
+    text_extractor.variables_found.first.last.should == "\"great\""
   end
 
   it "should extract multiple variables and report them back using add_variable" do
@@ -161,8 +161,16 @@ describe TextExtractor do
     text_extractor = TestTextExtractor.new
     erb_file.extract_text( text_extractor )
     text_extractor.variables_found.size.should == 2
-    text_extractor.variables_found.first.last.should == "great"
-    text_extractor.variables_found.last.last.should == "!"
+    text_extractor.variables_found.first.last.should == "\"great\""
+    text_extractor.variables_found.last.last.should == "\"!\""
+  end
+  
+  it "should extract a single variable and report back a reasonably named key" do
+    erb_file = ErbFile.from_string( '<%= "doug is #{"great"}" %>' )
+    text_extractor = TestTextExtractor.new
+    erb_file.extract_text( text_extractor )
+    text_extractor.variables_found.size.should == 1
+    text_extractor.variables_found.first.first.should == "great"
     
   end
   
