@@ -11,7 +11,8 @@ class I18nKey
       to_return = remove_html_tags( @text )
       to_return = to_return.gsub( /[%{].*[}]/, '' )
       to_return = to_return.gsub( /[^a-zA-Z0-9]/, ' ' )
-      to_return = to_return.squeeze.strip.downcase.chomp
+      to_return = to_return.gsub( /[ ]+/, ' ' )
+      to_return = to_return.strip.downcase.chomp
       to_return = to_return.gsub( / /, '_' )
       to_return = cut_down_to_size( to_return )
       to_return = ensure_no_duplicates( to_return )

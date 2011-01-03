@@ -62,6 +62,12 @@ TEXT
     text_call = I18nKey.new( "doug %{count}" )
     text_call.key_value.should == "doug"    
   end
+
+  it "should not eliminate double characters" do
+    text_call = I18nKey.new( "A GOOD whiteboard" )
+    text_call.key_value.should == "a_good"
+  end
+  
   
 end
 

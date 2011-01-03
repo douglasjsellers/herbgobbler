@@ -3,4 +3,4 @@ en:
     integration:
       test:
         test_html_and_non_extrated_erb_string:
-          ads_stuf_you: "ADS / STUFF <br/> YOU'VE CREATED"
+          ads_stuff_you: "ADS / STUFF <br/> YOU'VE CREATED"
