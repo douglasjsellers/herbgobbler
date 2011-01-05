@@ -50,7 +50,7 @@ class ErbFile
         combined_nodes << node
       end
     end
-    combined_nodes
+    remove_edge_tags_from_combined_text_nodes( combined_nodes )
   end
   
 
@@ -105,6 +105,35 @@ class ErbFile
   
   private
 
+  def remove_edge_tags_from_combined_text_nodes( nodes )
+    node_count = nodes.size
+    to_return = []
+
+    nodes.each do |node|
+      if( node.is_a?( HerbNodeRetainingTextNode ) )
+        to_return += remove_edge_tags_from_combined_text_node( node )
+      else
+        to_return << node
+      end
+    end
+
+    if( node_count != to_return.length )
+      to_return = remove_edge_tags_from_combined_text_nodes( to_return )
+    end
+
+    return to_return
+  end
+
+  def remove_edge_tags_from_combined_text_node( node )
+    if( node.starts_and_ends_with_same_tag? )
+      node.break_out_start_and_end_tags
+    else
+      [node]
+    end
+  end
+  
+  
+  
   def combine_two_nodes( node_a, node_b, resulting_node_type )
     if node_a.class == resulting_node_type
       node_a << node_b

@@ -3,4 +3,4 @@ en:
     integration:
       test:
         bold_tags:
-          test_data: "<b>Test Data</b>"
+          test_data: "Test Data"

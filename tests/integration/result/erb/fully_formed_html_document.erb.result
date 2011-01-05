@@ -43,11 +43,9 @@
                 </a>
              </td>
              <td style="line-height:12pt; height:10px;">
-               <span class="pagetop">
-                 <%= t '.hacker_news_1' %>
+               <%= t '.hacker_news_1' %>
                 <img src="http://ycombinator.com/images/s.gif" height=1 width=10>
                   <%= t '.new_comments' %>
-              </span>
             </td>
           </tr>
         </table>

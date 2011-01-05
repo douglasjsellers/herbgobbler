@@ -127,7 +127,7 @@ grammar ERBGrammer
              '</' tag_name:([a-zA-Z])+ (!'>' .)* '>' <NonTextNode>
              {
                 def can_be_combined?
-                    !(['a', 'b'].index(tag_name.text_value.downcase).nil?)
+                    !(['a', 'b', 'span'].index(tag_name.text_value.downcase).nil?)
                 end
 
                 def node_name
@@ -150,7 +150,7 @@ grammar ERBGrammer
              start_bracket:'<'  tag_name:([a-zA-Z])+  extra_text:tag_text end_bracket:'>' <NonTextNode>
              {
                 def can_be_combined?
-                    !(['a', 'b'].index(tag_name.text_value.downcase).nil?)
+                    !(['a', 'b', 'span'].index(tag_name.text_value.downcase).nil?)
                 end
 
                 def node_name

@@ -1,2 +1,2 @@
-<div><%= t '.comments' %></div>
-<div><%= t '.comments_1' %></div>
+<div><a href="newest"><%= t '.comments' %></a></div>
+<div><a href="newcomments"><%= t '.comments_1' %></a></div>

@@ -4,5 +4,5 @@ en:
       test:
         fully_formed_html_document:
           hacker_news: "Hacker News"
-          hacker_news_1: "<b>\n                   <a href=\"news\">Hacker News</a>\n                </b>"
-          new_comments: "<a href=\"newest\">new</a> | \n                  <a href=\"newcomments\">comments</a> | \n                  <a href=\"ask\">ask</a> | \n                  <a href=\"jobs\">jobs</a> | \n                  <a href=\"submit\">submit</a>"
+          hacker_news_1: "<span class=\"pagetop\">\n                 <b>\n                   <a href=\"news\">Hacker News</a>\n                </b>"
+          new_comments: "<a href=\"newest\">new</a> | \n                  <a href=\"newcomments\">comments</a> | \n                  <a href=\"ask\">ask</a> | \n                  <a href=\"jobs\">jobs</a> | \n                  <a href=\"submit\">submit</a>\n              </span>"

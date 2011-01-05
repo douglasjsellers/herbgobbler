@@ -122,17 +122,17 @@ describe ErbFile do
   end
 
   it "should be able to combine simple nodes" do
-    erb_file = ErbFile.from_string( "<a>Yay!</a>" )
+    erb_file = ErbFile.from_string( "Test <a>Yay!</a>" )
     nodes = erb_file.combine_nodes( erb_file.nodes )
     nodes.size.should == 1
-    nodes.first.text_value.should == "<a>Yay!</a>"
+    nodes.first.text_value.should == "Test <a>Yay!</a>"
   end
 
   it "should correctly combine a tags with attributes attached to them" do
-    erb_file = ErbFile.from_string( '<a href="newest">comments</a>' )
+    erb_file = ErbFile.from_string( 'Blah <a href="newest">comments</a>' )
     nodes = erb_file.combine_nodes( erb_file.nodes )
     nodes.size.should == 1
-    nodes.first.text_value.should == '<a href="newest">comments</a>'
+    nodes.first.text_value.should == 'Blah <a href="newest">comments</a>'
   end
 
   it "should not combine a non combinable node followed by a combinadable node" do
@@ -159,7 +159,7 @@ describe ErbFile do
   end
 
   it "shoud combine nodes together that have an attribute associated with an html tag" do
-    html = '<a href="blah">Doug</a>'
+    html = 'Blah <a href="blah">Doug</a>'
     erb_file = ErbFile.from_string( html )
     nodes = erb_file.combine_nodes( erb_file.nodes )
 
@@ -168,12 +168,29 @@ describe ErbFile do
   end
 
   it "shoud combine nodes together that have an attribute and whitespace associated with an html tag" do
-    html = "<a href=\"blah\">\nDoug\n</a>"
+    html = "Blah <a href=\"blah\">\nDoug\n</a>"
     erb_file = ErbFile.from_string( html )
     nodes = erb_file.combine_nodes( erb_file.nodes )
 
     nodes.size.should == 1
     nodes.first.text_value.should == html
   end
+
+  it "should not combine tags that are just surrounding text" do
+    erb_file = ErbFile.from_string( "<b>Doug</b>" )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+
+    nodes.size.should == 3
+    
+  end
+
+  it "should not combine text that has multiple sets of tags around it" do
+    erb_file = ErbFile.from_string( "<a><b>Doug</b></a>" )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+
+    nodes.size.should == 5
+  end
+  
+
     
 end

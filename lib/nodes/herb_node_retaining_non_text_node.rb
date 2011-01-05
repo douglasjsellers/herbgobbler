@@ -14,6 +14,16 @@ class HerbNodeRetainingNonTextNode < HerbNodeRetainingNode
   def can_be_combined?
     @can_be_combined
   end
+
+  def self.create_from_nodes( nodes )
+    to_return = HerbNodeRetainingNonTextNode.new
+    nodes.each do |node|
+      to_return << node
+    end
+    to_return
+  end
+  
+    
   
   
   

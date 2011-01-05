@@ -3,5 +3,5 @@ en:
     integration:
       test:
         generate_correct_keys_for_duplicate_text:
-          comments: "<a href=\"newest\">comments</a>"
-          comments_1: "<a href=\"newcomments\">comments</a>"
+          comments: "comments"
+          comments_1: "comments"

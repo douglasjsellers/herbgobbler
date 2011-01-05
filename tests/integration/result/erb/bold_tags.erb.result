@@ -1,1 +1,1 @@
-<%= t '.test_data' %>
+<b><%= t '.test_data' %></b>
