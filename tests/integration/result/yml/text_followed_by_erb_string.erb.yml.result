@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        text_followed_by_erb_string:
+          company_name: "Company Name: %{f_text_field}"
