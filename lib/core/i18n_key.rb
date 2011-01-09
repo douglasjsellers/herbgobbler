@@ -1,4 +1,6 @@
 class I18nKey
+
+  DEFAULT_KEY_NAME = "key"
   
   def initialize( text, key_store = [] )
     @text = text
@@ -9,7 +11,7 @@ class I18nKey
   def key_value
     if( @key_value.nil? )
       to_return = remove_html_tags( @text )
-      to_return = to_return.gsub( /[%{].*[}]/, '' )
+      to_return = to_return.gsub( /[%{].*?[}]/, '' )
       to_return = to_return.gsub( /[^a-zA-Z0-9]/, ' ' )
       to_return = to_return.gsub( /[ ]+/, ' ' )
       to_return = to_return.strip.downcase.chomp
@@ -49,7 +51,9 @@ class I18nKey
   end
   
   def ensure_no_duplicates( key_value, incrementor = 1 )
-    if( exists_in_keystore?( key_value ) )
+    if( key_value.strip.empty? )
+      ensure_no_duplicates( DEFAULT_KEY_NAME )
+    elsif( exists_in_keystore?( key_value ) )
       incremented_value = "#{key_value}_#{incrementor}"
       if( exists_in_keystore?( incremented_value ) )
         ensure_no_duplicates( key_value, incrementor + 1 )

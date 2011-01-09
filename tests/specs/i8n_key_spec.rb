@@ -67,6 +67,18 @@ TEXT
     text_call = I18nKey.new( "A GOOD whiteboard" )
     text_call.key_value.should == "a_good"
   end
+
+  it "should be able to eliminate all of the bad characters and still return a value" do
+    text_call = I18nKey.new( "%{link_to_last} &nbsp; %{link_to_last_1} &nbsp; %{link_to_last_2}" )
+    text_call.key_value.should == "nbsp_nbsp"
+  end
+
+  it "should return a default key if a blank key should have been generated" do
+    text_call = I18nKey.new( "%{link_to_last}" )
+    text_call.key_value.should == "key"
+    
+  end
+  
   
   
 end
