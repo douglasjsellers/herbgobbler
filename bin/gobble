@@ -9,7 +9,7 @@ end
 # when the context is set that rails will be able to find
 # it through the default . key syntax
 def convert_path_to_key_path( path )
-  path.split('.').first.gsub( "app/views/", '')  
+  path.split('.').first.gsub( '/app/views/', '')
 end
 
 if( ARGV.length < 1 )
@@ -28,7 +28,6 @@ else
   Dir["#{rails_view_directory}/**/*html.erb" ].each do |full_erb_file_path|
     
     erb_file = full_erb_file_path.gsub( rails_root, '' )
-    
     rails_translation_store.start_new_context( convert_path_to_key_path( erb_file.to_s ) )
     erb_file = ErbFile.load( full_erb_file_path )
     erb_file.extract_text( text_extractor )
