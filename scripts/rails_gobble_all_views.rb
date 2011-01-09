@@ -1,0 +1,43 @@
+require 'lib/herbgobbler'
+
+def print_usage
+  puts "ruby scripts/rails_gobble_all_views.rb <rails_root>"
+end
+
+# remove the file extension and the app/views/ so that
+# when the context is set that rails will be able to find
+# it through the default . key syntax
+def convert_path_to_key_path( path )
+  path.split('.').first.gsub( "app/views/", '')  
+end
+
+if( ARGV.length < 1 )
+  print_usage
+else
+  
+  rails_root = ARGV[0]
+  locale_file_name = "en.yml"
+  
+  rails_view_directory = "#{rails_root}/app/views"
+  full_yml_file_path = "#{rails_root}/config/locales/#{locale_file_name}"
+  
+  rails_translation_store = RailsTranslationStore.new
+  text_extractor = RailsTextExtractor.new( rails_translation_store )
+  
+  Dir["#{rails_view_directory}/**/*html.erb" ].each do |full_erb_file_path|
+    
+    erb_file = full_erb_file_path.gsub( rails_root, '' )
+    
+    rails_translation_store.start_new_context( convert_path_to_key_path( erb_file.to_s ) )
+    erb_file = ErbFile.load( full_erb_file_path )
+    erb_file.extract_text( text_extractor )
+
+    File.open(full_erb_file_path, 'w') {|f| f.write(erb_file.to_s) }
+    puts "Wrote #{full_erb_file_path}"
+  end
+
+  File.open(full_yml_file_path, 'w') {|f| f.write(rails_translation_store.serialize) }
+  puts "Wrote #{full_yml_file_path}"
+  
+end
+
