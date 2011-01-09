@@ -190,6 +190,16 @@ describe ErbFile do
 
     nodes.size.should == 5
   end
+
+  it "should correct combine text that starts with a tag but doesn't end with the same tag" do
+
+    erb_file = ErbFile.from_string( "<strong>Doug</strong> is great" )
+    nodes = erb_file.combine_nodes( erb_file.nodes )
+    nodes.size.should == 1
+  end
+  
+  
+  
   
 
     
