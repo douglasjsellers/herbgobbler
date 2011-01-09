@@ -106,6 +106,26 @@ describe RailsTextExtractor do
     resulting_nodes = extractor.end_html_text
     translation_store.translations["1"].should == "test %{count}"
   end
+
+  it "should be able to call translate_text and have the text passed in get translated" do
+    translation_store = TestTranslationStore.new
+    extractor = RailsTextExtractor.new( translation_store )
+    extractor.start_html_text
+    resulting_node = extractor.translate_text( "Yoink!" )
+    extractor.end_html_text
+
+    resulting_node.text_value.should == "t '.yoink'"
+  end
+
+  it "should be able to call translate_text and have the tranlated text end up in the yml" do
+    translation_store = TestTranslationStore.new
+    extractor = RailsTextExtractor.new( translation_store )
+    extractor.start_html_text
+    resulting_node = extractor.translate_text( "Yoink!" )
+    extractor.end_html_text
+    translation_store.translations["1"].should == "Yoink!"
+    
+  end
   
 end
 

@@ -24,10 +24,12 @@ class RailsTextExtractor < BaseTextExtractor
     total_text = @current_text.inject("") { |all_text, node| all_text + node.text_value }
     @current_nodes << HerbErbTextCallNode.new( [total_text], @key_store, "t '.", "'", @current_variables )
     @translation_store.add_translation( @current_nodes.last.key_value, @current_nodes.last.original_text )
+
     # Just reset everything here to be cautious
     to_return = @current_nodes
     @current_nodes = []
     @current_text = []
+    
     return to_return + whitespace
   end
 
@@ -44,6 +46,14 @@ class RailsTextExtractor < BaseTextExtractor
     variable_node = RailsTextVariableNode.new( variable_name, variable_value )
     @current_text << variable_node
     @current_variables << variable_node
+  end
+
+  # This is called to just produce a translated text node without erb
+  # braces around it.
+  def translate_text( text_to_translate )
+    call_node = HerbErbTextCallNode.new( [text_to_translate], @key_store, "t '.", "'", [], false )
+    @translation_store.add_translation( call_node.key_value, call_node.original_text )
+    call_node
   end
   
   # This takes in a text node and returns one or more nodes that will

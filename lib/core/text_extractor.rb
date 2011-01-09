@@ -14,6 +14,10 @@ class TextExtractor
   def add_variable( variable_name, variable_value )
     raise "Please implement me (add_variable)"    
   end
+
+  def translate_text( text_node_to_translate )
+    raise "Please impelement me (translate_text)"
+  end
   
   def end_html_text
     raise "Please implement me (end_html_text)"
