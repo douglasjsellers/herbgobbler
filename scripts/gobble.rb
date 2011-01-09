@@ -1,7 +1,7 @@
 require 'lib/herbgobbler'
 
 def print_usage
-  puts "ruby scripts/rails_gobble_all_views.rb <rails_root> <locale_file_name>"
+  puts "ruby scripts/rails_gobble_all_views.rb <rails_root>"
 end
 
 # remove the file extension and the app/views/ so that
@@ -16,7 +16,7 @@ if( ARGV.length < 2 )
 else
   
   rails_root = ARGV[0]
-  locale_file_name = ARGV[1]
+  locale_file_name = "en.yml"
   
   rails_view_directory = "#{rails_root}/app/views"
   full_yml_file_path = "#{rails_root}/config/locales/#{locale_file_name}"
