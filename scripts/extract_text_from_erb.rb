@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'lib/herbgobbler'
 
 file_name = ARGV.first
