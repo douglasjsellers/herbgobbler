@@ -1,4 +1,5 @@
 require 'lib/herbgobbler'
+require "bundler/setup"
 
 desc "Run the compliation tests"
 task :test_compilation do
