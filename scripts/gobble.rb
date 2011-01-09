@@ -11,7 +11,7 @@ def convert_path_to_key_path( path )
   path.split('.').first.gsub( "app/views/", '')  
 end
 
-if( ARGV.length < 2 )
+if( ARGV.length < 1 )
   print_usage
 else
   
