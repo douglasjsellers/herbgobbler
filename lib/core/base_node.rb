@@ -12,6 +12,10 @@ module BaseNode
 
   protected
 
+  def generate_i18n_key( text_extractor, node_tree )
+    I18nKey.new( self.text_value, get_key_hash(text_extractor, node_tree) )    
+  end
+  
   def get_key_hash( text_extractor, node_tree )
     # here we just try to use different keysets based on where they are in the tree since
     # there can only be key collisions when generating the same node

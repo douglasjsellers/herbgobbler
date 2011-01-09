@@ -13,4 +13,5 @@ require 'core/rails_translation_store'
 require 'core/double_quoted_text_node'
 require 'core/erb_string_non_text_content'
 require 'core/non_extracting_non_text_node'
+require 'core/method_call_node'
 

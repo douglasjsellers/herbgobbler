@@ -26,9 +26,8 @@ describe TextNode do
 
   it "should not think that a regular string has variables" do
     erb_file = ErbFile.from_string( '"test #{"data"}"' )
-    erb_file.nodes.size.should == 2
-    erb_file.nodes[1].has_variables?.should == false
-    
+    erb_file.nodes.size.should == 1
+    erb_file.nodes[0].has_variables?.should == false
   end
 
   it "should make the appropriate text call backs for a simple string with erb text in it" do
