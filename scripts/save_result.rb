@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 test_to_save = ARGV.first
 test_name = test_to_save.split( '/' ).last
 
