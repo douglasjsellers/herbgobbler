@@ -125,7 +125,7 @@ class ErbFile
   end
 
   def remove_edge_tags_from_combined_text_node( node )
-    if( node.starts_and_ends_with_same_tag? )
+    if( node.can_remove_starting_or_ending_html_tags? )
       node.break_out_start_and_end_tags
     else
       [node]

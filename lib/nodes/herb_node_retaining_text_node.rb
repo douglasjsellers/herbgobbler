@@ -7,7 +7,7 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
     end
   end
   
-  def starts_and_ends_with_same_tag?
+  def can_remove_starting_or_ending_html_tags?
     if( find_first_non_whitespace_node.node_name == "html_start_tag" && find_last_non_whitespace_node.node_name == "html_end_tag"  )
       if( find_first_non_whitespace_node.tag_name.text_value == find_last_non_whitespace_node.tag_name.text_value )
         true
@@ -21,7 +21,7 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
   end
 
   def break_out_start_and_end_tags
-    if( starts_and_ends_with_same_tag? )
+    if( can_remove_starting_or_ending_html_tags? )
       start_tag = extract_leading_tag
       end_tag = extract_trailing_tag
       middle_tag = HerbNodeRetainingTextNode.new
@@ -45,7 +45,20 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
   
   def to_s
     @text_value
+  end  
+  
+  def find_first_non_whitespace_node
+    nodes.each do |node|
+      return node unless node.text_value.strip.empty?
+    end
   end
+
+  def find_last_non_whitespace_node
+    nodes.reverse.each do |node|
+      return node unless node.text_value.strip.empty?
+    end
+  end
+
 
   private
 
@@ -70,19 +83,6 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
       end
     end
     
-  end
-  
-  
-  def find_first_non_whitespace_node
-    nodes.each do |node|
-      return node unless node.text_value.strip.empty?
-    end
-  end
-
-  def find_last_non_whitespace_node
-    nodes.reverse.each do |node|
-      return node unless node.text_value.strip.empty?
-    end
   end
   
   

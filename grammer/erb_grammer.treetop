@@ -91,7 +91,7 @@ grammar ERBGrammer
         end
 
         rule erb_block
-             start_block:'<%' block_contents:((!erb_block_end .)*) end_block:erb_block_end <NonTextNode>
+             start_block:'<%' block_contents:((!erb_block_end .)*) end_block:not_combindable_erb_block_end <NonTextNode>
              {
                 def node_name
                     "erb_block"
@@ -114,6 +114,21 @@ grammar ERBGrammer
 
         end
 
+        rule not_combindable_erb_block_end
+             ('%>' / '-%>') <NonTextNode>
+             {
+                def node_name
+                    "not_combindable_erb_block_end"
+                end
+
+                def can_be_combined?
+                    false
+                end
+
+             }
+
+        end
+        
         rule erb_block_end
              ('%>' / '-%>') <NonExtractingNonTextNode>
              {

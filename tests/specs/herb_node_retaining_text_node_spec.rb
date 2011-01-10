@@ -7,7 +7,7 @@ describe HerbNodeRetainingTextNode do
 
     node = HerbNodeRetainingTextNode.new
     node.add_all( erb_file.nodes )
-    node.starts_and_ends_with_same_tag?.should == true
+    node.can_remove_starting_or_ending_html_tags?.should == true
   end
 
   it "should not report a false positive if only the leading tag is present" do
@@ -16,7 +16,7 @@ describe HerbNodeRetainingTextNode do
 
     node = HerbNodeRetainingTextNode.new
     node.add_all( erb_file.nodes )
-    node.starts_and_ends_with_same_tag?.should == false
+    node.can_remove_starting_or_ending_html_tags?.should == false
   end
 
   it "should not report a false positive if only the trailing tag is present" do
@@ -25,7 +25,7 @@ describe HerbNodeRetainingTextNode do
 
     node = HerbNodeRetainingTextNode.new
     node.add_all( erb_file.nodes )
-    node.starts_and_ends_with_same_tag?.should == false
+    node.can_remove_starting_or_ending_html_tags?.should == false
     
   end
 
@@ -35,7 +35,7 @@ describe HerbNodeRetainingTextNode do
 
     node = HerbNodeRetainingTextNode.new
     node.add_all( erb_file.nodes )
-    node.starts_and_ends_with_same_tag?.should == true
+    node.can_remove_starting_or_ending_html_tags?.should == true
 
     tags = node.break_out_start_and_end_tags
     tags.size.should == 3
@@ -53,7 +53,7 @@ describe HerbNodeRetainingTextNode do
 
     node = HerbNodeRetainingTextNode.new
     node.add_all( erb_file.nodes )
-    node.starts_and_ends_with_same_tag?.should == true
+    node.can_remove_starting_or_ending_html_tags?.should == true
 
     tags = node.break_out_start_and_end_tags
     tags.size.should == 3
@@ -71,7 +71,7 @@ describe HerbNodeRetainingTextNode do
 
     node = HerbNodeRetainingTextNode.new
     node.add_all( erb_file.nodes )
-    node.starts_and_ends_with_same_tag?.should == true
+    node.can_remove_starting_or_ending_html_tags?.should == true
 
     tags = node.break_out_start_and_end_tags
     tags.size.should == 3
@@ -81,12 +81,25 @@ describe HerbNodeRetainingTextNode do
     tags[1].text_value.should == "Doug"
     
   end
-  
-  
-  
-  
-  
-  
+
+
+  it "shoulh return true to can_strip_nodes? if the first node is a end tag" do
+    erb_file = ErbFile.from_string( "\n<a>Doug</a>" )
+
+    erb_file.nodes.size.should == 4
+
+    node = HerbNodeRetainingTextNode.new
+    node.add_all( erb_file.nodes )
+    node.can_remove_starting_or_ending_html_tags?.should == true
+
+    tags = node.break_out_start_and_end_tags
+    tags.size.should == 3
+
+    tags.first.text_value.should == "\n<a>"
+    tags.last.text_value.should == "</a>"
+    tags[1].text_value.should == "Doug"
+    
+  end
   
 end
 
