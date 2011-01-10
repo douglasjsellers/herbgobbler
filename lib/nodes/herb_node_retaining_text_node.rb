@@ -48,7 +48,11 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
   
   def extract_text( text_extractor, node_tree )
     self.nodes.each do |node|
-      node.extract_text( text_extractor, node_tree )
+      if( node.is_a?( MethodCallNode ) )
+        node.extract_text( text_extractor, node_tree, self.nodes )
+      else
+        node.extract_text( text_extractor, node_tree )
+      end
     end
   end
   
@@ -75,6 +79,7 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
 
   private
 
+  
   def extract_leading_tag
     node = find_first_non_whitespace_node
     to_return = []
