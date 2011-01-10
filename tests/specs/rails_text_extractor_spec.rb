@@ -123,9 +123,26 @@ describe RailsTextExtractor do
     extractor.start_html_text
     resulting_node = extractor.translate_text( "Yoink!" )
     extractor.end_html_text
-    translation_store.translations["1"].should == "Yoink!"
+    translation_store.translations["1"].should == "Yoink!"    
+  end
+
+  it "should return an empty array of resulting nodes if nothing is passed in between start_html_text and end_html_text" do
+    translation_store = TestTranslationStore.new
+    extractor = RailsTextExtractor.new( translation_store )
+    extractor.start_html_text
+    extractor.end_html_text.empty?.should == true
+  end
+  
+  it "should return an empty array of resulting nodes if only translate_text is call between start_html_text and end_html_text" do
+
+    translation_store = TestTranslationStore.new
+    extractor = RailsTextExtractor.new( translation_store )
+    extractor.start_html_text
+    resulting_node = extractor.translate_text( "Yoink!" )
+    extractor.end_html_text.empty?.should == true
     
   end
+  
   
 end
 

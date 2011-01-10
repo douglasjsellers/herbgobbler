@@ -21,10 +21,13 @@ class RailsTextExtractor < BaseTextExtractor
 
   def end_html_text
     whitespace, @current_text = strip_ending_whitespace_nodes( @current_text )
-    total_text = @current_text.inject("") { |all_text, node| all_text + node.text_value }
-    @current_nodes << HerbErbTextCallNode.new( [total_text], @key_store, "t '.", "'", @current_variables )
-    @translation_store.add_translation( @current_nodes.last.key_value, @current_nodes.last.original_text )
 
+    unless( @current_text.empty? && @current_variables.empty? )
+      total_text = @current_text.inject("") { |all_text, node| all_text + node.text_value }
+      @current_nodes << HerbErbTextCallNode.new( [total_text], @key_store, "t '.", "'", @current_variables )
+      @translation_store.add_translation( @current_nodes.last.key_value, @current_nodes.last.original_text )
+    end
+    
     # Just reset everything here to be cautious
     to_return = @current_nodes
     @current_nodes = []
