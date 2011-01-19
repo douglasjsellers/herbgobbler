@@ -16,8 +16,7 @@
 /* line 39 */
 html {
   width: 100%;
-  background-color: #c6e7ec;
-  padding-top: 10px;
+  background-color: #007C21;
   font-family: Helvetica, sans-serif;
 }
 
@@ -69,13 +68,23 @@ h1 {
 
 /* line 59 */
 #body {
-  display: -webkit-box;
-  display: -moz-box;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
   -webkit-box-align: center;
   -moz-box-align: center;
-  width: 100%;
+}
+
+#contentbox
+{
+  width: 840px;
+  background-color: white;
+  position: relative;
+  top: -10px;
+  padding-right: 0;
+  padding-left: 100px;
+  overflow: visible;
+  margin: 0 auto;
+
 }
 
 /* line 63 */
