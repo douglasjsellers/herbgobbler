@@ -13,6 +13,7 @@ By automating the text extraction process in software internationalization, the 
 
 HerbGobbler Turns This
 --------------------
+<pre>
 &lt;div class="bullet"> 
   &lt;div class="description"> 
      If you're on an old version of Rubygems
@@ -20,16 +21,18 @@ HerbGobbler Turns This
   &lt;/div> 
   &lt;pre class='sunburst'>Run: $ gem update --system&#x000A;&lt;/pre> 
 &lt;div> 
+</pre>
 
 Into This
 --------
+<pre>
 &lt;div class="bullet"> 
   &lt;div class="description"> 
     &lt;%= t '.if_you_re_on' %>
   &lt;/div> 
   &lt;pre class='sunburst'>$ &lt;%= t '.run_gem_update' %>&lt;/pre> 
 &lt;div> 
-
+</pre>
 Getting Started
 ----------
 Getting started with the HerbGobbler is easy:
