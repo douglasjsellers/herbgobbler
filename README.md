@@ -51,4 +51,8 @@ Use the gobble command to extract all the english text from your .erb files and 
 
 The HerbGobbler is very much beta software.  It attempts to implement the best practices in internationalization (i18n) and localization by extracting complete sentences (even when these sentences contain html).  If you discover a piece of text that is not being properly extracted, or a pattern of extraction that you think is incorrect, please enter a bug into the system and a patch will be issued.  
 
+Customizing the HerbGobbler
+----------------------------
+If you are interested in exporting text to a different data store than the default rails i18n format (en.yml), this can be done by implementing a <a href="https://github.com/douglasjsellers/herbgobbler/blob/master/lib/core/base_translation_store.rb">TranslationStore</a>.  
+
 For more information on this <a href="http://www.i18n-rails.com">ruby on rails i18n tool</a>
