@@ -74,6 +74,21 @@ describe TextNode do
     results.last.text_value == rear_ws
   end
   
+  it "should be able to find a text node with alpha numberic characters" do
+     TestTextNode.new( "abc123" ).contains_alpha_characters?.should == true
+  end
+
+  it "should mark contains alpha numeric characters as false if it is all numbers" do
+     TestTextNode.new( "123" ).contains_alpha_characters?.should == false    
+  end
+  
+  it "should mark contains alpha numeric characters as false if it is all punctuation" do
+     TestTextNode.new( "|" ).contains_alpha_characters?.should == false        
+  end
+
+  it "should mark contains alpha numeric characters as false if it is all whitespace" do
+     TestTextNode.new( "  \n  " ).contains_alpha_characters?.should == false        
+  end
   
 end
 

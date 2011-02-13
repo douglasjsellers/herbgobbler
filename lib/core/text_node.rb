@@ -35,6 +35,10 @@ module TextNode
   def white_space?
     false
   end
+
+  def contains_alpha_characters?
+    !self.text_value[/[a-zA-Z]/].nil?
+  end
   
 
   def amount_of_ending_whitespace
