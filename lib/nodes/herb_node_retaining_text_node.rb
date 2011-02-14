@@ -55,6 +55,10 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
       end
     end
   end
+
+  def can_be_exploded?
+    find_all_non_matched_tags_and_white_space(nodes).empty?
+  end
   
   def can_be_combined?
     true
@@ -78,7 +82,6 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
 
 
   private
-
   
   def extract_leading_tag
     node = find_first_non_whitespace_node
@@ -102,6 +105,27 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
     end
     
   end
+  
+  def find_all_non_matched_tags_and_white_space( nodes )
+    to_return = []
+    search_node_name = nil
+    nodes.each do |current_node|
+      if( !current_node.respond_to?( :node_name ) )
+        to_return << current_node
+      elsif( search_node_name.nil? && current_node.node_name == "html_start_tag" )
+        search_node_name = current_node.tag_name.text_value
+      elsif( !search_node_name.nil? && current_node.node_name == "html_end_tag" )
+        search_node_name = nil if search_node_name == current_node.tag_name.text_value
+      elsif( search_node_name.nil? && current_node.is_a?(TextNode ) )
+        if( current_node.contains_alpha_characters? )
+          to_return << current_node
+        end
+      end
+    end
+    
+    return to_return
+  end
+
   
   
 end

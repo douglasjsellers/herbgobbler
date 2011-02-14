@@ -1,3 +1,4 @@
                <span class="pagetop">
-                  <a href="jobs"><%= t '.jobs_submit' %></a>
+                  <a href="jobs"><%= t '.jobs' %></a> | 
+                  <a href="submit"><%= t '.submit' %></a>
                 </span>

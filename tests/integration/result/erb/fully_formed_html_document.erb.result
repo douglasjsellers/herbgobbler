@@ -43,9 +43,17 @@
                 </a>
              </td>
              <td style="line-height:12pt; height:10px;">
-               <%= t '.hacker_news_1' %>
+               <span class="pagetop">
+                 <b>
+                   <a href="news"><%= t '.hacker_news_1' %></a>
+                </b>
                 <img src="http://ycombinator.com/images/s.gif" height=1 width=10>
-                  <%= t '.new_comments' %>
+                  <a href="newest"><%= t '.new' %></a> | 
+                  <a href="newcomments"><%= t '.comments' %></a> | 
+                  <a href="ask"><%= t '.ask' %></a> | 
+                  <a href="jobs"><%= t '.jobs' %></a> | 
+                  <a href="submit"><%= t '.submit' %></a>
+              </span>
             </td>
           </tr>
         </table>

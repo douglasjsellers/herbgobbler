@@ -137,6 +137,27 @@ describe HerbNodeRetainingTextNode do
     tags[1].text_value.should == "Doug"
     
   end
+
+  it "should be able to detect that something made up of only a tags and whitespace should be exploded" do
+    erb_file = ErbFile.from_string( "\n<a href='blah'>stuff</a>\n<a href='two'>more</a>\n" )
+    erb_file.nodes.size.should == 9
+    
+    node = HerbNodeRetainingTextNode.new
+    node.add_all( erb_file.nodes )
+
+    node.can_be_exploded?.should == true
+  end
+
+  it "should be able to detect that something made up of a tags, text and whitespace should not be exploded" do
+    erb_file = ErbFile.from_string( "\n<a href='blah'>stuff</a>Yay Doug!<a href='two'>more</a>\n" )
+    erb_file.nodes.size.should == 9
+    
+    node = HerbNodeRetainingTextNode.new
+    node.add_all( erb_file.nodes )
+
+    node.can_be_exploded?.should == false
+    
+  end
   
 end
 

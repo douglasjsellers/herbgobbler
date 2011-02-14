@@ -1,0 +1,7 @@
+        <div class="contents"> 
+          <ul class="bullet"> 
+            <a href="http://github.com/carlhuda/bundler/issues"><%= t '.reporting_a' %></a> 
+            <a href="./rationale.html"><%= t '.understanding' %></a> 
+            <a href="./man/gemfile.5.html"><%= t '.gemfile_manual' %></a> 
+          </ul> 
+        </div> 

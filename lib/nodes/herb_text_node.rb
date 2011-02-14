@@ -11,6 +11,10 @@ class HerbTextNode
     true
   end
 
+  def node_name
+    "herb_text_node"
+  end
+  
   def strip_whitespace?
     @strip_whitespace
   end

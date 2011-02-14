@@ -10,11 +10,11 @@ class HerbNodeRetainingNonTextNode < HerbNodeRetainingNode
     super(node)
     @can_be_combined ||= ( node.respond_to?( :can_be_combined? ) && node.can_be_combined? )
   end
-
+  
   def can_be_combined?
     @can_be_combined
   end
-
+  
   def self.create_from_nodes( nodes )
     to_return = HerbNodeRetainingNonTextNode.new
     nodes.each do |node|

@@ -3,4 +3,5 @@ en:
     integration:
       test:
         should_not_combine_last_whitespace_node:
-          jobs_submit: "jobs</a> | \n                  <a href=\"submit\">submit"
+          jobs: "jobs"
+          submit: "submit"

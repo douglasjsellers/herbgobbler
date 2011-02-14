@@ -50,7 +50,7 @@ class ErbFile
         combined_nodes << node
       end
     end
-    remove_edge_tags_from_combined_text_nodes( combined_nodes )
+    remove_edge_tags_from_combined_text_nodes( unwind_list( combined_nodes ) )
   end
   
 
@@ -105,6 +105,23 @@ class ErbFile
   
   private
 
+  def unwind_list( nodes )
+    to_return = []
+    nodes.each do |node|
+      if( node.is_a?( HerbNodeRetainingTextNode ) )
+        if( node.can_be_exploded? )
+          to_return += node.nodes
+        else
+          to_return << node
+        end
+      else
+        to_return << node
+      end
+    end
+
+    return to_return
+  end
+  
   def remove_edge_tags_from_combined_text_nodes( nodes )
     node_count = nodes.size
     to_return = []
