@@ -5,13 +5,6 @@ def print_usage
   puts "gobble <rails_root>"
 end
 
-# remove the file extension and the app/views/ so that
-# when the context is set that rails will be able to find
-# it through the default . key syntax
-def convert_path_to_key_path( path )
-  path.split('.').first.gsub( '/app/views/', '')
-end
-
 if( ARGV.length < 1 )
   print_usage
 else
