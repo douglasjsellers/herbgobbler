@@ -2,7 +2,7 @@
 require 'lib/herbgobbler'
 
 def print_usage
-  puts "ruby scripts/rails_gobble_all_views.rb <rails_root>"
+  puts "gobble <rails_root>"
 end
 
 # remove the file extension and the app/views/ so that
