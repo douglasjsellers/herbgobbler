@@ -1,10 +1,14 @@
 class GobbleAll
 
-  def initialize( rails_root )
+  def initialize( rails_root, options )
     @rails_root = rails_root
+    @options = options
   end
 
   def execute
+    puts "Processing all of: #{@rails_root}"
+    puts ""
+    
     locale_file_name = "en.yml"
     
     rails_view_directory = "#{@rails_root}/app/views"
@@ -34,4 +38,9 @@ class GobbleAll
   def convert_path_to_key_path( path )
     path.split('.').first.gsub( '/app/views/', '')
   end
+
+  def valid?
+    @options.empty?
+  end
+  
 end
