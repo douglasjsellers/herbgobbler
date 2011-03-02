@@ -223,5 +223,17 @@ VALUE_STRING
     yaml_result['en']['test']['key'].should == value_string
     
   end
+
+  it "should be able to load an existing yml file" do
+    yaml_string =<<YAML_STRING
+en:
+  test:
+    key: "value"
+YAML_STRING
+
+    store = RailsTranslationStore.load_from_string( yaml_string )
+    yaml_result = YAML.load( store.serialize )    
+    yaml_result['en']['test']['key'].should == 'value'
+  end
   
 end
