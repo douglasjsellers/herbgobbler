@@ -1,3 +1,5 @@
+require 'yaml'
+
 class RailsTranslationStore < BaseTranslationStore
 
   def initialize( language = "en" )
@@ -7,7 +9,11 @@ class RailsTranslationStore < BaseTranslationStore
 
 
   def self.load_from_file( full_path_to_file, language = "en" )
-    self.load_from_string( File.read( full_path_to_file ), language )
+    if( File.exists?( full_path_to_file ) )
+      RailsTranslationStore.load_from_string( File.read( full_path_to_file ), language )
+    else
+      RailsTranslationStore.new( language )
+    end
   end
   
   # This is used to load an existing rails transaltion store (in yaml
@@ -16,15 +22,28 @@ class RailsTranslationStore < BaseTranslationStore
     to_return = RailsTranslationStore.new( language )
     yaml = YAML.load( string )
     yaml['en'].each_pair do |language, translations|
-      to_return.start_new_context( language )
-      translations.each_pair do |key,value|
-        to_return.add_translation( key, value )
-      end
+      self.process_yaml_pair( to_return, language, translations, language )
     end
     to_return
   end
-  
 
+  def self.process_yaml_pair( translation_store, key, value, directory_like_key )
+    if( value.is_a?( Hash ) )
+      value.each_pair do |key, value|
+        if( value.is_a?( Hash ) )
+          directory_like_key = "#{directory_like_key}/" unless directory_like_key.empty?
+          directory_like_key = "#{directory_like_key}#{key}"
+        end
+        self.process_yaml_pair( translation_store, key, value, directory_like_key )
+      end
+      translation_store
+    else
+      translation_store.start_new_context( directory_like_key )      
+      translation_store.add_translation( key, value )
+      translation_store
+    end
+  end
+  
   # This goes out of it's way to keep things in exactly the correct
   # order.  This makes it easier for translators when dealing with
   # files.  This is the reason to not just throw things into a hash

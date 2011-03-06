@@ -5,7 +5,7 @@ def print_usage
   puts " ***** HerbGobbler Usage ***** "
   puts
   puts "Options "
-  puts "-a : Process all of a rails code pass"
+  puts "-a : Process an entire Rails Code Base"
   puts "-f <full path to file> : Process a single file"
   puts
   puts "Usage: gobble <options> <rails root>"

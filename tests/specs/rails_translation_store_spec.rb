@@ -235,5 +235,18 @@ YAML_STRING
     yaml_result = YAML.load( store.serialize )    
     yaml_result['en']['test']['key'].should == 'value'
   end
+
+  it "should be able to load an existing yml file with much deeper nesting of files" do
+    yaml_string =<<DEEP_NEST
+en:
+  test:
+    index:
+      test_of_the: "Test of the Herb Gobbler"
+DEEP_NEST
+    store = RailsTranslationStore.load_from_string( yaml_string )
+    yaml_result = YAML.load( store.serialize )
+    yaml_result['en']['test']['index']['test_of_the'].should == 'Test of the Herb Gobbler'
+    
+  end
   
 end
