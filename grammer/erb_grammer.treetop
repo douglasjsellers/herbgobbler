@@ -1,6 +1,7 @@
 grammar ERBGrammer
         rule erb
-             ( erb_string /
+             ( processing_instruction / 
+               erb_string /
                erb_block  / 
                ignorable_script_tag_content /
                html_end_tag / 
@@ -88,6 +89,15 @@ grammar ERBGrammer
                 end
              }
 
+        end
+
+        rule processing_instruction
+             '<!' ( !'>' .)+ '>' <NonTextNode>
+             {
+                def node_name
+                    "processing_instruction"
+                end
+             }
         end
 
         rule erb_block
