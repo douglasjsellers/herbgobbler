@@ -23,3 +23,8 @@
       return false; // cancel browser nav
       } 
       </script>
+
+
+<%- javascript_tag do -%>
+  document.observe('dom:loaded', function() {})
+<%- end -%>  
