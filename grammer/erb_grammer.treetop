@@ -103,7 +103,7 @@ grammar ERBGrammer
         end
 
         rule ignorable_javascript_tag
-             not_combindable_erb_block_start whitespace* 'javascript_tag' (!(not_combindable_erb_block_start whitespace* 'end' whitespace* not_combindable_erb_block_end) .)+ <IgnorableTagNode>
+             not_combindable_erb_block_start whitespace* 'javascript_tag' (!(not_combindable_erb_block_start space 'end' space  not_combindable_erb_block_end) .)+ <IgnorableTagNode>
              {
                 def can_be_combined?
                     false
@@ -141,7 +141,7 @@ grammar ERBGrammer
         end
 
         rule not_combindable_erb_block_start
-             ('<%' / '<%-') <NonTextNode>
+             ('<%-' / '<%') <NonTextNode>
              {
                 def node_name
                     "not_combindable_erb_block_start"
@@ -156,7 +156,7 @@ grammar ERBGrammer
         end
 
         rule not_combindable_erb_block_end
-             ('%>' / '-%>') <NonTextNode>
+             ('-%>' / '%>') <NonTextNode>
              {
                 def node_name
                     "not_combindable_erb_block_end"
@@ -277,9 +277,9 @@ grammar ERBGrammer
                       end                      
            }
         end
-
+        
         rule whitespace
-            ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+) !'<%' !'"') . )+ <NonTextNode>
+            ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+) !'<%' !'"' ) . )+ <NonTextNode>
             {
                 def can_be_combined?
                    true
