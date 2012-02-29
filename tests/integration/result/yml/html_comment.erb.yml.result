@@ -4,3 +4,4 @@ en:
       test:
         html_comment:
           non_comment: "Non Comment"
+          indented_non: "Indented Non Comment"
