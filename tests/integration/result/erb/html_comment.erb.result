@@ -1,1 +1,2 @@
 <!-- html comment -->
+<b><%= t '.non_comment' %></b>

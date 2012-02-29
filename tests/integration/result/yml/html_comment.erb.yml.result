@@ -1,1 +1,6 @@
 en:
+  tests:
+    integration:
+      test:
+        html_comment:
+          non_comment: "Non Comment"

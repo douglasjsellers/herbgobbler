@@ -1,6 +1,8 @@
 grammar ERBGrammer
         rule erb
-             ( processing_instruction / 
+             ( 
+               ignorable_javascript_tag /
+               processing_instruction / 
                erb_string /
                erb_block  / 
                ignorable_script_tag_content /
@@ -100,6 +102,20 @@ grammar ERBGrammer
              }
         end
 
+        rule ignorable_javascript_tag
+             not_combindable_erb_block_start whitespace* 'javascript_tag' (!(not_combindable_erb_block_start whitespace* 'end' whitespace* not_combindable_erb_block_end) .)+ <IgnorableTagNode>
+             {
+                def can_be_combined?
+                    false
+                end
+
+                def node_name
+                   "ignorable_javascript_tag"
+                end
+             }
+
+        end
+
         rule erb_block
              start_block:'<%' block_contents:((!erb_block_end .)*) end_block:not_combindable_erb_block_end <NonTextNode>
              {
@@ -120,6 +136,21 @@ grammar ERBGrammer
                 def can_be_combined?
                     true
                 end
+             }
+
+        end
+
+        rule not_combindable_erb_block_start
+             ('<%' / '<%-') <NonTextNode>
+             {
+                def node_name
+                    "not_combindable_erb_block_start"
+                end
+
+                def can_be_combined?
+                    false
+                end
+
              }
 
         end
@@ -166,6 +197,7 @@ grammar ERBGrammer
                 end
              }
         end
+
 
 
         rule html_self_contained
@@ -256,6 +288,7 @@ grammar ERBGrammer
                def node_name    
                     "whitespace"
                end
+
                def white_space?
                   true
                end
