@@ -241,8 +241,17 @@ grammar ERBGrammer
             }
         end
 
+        rule html_tag_greater_than
+            '>' <NonTextNode>
+            {
+               def node_name
+                   "html_tag_end_bracket"
+               end
+            }
+        end
+
         rule html_start_tag
-             start_bracket:'<'  tag_name:([a-zA-Z])+  extra_text:tag_text end_bracket:'>' <NonTextNode>
+             start_bracket:'<'  tag_name:([a-zA-Z])+  extra_text:tag_text end_bracket:html_tag_greater_than <NonTextNode>
              {
                 def can_be_combined?
                     !(['a', 'b', 'span','strong'].index(tag_name.text_value.downcase).nil?)

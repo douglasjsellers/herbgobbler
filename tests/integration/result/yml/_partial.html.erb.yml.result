@@ -1,3 +1,6 @@
 en:
-  _partial:
-    i_am_a_partial: "I am a partial"
+  tests:
+    integration:
+      test:
+        _partial:
+          i_am_a_partial: "I am a partial"
