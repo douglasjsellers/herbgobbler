@@ -99,6 +99,10 @@ grammar ERBGrammer
                 def node_name
                     "processing_instruction"
                 end
+
+                def can_be_combined?
+                    false
+                end
              }
         end
 
@@ -279,7 +283,7 @@ grammar ERBGrammer
         end
         
         rule whitespace
-            ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+) !'<%' !'"' ) . )+ <NonTextNode>
+            ((![a-zA-Z] !('<' [a-zA-Z]+) !('</' [a-zA-Z]+) !'<%' !'"' !'<!' ) . )+ <NonTextNode>
             {
                 def can_be_combined?
                    true
