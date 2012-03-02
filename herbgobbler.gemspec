@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "herbgobbler"
-  s.version = "0.1.6"
+  s.version = "0.1.7"
   s.has_rdoc = false
   s.bindir = 'bin'
   s.executables << 'gobble'
