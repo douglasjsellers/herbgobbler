@@ -64,7 +64,7 @@ class ErbFile
     new_node_set = []
     @nodes = combine_nodes( @nodes )    
     @nodes.each do |node|
-      if( node.text? )
+      if( node.respond_to?(:text?) && node.text? )
         text_extractor.start_html_text
         node.extract_text( text_extractor, new_node_set )
         new_node_set += text_extractor.end_html_text
