@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        erb_conditional_in_html_tag:
+          test: "Test"
