@@ -57,7 +57,9 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
   end
 
   def can_be_exploded?
-    find_all_non_matched_tags_and_white_space(nodes).empty?
+    # it is possible that this node contains only non text nodes.  If
+    # there is no text within this combined node then this should be uncombined
+    find_all_non_matched_tags_and_white_space(nodes).empty? || contains_only_non_text_and_non_method_nodes?
   end
   
   def can_be_combined?
@@ -82,6 +84,15 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
 
 
   private
+  
+  def contains_only_non_text_and_non_method_nodes?
+    found_text = false
+    nodes.each do |current_node|
+      found_text = true if current_node.is_a?( TextNode ) && !current_node.is_a?(MethodCallNode)
+      
+    end
+    !found_text
+  end
   
   def extract_leading_tag
     node = find_first_non_whitespace_node

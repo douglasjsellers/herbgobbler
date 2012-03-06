@@ -1,8 +1,7 @@
 module MethodCallNode
   include TextNode
 
-  def extract_text( text_extractor, node_tree, surrounding_nodes )
-    
+  def extract_text( text_extractor, node_tree, surrounding_nodes = nil )
     text_string = ''
     self.elements.each do |node|
       if( node.is_a?( TextNode ) )
@@ -12,8 +11,10 @@ module MethodCallNode
         text_string << node.text_value
       end   
     end
-    
-    if( surrounded_by_text? (surrounding_nodes) )
+
+    if( surrounding_nodes.nil? )
+      node_tree << HerbNonTextNode.new( text_string )
+    elsif( surrounded_by_text? (surrounding_nodes) )
       text_extractor.add_variable( generate_i18n_key( text_extractor, node_tree ).to_s, text_string.strip )
     else
       node_tree << HerbNonTextNode.new( "<%= #{text_string.strip} %>" )
