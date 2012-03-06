@@ -62,6 +62,7 @@ class ErbFile
     # this is going to work with any of the nested stuff)
     text_extractor.starting_text_extraction
     new_node_set = []
+    @nodes ||= []
     @nodes = combine_nodes( @nodes )    
     @nodes.each do |node|
       if( node.respond_to?(:text?) && node.text? )
