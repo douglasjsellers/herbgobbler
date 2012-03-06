@@ -1,0 +1,1 @@
+<%= link_to "Start new forum thread for this thread", new_forum_topic_path(@game.game_specific_forum), :class => 'spritegame', :popup => true %>     <%= link_to "View all forum threads", forum_path(@game.game_specific_forum), :class => 'viewall_posts spritegame', :popup => true %>
