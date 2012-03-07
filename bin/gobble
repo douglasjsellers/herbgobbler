@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'lib/herbgobbler'
+require 'herbgobbler'
 
 def print_usage
   puts " ***** HerbGobbler Usage ***** "
