@@ -23,7 +23,7 @@ class RailsTranslationStore < BaseTranslationStore
     yaml = YAML.load( string )
     yaml['en'].each_pair do |language, translations|
       self.process_yaml_pair( to_return, language, translations, language )
-    end
+    end if yaml['en'].respond_to?(:each_pair)
     to_return
   end
 
