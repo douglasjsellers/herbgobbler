@@ -1,0 +1,7 @@
+<div class="bullet"> 
+  <div class="description"> 
+     <%= t '.if_you_re_on' %>
+  </div> 
+  <pre class='sunburst'><%= t '.run_gem_update' %>
+</pre> 
+<div> 
