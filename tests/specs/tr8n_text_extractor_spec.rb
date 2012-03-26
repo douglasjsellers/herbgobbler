@@ -47,7 +47,7 @@ describe Tr8nTextExtractor do
     text_extractor = Tr8nTextExtractor.new
     erb_file.extract_text( text_extractor )
     erb_file.nodes.size.should == 1
-    erb_file.nodes.first.text_value.should == '<%= tr( "This is only {user} a test" , nil, {:user => @user}) %>'    
+    erb_file.nodes.first.text_value.should == '<%= tr( "This is only {user} a test" , nil, {:user => @user }) %>'    
   end
 
   it "should do multiple variable replacement" do
