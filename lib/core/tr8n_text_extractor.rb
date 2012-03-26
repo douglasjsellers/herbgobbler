@@ -1,11 +1,16 @@
 class Tr8nTextExtractor < BaseTextExtractor
+
+
+  def initialize
+    @current_onde = nil
+  end
   
   # This is called when text extraction has begun
   def starting_text_extraction
   end
 
   def add_html_text( text_node )
-    puts "Add html text: #{text_node.node_name}"
+    @current_node.add_text( text_node.text_value )
   end
 
   def add_variable( variable_name, variable_value )
@@ -17,9 +22,13 @@ class Tr8nTextExtractor < BaseTextExtractor
   end
   
   def end_html_text
+    to_return = @current_node
+    @current_node = nil
+    [to_return]
   end
 
   def start_html_text
+    @current_node = HerbTr8nTextCallNode.new
   end
     
   def completed_text_extraction
