@@ -31,5 +31,8 @@ class TextExtractor
     raise "Please implement me (white_space)"
   end
   
+  def add_non_text( non_text_node )
+    raise "Please implement me (add_non_text)"
+  end
    
 end
