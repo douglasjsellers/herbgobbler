@@ -27,5 +27,9 @@ class TextExtractor
     raise "Please implement me (start_html_text)"
   end
 
+  def white_space( node )
+    raise "Please implement me (white_space)"
+  end
+  
    
 end
