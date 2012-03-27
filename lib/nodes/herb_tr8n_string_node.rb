@@ -4,6 +4,7 @@
 class HerbTr8nStringNode
 
   ESCAPE_LOOKUP_TABLE = [
+                         ["\"", "quot"],
                          ["\n", "break"],
                          ["&ndash;", "ndash"],
                          ["&mdash;", "mdash"],
