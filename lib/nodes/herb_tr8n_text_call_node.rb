@@ -6,7 +6,7 @@ class HerbTr8nTextCallNode
   end
 
   def add_text( text_value_as_string )
-    @text_values << text_value_as_string
+    @text_values << HerbTr8nStringNode.new( text_value_as_string )
   end
 
   def add_variable( name, value )
@@ -22,7 +22,7 @@ class HerbTr8nTextCallNode
     to_return = '<%= tr( "'
 
     @text_values.each do |text_value|
-      to_return += (HerbTr8nStringNode.new(text_value)).text_value
+      to_return += text_value.to_s
     end
 
     to_return +='"'
