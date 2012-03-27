@@ -35,7 +35,7 @@ class Tr8nTextExtractor < BaseTextExtractor
   end
 
   def white_space( node )
-
+    @current_node.white_space( node.text_value )
   end
 
   def add_non_text( non_text_node )
@@ -43,6 +43,8 @@ class Tr8nTextExtractor < BaseTextExtractor
       start_html_tag( non_text_node )
     elsif( non_text_node.node_name == 'html_end_tag' )
       end_html_tag( non_text_node )
+    elsif( non_text_node.node_name == 'html_self_contained' )
+      self_contained_html_node( non_text_node )
     end
   end
 
@@ -53,6 +55,11 @@ class Tr8nTextExtractor < BaseTextExtractor
   def end_html_tag( html_start_node )
     puts "End tag: #{html_start_node.tag_name.text_value}"
   end
+
+  def self_contained_html_node( html_self_contained_node )
+    @current_node.self_contained_html_node( html_self_contained_node.tag_name.text_value )
+  end
+  
   
   
 end
