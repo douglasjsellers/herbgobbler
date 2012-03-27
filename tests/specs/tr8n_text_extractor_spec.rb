@@ -51,6 +51,7 @@ describe Tr8nTextExtractor do
   end
 
   it "should do multiple variable replacement" do
+
     erb_file = ErbFile.from_string( "This is <%= @user %> a test <%= @count %>" )
     text_extractor = Tr8nTextExtractor.new
     erb_file.extract_text( text_extractor )

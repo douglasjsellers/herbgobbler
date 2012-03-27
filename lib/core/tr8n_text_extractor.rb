@@ -14,7 +14,7 @@ class Tr8nTextExtractor < BaseTextExtractor
   end
 
   def add_variable( variable_name, variable_value )
-    puts "Adding variable: #{variable_name}=#{variable_value}"
+    @current_node.add_variable( variable_name, variable_value )
   end
 
   def translate_text( text_node_to_translate )
