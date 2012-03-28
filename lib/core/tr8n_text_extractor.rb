@@ -49,11 +49,11 @@ class Tr8nTextExtractor < BaseTextExtractor
   end
 
   def start_html_tag( html_start_node )
-    puts "Start tag: #{html_start_node.tag_name.text_value}"
+    @current_node.start_html_tag( html_start_node )
   end
   
-  def end_html_tag( html_start_node )
-    puts "End tag: #{html_start_node.tag_name.text_value}"
+  def end_html_tag( html_end_node )
+    @current_node.end_html_tag( html_end_node )
   end
 
   def self_contained_html_node( html_self_contained_node )
