@@ -1,0 +1,1 @@
+<div><%= tr( "I am a partial" ) %></div>
