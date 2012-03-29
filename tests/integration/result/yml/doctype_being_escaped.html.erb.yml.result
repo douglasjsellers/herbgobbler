@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        doctype_being_escaped:
-          testgobbler: "TestGobbler"

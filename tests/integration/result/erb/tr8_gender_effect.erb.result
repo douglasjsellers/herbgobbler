@@ -1,3 +1,0 @@
-<div>
-	<%=h(@actor.username)-%> <%= t '.started' %> <%=h(@game.name) %>.
-</div>

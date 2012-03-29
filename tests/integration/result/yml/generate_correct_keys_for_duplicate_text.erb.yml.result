@@ -1,7 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        generate_correct_keys_for_duplicate_text:
-          comments: "comments"
-          comments_1: "comments"

@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        erb_block_mixed_with_erb_strings:
-          ago: "%{time_ago_in} ago"

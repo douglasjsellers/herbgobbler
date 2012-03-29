@@ -1,3 +1,0 @@
-<div>
-  <%= t '.yay_for_doug' %>
-</div>

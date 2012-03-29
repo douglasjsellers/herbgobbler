@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        tr8_gender_effect:
-          started: "started playing"

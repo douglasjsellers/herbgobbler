@@ -1,7 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        consecutive_link_tags_seperated_by_whitespace:
-          start_new: "Start new forum thread for this thread"
-          view_all_forum: "View all forum threads"

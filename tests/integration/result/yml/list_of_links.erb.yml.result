@@ -1,8 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        list_of_links:
-          reporting_a: "Reporting a Bug"
-          understanding: "Understanding HerbGobbler"
-          gemfile_manual: "Gemfile Manual"

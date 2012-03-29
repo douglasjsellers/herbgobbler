@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        tr8n_pluralization:
-          you_have: "You have"

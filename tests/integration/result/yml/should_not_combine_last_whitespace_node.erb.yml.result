@@ -1,7 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        should_not_combine_last_whitespace_node:
-          jobs: "jobs"
-          submit: "submit"

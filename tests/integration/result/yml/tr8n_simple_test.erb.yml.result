@@ -1,7 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        tr8n_simple_test:
-          if_you_re_on: "If you're on an old version of Rubygems\n     (before 1.3.6)"
-          run_gem_update: "Run: $ gem update --system"

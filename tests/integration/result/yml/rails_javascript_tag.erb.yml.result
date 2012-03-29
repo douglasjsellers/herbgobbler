@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        rails_javascript_tag:
-          non_javascript: "Non-javascript..."

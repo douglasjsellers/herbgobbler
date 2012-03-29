@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        html_tag_with_consecutive_erb_blocks:
-          test: "Test"

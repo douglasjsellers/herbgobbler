@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        ignore_script_tag:
-          non_javascript: "Non-javascript..."

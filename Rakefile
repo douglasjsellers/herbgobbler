@@ -41,13 +41,13 @@ task :test_integration do
     
     erb_file = ErbFile.load(  "#{test_directory}/#{file}" )
     erb_file.extract_text(text_extractor )
-    if( erb_file.to_s == File.read( "#{result_directory}/#{file}.result" ) )
+    if( erb_file.to_s == File.read( "#{result_directory}/#{file}.i18n.result" ) )
       puts "Successfully processed erb file #{file}"
     else
       puts "**** Failed to process erb #{file}"
     end
     
-    if( rails_translation_store.serialize == File.read( "#{yml_directory}/#{file}.yml.result" ) )
+    if( rails_translation_store.serialize == File.read( "#{yml_directory}/#{file}.yml.i18n.result" ) )
       puts "Successfully processed yml file #{file}"        
     else
       puts "**** Failed to process yml file #{file}"

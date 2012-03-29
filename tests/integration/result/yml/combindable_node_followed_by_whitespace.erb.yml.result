@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        combindable_node_followed_by_whitespace:
-          hacker_news: "Hacker News"

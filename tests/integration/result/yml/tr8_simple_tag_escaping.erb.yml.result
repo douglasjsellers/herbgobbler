@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        tr8_simple_tag_escaping:
-          i_had_a_dream: "I had a <b>dream</b> and it would not die"

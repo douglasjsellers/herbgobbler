@@ -1,1 +1,0 @@
-<div><%= t '.i_am_a_partial' %></div>

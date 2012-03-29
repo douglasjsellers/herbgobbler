@@ -1,1 +1,0 @@
-<center><%= t '.nbsp_nbsp', :link_to_last => (link_to (t '.last_day'), performance_test_path( :duration => 'day' )), :link_to_last_1 => (link_to (t '.last_week'), performance_test_path( :duration => 'week' )), :link_to_last_2 => (link_to (t '.last_month'), performance_test_path( :duration => 'month' )) %></center>

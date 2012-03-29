@@ -1,5 +1,0 @@
-<!-- html comment -->
-<b><%= t '.non_comment' %></b>
-
-  <!-- indented html comment -->
-  <b><%= t '.indented_non' %></b>

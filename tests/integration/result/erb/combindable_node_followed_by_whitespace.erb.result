@@ -1,3 +1,0 @@
-                 <b>
-                   <a href="news"><%= t '.hacker_news' %></a>
-                </b>

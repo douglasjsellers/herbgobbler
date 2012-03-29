@@ -1,3 +1,0 @@
-<div id="gameinfo"<%- if @game.special? -%> class="special css class"<%- end -%>>
-  <%= t '.test' %>
-</div>

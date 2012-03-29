@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        erb_string_in_text:
-          and_the_lions: "And the lions roared for prometheus!"

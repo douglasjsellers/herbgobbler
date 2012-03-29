@@ -1,1 +1,0 @@
-<div><%= t '.company_name', :f_text_field => (f.text_field :company_name) %></div>

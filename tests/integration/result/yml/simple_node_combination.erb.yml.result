@@ -1,6 +1,0 @@
-en:
-  tests:
-    integration:
-      test:
-        simple_node_combination:
-          this_is_a_test: "This is a <a href=\"/test\">test</a> of the emergency Twitter system!  TWEEEEEETTTTT"
