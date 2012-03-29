@@ -42,16 +42,27 @@ task :test_integration do
     erb_file = ErbFile.load(  "#{test_directory}/#{file}" )
     erb_file.extract_text(text_extractor )
     if( erb_file.to_s == File.read( "#{result_directory}/#{file}.i18n.result" ) )
-      puts "Successfully processed erb file #{file}"
+      puts "Successfully processed i18n erb file #{file}"
     else
-      puts "**** Failed to process erb #{file}"
+      puts "**** Failed to process i18n erb #{file}"
     end
     
     if( rails_translation_store.serialize == File.read( "#{yml_directory}/#{file}.yml.i18n.result" ) )
-      puts "Successfully processed yml file #{file}"        
+      puts "Successfully processed i18n yml file #{file}"        
     else
-      puts "**** Failed to process yml file #{file}"
+      puts "**** Failed to process i18n yml file #{file}"
     end
+
+    text_extractor = Tr8nTextExtractor.new    
+    erb_file = ErbFile.load(  "#{test_directory}/#{file}" )
+    erb_file.extract_text(text_extractor )
+
+    if( File.exists?( "#{result_directory}/#{file}.tr8n.result" ) && erb_file.to_s == File.read( "#{result_directory}/#{file}.tr8n.result" ) )
+      puts "Successfully processed tr8n erb file #{file}"
+    else
+      puts "**** Failed to process tr8n erb #{file}"
+    end
+    
   end
   
 end
