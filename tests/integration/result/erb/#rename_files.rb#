@@ -1,0 +1,9 @@
+ Dir.new( "." ).reject {|f| [".", ".."].include? f}.each do |file|
+   split_files =  file.split( '.' )   
+puts split_files.length
+   if( split_files.length == 4 )
+     new_name = "#{split_files[0]}.#{split_files[1]}.#{split_files[2]}.i18n.#{split_files[3]}"
+     `mv #{file} #{new_name}`
+   end
+   
+end

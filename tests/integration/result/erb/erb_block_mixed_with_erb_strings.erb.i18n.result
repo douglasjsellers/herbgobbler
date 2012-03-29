@@ -1,0 +1,11 @@
+<div class="top">
+     <strong>
+        <%= version.to_title %>
+        <% if version.platformed? -%>
+           <%= version.platform %>
+        <% end -%>
+      </strong>
+<%= t '.ago', :time_ago_in => (time_ago_in_words(version.created_at)) %></div>
+
+<div <%= style='foo' if bar  %>>
+</div>

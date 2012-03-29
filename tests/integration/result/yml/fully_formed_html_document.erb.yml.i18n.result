@@ -1,0 +1,12 @@
+en:
+  tests:
+    integration:
+      test:
+        fully_formed_html_document:
+          hacker_news: "Hacker News"
+          hacker_news_1: "Hacker News"
+          new: "new"
+          comments: "comments"
+          ask: "ask"
+          jobs: "jobs"
+          submit: "submit"

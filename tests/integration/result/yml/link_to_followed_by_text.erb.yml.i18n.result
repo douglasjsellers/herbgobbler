@@ -1,0 +1,9 @@
+en:
+  tests:
+    integration:
+      test:
+        link_to_followed_by_text:
+          last_day: "Last Day"
+          last_week: "Last Week"
+          last_month: "Last Month"
+          nbsp_nbsp: "%{link_to_last} &nbsp; %{link_to_last_1} &nbsp; %{link_to_last_2}"

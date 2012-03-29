@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        simple_ruby_string:
+          doug: "doug"

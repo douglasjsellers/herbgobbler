@@ -1,0 +1,4 @@
+<div>
+	<%= t '.you_have' %> <%=count%> <%=pluralize(@message_count, "message") %>.
+</div>
+

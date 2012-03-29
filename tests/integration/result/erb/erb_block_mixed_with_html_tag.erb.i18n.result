@@ -1,0 +1,2 @@
+<div <%= style='foo' if bar  %>>
+</div>

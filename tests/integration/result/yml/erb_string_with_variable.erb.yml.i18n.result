@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        erb_string_with_variable:
+          doug_is_great: "Doug is great = %{1_1}"

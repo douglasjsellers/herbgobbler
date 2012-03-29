@@ -1,0 +1,9 @@
+<div id="right_column" class="prepend-top span-5 stack-<%= @card_height %>">
+
+  <div id="ad_box" class="span-5 stack-<%= @card_height - 3 %>">
+     <div id="ads_text">
+       <%= t '.ads_stuff_you' %>
+     </div>
+   </div>
+
+</div>

@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        multi_level_divs:
+          yay_for_doug: "Yay for Doug! <b>Cara is nice too</b>"

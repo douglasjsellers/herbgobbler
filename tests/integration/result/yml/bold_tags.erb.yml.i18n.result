@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        bold_tags:
+          test_data: "Test Data"

@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        only_link_to:
+          gem: "Gem Specification"
