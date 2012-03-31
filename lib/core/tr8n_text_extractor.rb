@@ -18,7 +18,11 @@ class Tr8nTextExtractor < BaseTextExtractor
   end
 
   def translate_text( text_node_to_translate )
-    puts "Transate text: #{text_node_to_translate}"
+    # This should just return a node that responds to text_value
+    to_return = HerbTr8nTextCallNode.new
+    to_return.add_text( text_node_to_translate )
+    to_return
+    
   end
   
   def end_html_text
@@ -28,7 +32,7 @@ class Tr8nTextExtractor < BaseTextExtractor
   end
 
   def start_html_text
-    @current_node = HerbTr8nTextCallNode.new
+    @current_node = HerbErbTr8nTextCallNode.new
   end
     
   def completed_text_extraction

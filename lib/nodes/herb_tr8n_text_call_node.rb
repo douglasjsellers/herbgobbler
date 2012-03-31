@@ -83,11 +83,10 @@ class HerbTr8nTextCallNode
   def to_s
     text_value
   end
-
+  
   def tr_call( html_end_tag = nil, count = 0 )
     to_return = ""
-
-    to_return += '<%= ' unless being_assigned_to_variable?
+    
     to_return += 'tr( "'
 
     to_return += @html_start_tag.text_value if being_assigned_to_variable?
@@ -113,7 +112,6 @@ class HerbTr8nTextCallNode
     end
     
     to_return += ' )'
-    to_return += ' %>' unless being_assigned_to_variable?
     to_return
   end
 
