@@ -38,6 +38,10 @@ class HerbTr8nTextCallNode
     to_return += "]"
     to_return
   end
+
+  def empty?
+    @text_values.empty? && @variable_names_and_values.empty? && @child_text_call_node.nil?
+  end
   
   def end_html_tag( html_end_tag )
     @variable_names_and_values << [@child_text_call_node.variable_name_being_assigned_to, @child_text_call_node.tr_call(html_end_tag, @number_of_html_nodes) ]
@@ -86,32 +90,33 @@ class HerbTr8nTextCallNode
   
   def tr_call( html_end_tag = nil, count = 0 )
     to_return = ""
-    
-    to_return += 'tr( "'
+    unless( empty? )
+      to_return += 'tr( "'
 
-    to_return += @html_start_tag.text_value if being_assigned_to_variable?
+      to_return += @html_start_tag.text_value if being_assigned_to_variable?
 
-    if( being_assigned_to_variable? )
-      to_return += "{$#{count}}"
-    else
-      to_return += text_values_as_concated_string      
-    end
-
-
-    to_return += html_end_tag.text_value if being_assigned_to_variable?
-    
-    to_return +='"'
-    
-    unless( @variable_names_and_values.empty? )
-      to_return += ", nil, { "
-      @variable_names_and_values.each do |variable_name_value|
-        to_return += ":#{variable_name_value.first} => #{variable_name_value.last}"
-        to_return += ", " unless variable_name_value == @variable_names_and_values.last
+      if( being_assigned_to_variable? )
+        to_return += "{$#{count}}"
+      else
+        to_return += text_values_as_concated_string      
       end
-      to_return += " }"
+
+
+      to_return += html_end_tag.text_value if being_assigned_to_variable?
+      
+      to_return +='"'
+      
+      unless( @variable_names_and_values.empty? )
+        to_return += ", nil, { "
+        @variable_names_and_values.each do |variable_name_value|
+          to_return += ":#{variable_name_value.first} => #{variable_name_value.last}"
+          to_return += ", " unless variable_name_value == @variable_names_and_values.last
+        end
+        to_return += " }"
+      end
+      
+      to_return += ' )'
     end
-    
-    to_return += ' )'
     to_return
   end
 
