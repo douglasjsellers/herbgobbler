@@ -1,0 +1,5 @@
+<!-- html comment -->
+<b><%= tr( "Non Comment" ) %></b>
+
+  <!-- indented html comment -->
+  <b><%= tr( "Indented Non Comment" ) %></b>

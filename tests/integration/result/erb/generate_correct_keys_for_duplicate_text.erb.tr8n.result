@@ -1,0 +1,2 @@
+<div><a href="newest"><%= tr( "comments" ) %></a></div>
+<div><a href="newcomments"><%= tr( "comments" ) %></a></div>
