@@ -1,6 +1,5 @@
 class Tr8nTextExtractor < BaseTextExtractor
 
-
   def initialize
     @current_node = nil
     @debug = false

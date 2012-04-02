@@ -1,7 +1,1 @@
-Starting html text
-Translating text: Start new forum thread for this thread
-End HTML Text
-Starting html text
-Translating text: View all forum threads
-End HTML Text
 <%= link_to (tr( "Start new forum thread for this thread" )), new_forum_topic_path(@game.game_specific_forum), :class => 'spritegame', :popup => true %>     <%= link_to (tr( "View all forum threads" )), forum_path(@game.game_specific_forum), :class => 'viewall_posts spritegame', :popup => true %>
