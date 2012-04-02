@@ -122,9 +122,10 @@ class HerbTr8nTextCallNode
 
   def white_space( white_space_text )
     unless( processing_nested_html? )
-      @text_values << white_space_text
+      
+      @text_values << ( HerbTr8nStringNode.new( white_space_text ) ).to_s
     else
-      @child_text_call_node.white_space( white )
+      @child_text_call_node.white_space( white_space_text )
     end
   end
   
