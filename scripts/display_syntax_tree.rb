@@ -1,4 +1,5 @@
-require 'lib/herbgobbler'
+require 'backports'
+require_relative '../lib/herbgobbler'
 
 
 file_name = ARGV.first

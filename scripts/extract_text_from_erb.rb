@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
-require 'lib/herbgobbler'
+require 'backports'
+require_relative '../lib/herbgobbler'
 
 def print_usage
   puts "usage: ruby extract_text_from_erb.rb i18n|tr8n <file name>"
