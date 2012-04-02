@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'backports'
+require_relative '../spec_helper'
 
 describe HerbTr8nTextCallNode do
   it "should return empty? == true if nothing has been added to it" do

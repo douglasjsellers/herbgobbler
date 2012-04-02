@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'backports'
+require_relative '../spec_helper'
 
 describe I18nKey do
   it "should correctly generate keys in a normal situation" do

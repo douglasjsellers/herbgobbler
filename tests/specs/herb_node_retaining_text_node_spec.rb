@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'backports'
+require_relative '../spec_helper'
 
 describe HerbNodeRetainingTextNode do
   it "should be able to identify if two tags are correctly wrapped around a text tag" do

@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'backports'
+require_relative '../spec_helper'
 
 describe HerbNodeRetainingNode do
   it "should be able to correctly add up a lot of nodes and get the correct text value" do

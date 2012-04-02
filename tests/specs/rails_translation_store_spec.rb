@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'backports'
+require_relative '../spec_helper'
 require 'yaml'
 describe RailsTranslationStore do
   it "should be able to add a context, value, and interate over it" do
