@@ -1,0 +1,4 @@
+               <span class="pagetop">
+                  <a href="jobs"><%= tr( "jobs" ) %></a> | 
+                  <a href="submit"><%= tr( "submit" ) %></a>
+                </span>

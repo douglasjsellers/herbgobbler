@@ -1,0 +1,7 @@
+        <div class="contents"> 
+          <ul class="bullet"> 
+            <a href="http://github.com/carlhuda/bundler/issues"><%= tr( "Reporting a Bug" ) %></a> 
+            <a href="./rationale.html"><%= tr( "Understanding HerbGobbler" ) %></a> 
+            <a href="./man/gemfile.5.html"><%= tr( "Gemfile Manual" ) %></a> 
+          </ul> 
+        </div> 
