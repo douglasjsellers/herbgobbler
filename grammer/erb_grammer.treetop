@@ -58,7 +58,7 @@ grammar ERBGrammer
         end
 
         rule erb_string
-             start_erb:erb_string_start start_space:(space) text:(method_call_content / double_quoted_ruby_string)? everything_else:erb_string_non_text_content end_erb:(erb_block_end) <NonTextNode>
+             start_erb:erb_string_start start_space:(space)? text:(method_call_content / double_quoted_ruby_string)? everything_else:erb_string_non_text_content end_erb:(erb_block_end) <NonTextNode>
              {
                 def node_name
                     "erb_string"
