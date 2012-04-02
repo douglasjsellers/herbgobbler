@@ -3,4 +3,4 @@ en:
     integration:
       test:
         tr8_gender_effect:
-          started: "started playing"
+          started: "%{h_actor} started playing %{h_game_name}."
