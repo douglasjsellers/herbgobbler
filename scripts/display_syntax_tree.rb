@@ -10,7 +10,7 @@ puts "---------- Original ----------------"
 puts File.read( file_name )
 puts "---------- Un-Combined Syntax Tree -------------"
 top_levels.each_with_index do |top_level, index|
-  puts "(#{index}): #{top_level.text_value} #{top_level.is_a?(TextNode)}"
+  puts "(#{index}): #{top_level.text_value} #{top_level.node_name if top_level.respond_to?(:node_name)} #{top_level.is_a?(TextNode)}"
 end
 puts "---------- Combined Syntax Tree -------------"
 erb_file.combine_nodes( erb_file.flatten_elements ).each do |element|

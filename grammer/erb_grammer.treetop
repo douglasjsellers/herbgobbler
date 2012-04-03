@@ -30,7 +30,7 @@ grammar ERBGrammer
             "," <NonTextNode>
             {
                 def node_name
-                    "method_names"
+                    "comma"
                 end
 
                 def can_be_combined?
@@ -40,6 +40,33 @@ grammar ERBGrammer
             }
         end 
        
+        rule not_whitespace_or_comma
+          ((!comma !space !")") . )+ <NonTextNode>
+          {
+          
+            def can_be_combined? 
+               true
+            end
+          
+            def node_name
+              "not_whitespace_or_comma"
+            end
+          }
+        end
+          
+        rule pluralize
+          "pluralize"  space? "("? space? not_whitespace_or_comma space? comma space? not_whitespace_or_comma space? ")"? space? <MethodCallNode>
+          {
+            def can_be_combined? 
+               true
+            end
+          
+            def node_name
+              "pluralize"
+            end
+          }
+        end
+
         rule method_call_content
              method_names whitespace double_quoted_ruby_string (comma erb_string_non_text_content)? <MethodCallNode>
         end
@@ -58,7 +85,7 @@ grammar ERBGrammer
         end
 
         rule erb_string
-             start_erb:erb_string_start start_space:(space)? text:(method_call_content / double_quoted_ruby_string)? everything_else:erb_string_non_text_content end_erb:(erb_block_end) <NonTextNode>
+             start_erb:erb_string_start start_space:(space)? text:(method_call_content / double_quoted_ruby_string)? everything_else:(pluralize / erb_string_non_text_content) end_erb:(erb_block_end) <NonTextNode>
              {
                 def node_name
                     "erb_string"
