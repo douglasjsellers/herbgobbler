@@ -3,7 +3,7 @@ module MethodCallNode
 
   def extract_text( text_extractor, node_tree, surrounding_nodes = nil )
     text_string = ''
-    self.elements.each do |node|
+    self.elements.each do |node|        
       if( node.is_a?( TextNode ) )
         translated_node = text_extractor.translate_text( node.text_value )
         text_string << "(#{translated_node.text_value})"

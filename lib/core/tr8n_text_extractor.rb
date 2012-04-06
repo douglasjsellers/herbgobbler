@@ -35,6 +35,10 @@ class Tr8nTextExtractor < BaseTextExtractor
     [to_return]
   end
 
+  def pluralize( pluralize_node )
+    "pluralizing"
+  end
+  
   def start_html_text
     puts "Starting html text" if @debug
     @current_node = HerbErbTr8nTextCallNode.new

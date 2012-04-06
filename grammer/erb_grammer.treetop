@@ -55,7 +55,7 @@ grammar ERBGrammer
         end
           
         rule pluralize
-          "pluralize"  space? "("? space? not_whitespace_or_comma space? comma space? not_whitespace_or_comma space? ")"? space? <MethodCallNode>
+          "pluralize"  space? "("? space? repetition:not_whitespace_or_comma space? comma space? string_to_pluralize:not_whitespace_or_comma space? ")"? space? <PluralizeNode>
           {
             def can_be_combined? 
                true

@@ -15,6 +15,10 @@ class TextExtractor
     raise "Please implement me (add_variable)"    
   end
 
+  def pluralize( pluralize_node )
+    raise "Please implement me (pluralize)"
+  end
+  
   def translate_text( text_node_to_translate )
     raise "Please impelement me (translate_text)"
   end

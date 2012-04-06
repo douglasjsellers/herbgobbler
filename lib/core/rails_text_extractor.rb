@@ -36,6 +36,10 @@ class RailsTextExtractor < BaseTextExtractor
     return to_return + whitespace
   end
 
+  def pluralize( pluralize_node )
+    add_variable( pluralize_node.variable_name, pluralize_node.variable_value )
+  end
+  
   def white_space( node )
     if( @current_text.empty? )
       @current_nodes << node
