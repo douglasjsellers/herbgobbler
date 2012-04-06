@@ -1,0 +1,7 @@
+en:
+  tests:
+    integration:
+      test:
+        pluralize_attribute_in_div:
+          actual_price: "Actual price %{pluralize_item}"
+          yay: "Yay!"

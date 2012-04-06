@@ -1,0 +1,3 @@
+ <div title="<%= tr( "Actual price [item_regular_price || 'Kred']", nil, { :item_regular_price => item.regular_price } ) %>" class="price">
+   <%= tr( "Yay!" ) %>
+</div>

@@ -1,0 +1,3 @@
+ <div title="<%= t '.actual_price', :pluralize_item => (pluralize(item.regular_price, 'Kred')) %>" class="price">
+   <%= t '.yay' %>
+</div>

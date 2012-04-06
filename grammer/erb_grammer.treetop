@@ -259,8 +259,17 @@ grammar ERBGrammer
 
         end
         
+        rule tag_to_process
+             ('title' space? '=' space? ('\'' / '"' ) text erb_string (!'\'' !'"' text)*  ('\'' / '"') space? ) <NonTextNode>
+             {
+               def node_name
+                 "tag_to_process"
+               end
+             }
+        end
+
         rule tag_text
-            (!'>' !'/>' ( erb_block / erb_string / . ) )* <NonTextNode>
+            (!'>' !'/>' ( tag_to_process / erb_block / erb_string / . ) )* <NonTextNode>
             {
                def node_name
                    "tag_text"
