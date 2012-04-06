@@ -138,7 +138,7 @@ class HerbTr8nTextCallNode
 
   private
   def convert_variable_to_variable_name( variable )
-    variable.gsub( "@", "" ).gsub( ":", "" )
+    variable.gsub( "@", "" ).gsub( ":", "" ).gsub( ".", "_" )
   end
 
 end

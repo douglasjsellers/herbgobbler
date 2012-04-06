@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        pluralize_table_entries:
+          key: "%{pluralize}"
