@@ -10,6 +10,10 @@ class HerbErbTr8nTextCallNode < HerbTr8nTextCallNode
     super( name, value )
   end
 
+  def add_pluralization( variable, singular )
+    mark_as_called_and_push_whitespace
+    super( variable, singular )    
+  end
   
   def end_html_tag( html_end_tag )
     mark_as_called_and_push_whitespace

@@ -36,7 +36,9 @@ class Tr8nTextExtractor < BaseTextExtractor
   end
 
   def pluralize( pluralize_node )
-    "pluralizing"
+    singluar = pluralize_node.string_to_pluralize.text_value
+    variable_name = pluralize_node.repetition.text_value
+    @current_node.add_pluralization( variable_name, singluar )
   end
   
   def start_html_text

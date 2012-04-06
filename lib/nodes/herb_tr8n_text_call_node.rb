@@ -28,6 +28,13 @@ class HerbTr8nTextCallNode
     end
   end
 
+  def add_pluralization( variable, singular )
+    variable_name = convert_variable_to_variable_name( variable )
+    @text_values << "[#{variable_name} || #{singular}]"
+    @variable_names_and_values << [variable_name, variable ]
+  end
+
+  
   def being_assigned_to_variable?
     !@variable_name_being_assigned_to.nil?
   end
@@ -128,6 +135,11 @@ class HerbTr8nTextCallNode
       @child_text_call_node.white_space( white_space_text )
     end
   end
-  
+
+  private
+  def convert_variable_to_variable_name( variable )
+    variable.gsub( "@", "" ).gsub( ":", "" )
+  end
+
 end
 
