@@ -15,7 +15,7 @@ grammar ERBGrammer
          end
 
         rule method_names             
-             "link_to" <NonTextNode>
+             "link_to_function" / "link_to"  <NonTextNode>
              {
                 def node_name  
                     "method_names"
