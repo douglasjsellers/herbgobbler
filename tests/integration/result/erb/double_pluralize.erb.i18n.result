@@ -1,1 +1,1 @@
-<%= t '.key', :pluralize => (pluralize @forum.topics_count, 'topic'), :pluralize_1 => (pluralize @forum.posts_count, 'post') %>
+<%= t '.key', :forum_topics => (pluralize @forum.topics_count, 'topic' ), :forum_posts => (pluralize @forum.posts_count, 'post' ) %>

@@ -3,5 +3,5 @@ en:
     integration:
       test:
         pluralize_attribute_in_div:
-          actual_price: "Actual price %{pluralize_item}"
+          actual_price: "Actual price %{item_regular}"
           yay: "Yay!"

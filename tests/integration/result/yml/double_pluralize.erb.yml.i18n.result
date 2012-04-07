@@ -3,4 +3,4 @@ en:
     integration:
       test:
         double_pluralize:
-          key: "%{pluralize}, %{pluralize_1}"
+          key: "%{forum_topics}, %{forum_posts}"

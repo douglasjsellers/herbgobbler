@@ -3,4 +3,4 @@ en:
     integration:
       test:
         pluralize_with_link_tag:
-          earned_the: "%{link_to_user} earned the %{link_to_badge} badge in %{link_to_game} and %{pluralize}"
+          earned_the: "%{link_to_user} earned the %{link_to_badge} badge in %{link_to_game} and %{count}"

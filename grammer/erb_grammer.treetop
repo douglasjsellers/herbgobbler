@@ -121,7 +121,8 @@ grammar ERBGrammer
         end
         
         rule string_variable 
-             '#{' variable:((!'}' .)*) '}' <HerbStringVariable>
+            '#{' variable:((!'}'  (pluralize / .))*) '}' <HerbStringVariable>
+ 
         end
 
         rule double_quoted_ruby_string

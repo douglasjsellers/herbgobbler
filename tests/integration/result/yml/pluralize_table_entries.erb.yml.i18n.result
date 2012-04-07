@@ -3,4 +3,4 @@ en:
     integration:
       test:
         pluralize_table_entries:
-          key: "%{pluralize}"
+          key: "%{accomplishments}"

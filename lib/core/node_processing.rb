@@ -10,7 +10,8 @@ module NodeProcessing
         node.elements.nil? ||
         node.elements.empty? ||
         (node.is_a?( TextNode ) && !node.has_variables?)||
-        node.is_a?( HerbStringVariable ) || 
+        node.is_a?( HerbStringVariable ) ||
+        node.is_a?( PluralizeNode ) || 
         ( node.is_a?(NonTextNode) && node.can_be_combined? ) )
       leaves << node if( !node.text_value.empty? )
       leaves

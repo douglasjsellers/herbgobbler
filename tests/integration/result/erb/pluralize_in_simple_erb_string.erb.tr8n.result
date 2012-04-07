@@ -1,0 +1,1 @@
+<%= tr( "Join [number_with || 'person'] in chat right now!", nil, { :number_with => number_with_delimiter(@online_users_count.to_i) } ) %>

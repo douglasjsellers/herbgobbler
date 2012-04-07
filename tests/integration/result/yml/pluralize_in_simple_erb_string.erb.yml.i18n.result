@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        pluralize_in_simple_erb_string:
+          join_in_chat: "Join %{number_with} in chat right now!"

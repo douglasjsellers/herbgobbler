@@ -1,4 +1,4 @@
 <div>
-	<%= t '.you_have', :count => (count), :pluralize => (pluralize(@message_count, "message")) %>
+	<%= t '.you_have', :count => (count), :message_count => (pluralize(@message_count, "message") ) %>
 </div>
 

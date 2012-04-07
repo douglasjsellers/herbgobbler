@@ -3,4 +3,4 @@ en:
     integration:
       test:
         simple_pluralize:
-          key: "%{pluralize}"
+          key: "%{count}"

@@ -1,1 +1,1 @@
-<%= t '.key', :pluralize => (pluralize(number_with_delimiter(@online_users_count.to_i), 'person')) %>
+<%= t '.key', :number_with => (pluralize(number_with_delimiter(@online_users_count.to_i), 'person') ) %>

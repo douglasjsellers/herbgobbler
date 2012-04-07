@@ -3,4 +3,4 @@ en:
     integration:
       test:
         tr8n_pluralization:
-          you_have: "You have %{count} %{pluralize}."
+          you_have: "You have %{count} %{message_count}."

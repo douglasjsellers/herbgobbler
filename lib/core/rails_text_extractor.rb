@@ -36,8 +36,9 @@ class RailsTextExtractor < BaseTextExtractor
     return to_return + whitespace
   end
 
-  def pluralize( pluralize_node )
-    add_variable( pluralize_node.variable_name, pluralize_node.variable_value )
+  def pluralize( pluralize_node, variable_name )
+    add_variable( variable_name,
+                  pluralize_node.text_value )
   end
   
   def white_space( node )

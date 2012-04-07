@@ -1,5 +1,5 @@
 <table>
         <tr>
-                <td><%= t '.key', :pluralize => (pluralize(accomplishments.size,'Achievements')) %></td>
+                <td><%= t '.key', :accomplishments => (pluralize(accomplishments.size,'Achievements') ) %></td>
         </tr>
 </table>

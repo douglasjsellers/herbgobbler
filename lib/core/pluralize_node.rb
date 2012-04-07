@@ -4,7 +4,8 @@ module PluralizeNode
   
   def extract_text( text_extractor, node_tree, surrounding_nodes = nil )
     set_variable_name_and_value( text_extractor, node_tree, surrounding_nodes )
-    text_extractor.pluralize( self )
+    variable_name = I18nKey.new( self.repetition.text_value, get_key_hash(text_extractor, node_tree) ).to_s      
+    text_extractor.pluralize( self, variable_name )
   end
 
   private
