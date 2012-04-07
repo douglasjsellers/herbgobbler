@@ -1,0 +1,1 @@
+<%= t '.earned_the', :link_to_user => (link_to(user.username, account_path(user))), :link_to_badge => (link_to(badge.name, game_url)), :link_to_game => (link_to(game.title, game_url)), :pluralize => (pluralize(count, "other badge")) %>

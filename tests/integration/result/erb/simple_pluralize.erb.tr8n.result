@@ -1,0 +1,1 @@
+<%= tr( "[count || "other badge"]", nil, { :count => count } ) %>

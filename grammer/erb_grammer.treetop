@@ -53,9 +53,35 @@ grammar ERBGrammer
             end
           }
         end
+
+        rule double_quoted_non_string
+          '"' ( !'"' .)* '"' <NonTextNode>
+          {
+            def can_be_combined? 
+               true
+            end
+          
+            def node_name
+              "double_quoted_non_string"
+            end            
+          }
+        end
+
+        rule single_quoted_non_string
+          "'" ( !"'" .)* "'" <NonTextNode>
+          {
+            def can_be_combined? 
+               true
+            end
+          
+            def node_name
+              "single_quoted_non_string"
+            end            
+          }
+        end
           
         rule pluralize
-          "pluralize"  space? "("? space? repetition:not_whitespace_or_comma space? comma space? string_to_pluralize:not_whitespace_or_comma space? ")"? space? <PluralizeNode>
+          "pluralize"  space? "("? space? repetition:not_whitespace_or_comma space? comma space? string_to_pluralize:(single_quoted_non_string / double_quoted_non_string) space? ")"? space? <PluralizeNode>
           {
             def can_be_combined? 
                true
