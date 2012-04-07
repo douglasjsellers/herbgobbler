@@ -94,7 +94,7 @@ grammar ERBGrammer
         end
 
         rule method_call_content
-             method_names whitespace double_quoted_ruby_string (comma erb_string_non_text_content)? <MethodCallNode>
+             method_names whitespace ruby_string:double_quoted_ruby_string everything_else:(comma erb_string_non_text_content)? <MethodCallNode>
         end
        
         rule erb_string_non_text_content
