@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        pluralize_with_method_call:
+          key: "%{pluralize}"

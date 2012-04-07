@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        double_pluralize:
+          key: "%{pluralize}, %{pluralize_1}"

@@ -41,7 +41,7 @@ grammar ERBGrammer
         end 
        
         rule not_whitespace_or_comma
-          ((!comma !space !")") . )+ <NonTextNode>
+          ((!comma !space ) . )+ <NonTextNode>
           {
           
             def can_be_combined? 

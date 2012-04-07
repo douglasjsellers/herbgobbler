@@ -1,0 +1,1 @@
+<%= tr( "[forum_topics_count || 'topic'], [forum_posts_count || 'post']", nil, { :forum_topics_count => @forum.topics_count, :forum_posts_count => @forum.posts_count } ) %>
