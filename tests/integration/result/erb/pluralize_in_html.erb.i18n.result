@@ -1,3 +1,3 @@
   <p id="won_both_badge_and_botd_content" class="botd_content regtext">
-    <%= t '.you_just', :achievement => (achievement.badge.name), :pluralize => (pluralize(achievement.reward_points, 'point')), :pluralize_1 => (pluralize(achievement.reward_points, 'point')) %>
+    <%= t '.you_just', :achievement => (achievement.badge.name), :achievement_1 => (pluralize(achievement.reward_points, 'point') ), :achievement_2 => (pluralize(achievement.reward_points, 'point') ) %>
   </p>

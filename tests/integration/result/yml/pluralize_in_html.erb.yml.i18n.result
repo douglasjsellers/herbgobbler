@@ -3,4 +3,4 @@ en:
     integration:
       test:
         pluralize_in_html:
-          you_just: "You just earned the %{achievement} Badge and %{pluralize} \n    <strong>+ %{pluralize_1} for Badge of the Day!</strong>"
+          you_just: "You just earned the %{achievement} Badge and %{achievement_1} \n    <strong>+ %{achievement_2} for Badge of the Day!</strong>"

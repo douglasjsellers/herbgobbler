@@ -29,8 +29,13 @@ class HerbTr8nTextCallNode
   end
 
   def add_pluralization( variable_name, singular, variable )
-    @text_values << "[#{variable_name} || #{singular}]"
-    @variable_names_and_values << [variable_name, variable ]
+    unless( processing_nested_html? )    
+      @text_values << "[#{variable_name} || #{singular}]"
+      @variable_names_and_values << [variable_name, variable ]
+    else
+      @child_text_call_node.add_pluralization( variable_name, singular, variable )
+    end
+    
   end
 
   

@@ -1,3 +1,21 @@
+Starting html text
+Whitespace
+Adding html text: You just earned the
+Whitespace
+Adding variable: achievement = achievement.badge.name
+Whitespace
+Adding html text: Badge and
+Whitespace
+Whitespace
+Adding non text
+Start html tag
+Whitespace
+Whitespace
+Adding html text: for Badge of the Day!
+Adding non text
+End html tag
+Whitespace
+End HTML Text
   <p id="won_both_badge_and_botd_content" class="botd_content regtext">
-    <%= tr( "You just earned the {achievement} Badge and [achievement_reward_po || 'point'] {break}    [strong: +  for Badge of the Day!][achievement_reward_po || 'point']", nil, { :achievement => achievement.badge.name, :achievement_reward_po => achievement.reward_points, :achievement_reward_po => achievement.reward_points, :strong => tr( "<strong>{$0}</strong>" ) } ) %>
+    <%= tr( "You just earned the {achievement} Badge and [achievement_1 || 'point'] {break}    [strong: + [achievement_2 || 'point'] for Badge of the Day!]", nil, { :achievement => achievement.badge.name, :achievement_1 => achievement.reward_points, :strong => tr( "<strong>{$0}</strong>", nil, { :achievement_2 => achievement.reward_points } ) } ) %>
   </p>
