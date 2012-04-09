@@ -47,12 +47,17 @@ Extract all of the text from your Rails Project
 ---------------------
 Use the gobble command to extract all the english text from your .erb files and place the extracted text into the RAILS_ROOT/config/locals/en.yml file
 
-          $ gobble ~/my/rails/root/
+          $ gobble i18n -a ~/my/rails/root/
 
 The HerbGobbler is very much beta software.  It attempts to implement the best practices in internationalization (i18n) and localization by extracting complete sentences (even when these sentences contain html).  If you discover a piece of text that is not being properly extracted, or a pattern of extraction that you think is incorrect, please enter a bug into the system and a patch will be issued.  
+
+Experimental TR8N Support
+-------------------------
+The Herbgobbler also has experimental <a href="http://www.tr8n.net/">tr8n</a> support.  By running:
+          $ gobble -tr8n -a ~/my/rails/root
+
+The Herbgobbler will rewrite your erb files with tr8n embed (tr) tags.  This is a more beta feature than the rest of the Herbgobbler.  If you discover any problems please submit a bug through github being sure to include the block of erb that is causing problems.
 
 Customizing the HerbGobbler
 ----------------------------
 If you are interested in exporting text to a different data store than the default rails i18n format (en.yml), this can be done by implementing a <a href="https://github.com/douglasjsellers/herbgobbler/blob/master/lib/core/base_translation_store.rb">TranslationStore</a>.  
-
-For more information on this <a href="http://www.i18n-rails.com">ruby on rails i18n tool</a>
