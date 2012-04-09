@@ -1,3 +1,3 @@
 <div>
-  <%= tr( "Yay for Doug! [b: Cara is nice too]", nil, { :b => tr( "<b>{$0}</b>" ) } ) %>
+  <%= tr( "Yay for Doug! [b: Cara is nice too]", nil, { :b => "<b>{$0}</b>" } ) %>
 </div>

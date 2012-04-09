@@ -24,16 +24,19 @@ class HerbTr8nTextCallNode
       @variable_names_and_values << [name, value]
       @text_values << "{#{name}}"
     else
-      @child_text_call_node.add_variable( name, value )
+      @variable_names_and_values << [name, value]      
+      @child_text_call_node.add_text( "{#{name}}" )
     end
   end
 
   def add_pluralization( variable_name, singular, variable )
+    text_representation =  "[#{variable_name} || #{singular}]"
     unless( processing_nested_html? )    
-      @text_values << "[#{variable_name} || #{singular}]"
+      @text_values << text_representation
       @variable_names_and_values << [variable_name, variable ]
     else
-      @child_text_call_node.add_pluralization( variable_name, singular, variable )
+      @variable_names_and_values << [variable_name, variable ]
+      @child_text_call_node.add_text( text_representation )
     end
     
   end
@@ -55,7 +58,7 @@ class HerbTr8nTextCallNode
   end
   
   def end_html_tag( html_end_tag )
-    @variable_names_and_values << [@child_text_call_node.variable_name_being_assigned_to, @child_text_call_node.tr_call(html_end_tag, @number_of_html_nodes) ]
+    @variable_names_and_values << [@child_text_call_node.variable_name_being_assigned_to, @child_text_call_node.tr_text(html_end_tag, @number_of_html_nodes) ]
     @number_of_html_nodes += 1
     @child_text_call_node = nil
   end
@@ -98,12 +101,10 @@ class HerbTr8nTextCallNode
   def to_s
     text_value
   end
-  
-  def tr_call( html_end_tag = nil, count = 0 )
-    to_return = ""
-    unless( empty? )
-      to_return += 'tr( "'
 
+  def tr_text( html_end_tag = nil, count = 0 )
+    to_return = "\""
+    unless( empty? )
       to_return += @html_start_tag.text_value if being_assigned_to_variable?
 
       if( being_assigned_to_variable? )
@@ -111,7 +112,6 @@ class HerbTr8nTextCallNode
       else
         to_return += text_values_as_concated_string      
       end
-
 
       to_return += html_end_tag.text_value if being_assigned_to_variable?
       
@@ -125,7 +125,16 @@ class HerbTr8nTextCallNode
         end
         to_return += " }"
       end
-      
+    end
+
+    to_return
+  end
+  
+  def tr_call( html_end_tag = nil, count = 0 )
+    to_return = ""
+    unless( empty? )
+      to_return += 'tr( '
+      to_return += tr_text( html_end_tag, count )
       to_return += ' )'
     end
     to_return

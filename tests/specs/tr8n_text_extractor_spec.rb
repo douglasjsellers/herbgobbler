@@ -58,7 +58,7 @@ describe Tr8nTextExtractor do
     text_extractor = Tr8nTextExtractor.new
     erb_file.extract_text( text_extractor )
     erb_file.nodes.size.should == 1
-    erb_file.nodes.first.text_value.should == '<%= tr( "This is [b: a test]", nil, { :b => tr( "<b>{$0}</b>" ) } ) %>'    
+    erb_file.nodes.first.text_value.should == '<%= tr( "This is [b: a test]", nil, { :b => "<b>{$0}</b>" } ) %>'    
   end
   
   
