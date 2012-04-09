@@ -14,7 +14,11 @@ class HerbErbTr8nTextCallNode < HerbTr8nTextCallNode
     mark_as_called_and_push_whitespace
     super( variable_name, singular, variable )    
   end
-  
+
+  def add_child( node )
+    mark_as_called_and_push_whitespace
+    super( node )    
+  end    
   def end_html_tag( html_end_tag )
     mark_as_called_and_push_whitespace
     super( html_end_tag )

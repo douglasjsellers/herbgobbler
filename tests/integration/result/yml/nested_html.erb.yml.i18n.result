@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        nested_html:
+          this_is_a: "This is a <b>interesting <a href=\"/test\">Test</a></b> of the system"

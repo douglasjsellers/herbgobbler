@@ -1,0 +1,3 @@
+<div>
+  <%= t '.this_is_a' %>
+</div>
