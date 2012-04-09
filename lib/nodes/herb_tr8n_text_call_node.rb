@@ -2,11 +2,11 @@ class HerbTr8nTextCallNode
 
   attr_reader :variable_name_being_assigned_to
   
-  def initialize( html_start_tag = nil, tag_count = 0 )
+  def initialize( html_start_tag = nil, tag_count = 0, tag_variable_name = nil )
     @text_values = []
     @variable_names_and_values = []
     @html_start_tag = html_start_tag
-    @variable_name_being_assigned_to = html_start_tag.tag_name.text_value unless html_start_tag.nil?
+    @variable_name_being_assigned_to = tag_variable_name
     @number_of_html_nodes = tag_count
     @child_nodes = []
   end

@@ -28,9 +28,7 @@ class GobbleAll
 
   def execute_tr8n
     rails_view_directory = "#{@rails_root}/app/views"
-    
     text_extractor = Tr8nTextExtractor.new
-
     
     Dir["#{rails_view_directory}/**/*html.erb" ].each do |full_erb_file_path|
       

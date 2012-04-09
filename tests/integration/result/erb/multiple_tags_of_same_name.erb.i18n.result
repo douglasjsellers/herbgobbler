@@ -1,0 +1,3 @@
+<div>
+  <%= t '.message_queue', :servervalue => (ServerValue.message_queue_current_size) %>
+</div>
