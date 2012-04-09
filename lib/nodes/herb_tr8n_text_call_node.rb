@@ -35,6 +35,10 @@ class HerbTr8nTextCallNode
     !@variable_name_being_assigned_to.nil?
   end
 
+  def closing_tag_for_this_node?( closing_tag )
+    ( !@html_start_tag.nil? && @html_start_tag.tag_name.text_value == closing_tag.tag_name.text_value )
+  end
+  
   def block_variable
     to_return = "[#{variable_name_being_assigned_to}: "
     to_return += text_values_as_concated_string
