@@ -34,6 +34,7 @@ class Tr8nTextExtractor < BaseTextExtractor
     puts "End HTML Text" if @debug
     to_return = @current_node
     @current_node = nil
+    @html_tag_count = 0
     [to_return]
   end
 
