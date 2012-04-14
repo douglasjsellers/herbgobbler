@@ -20,6 +20,6 @@ erb_file.combine_nodes( erb_file.flatten_elements ).each do |element|
     name = ""
   end
   
-  puts "`#{element.text_value}`(text=#{element.is_a?(TextNode)})(combindable=#{element.is_a?(NonTextNode) && element.can_be_combined?})(class=#{element.class})#{name}"
+  puts "`#{element.text_value}`(text=#{element.is_a?(TextNode)})(combindable=#{element.respond_to?(:can_be_combined?) && element.can_be_combined?})(class=#{element.class})#{name}"
 end
 
