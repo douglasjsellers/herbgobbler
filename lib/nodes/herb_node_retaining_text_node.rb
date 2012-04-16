@@ -6,7 +6,7 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
       self << node
     end
   end
-  
+
   def can_remove_starting_or_ending_html_tags?
     if( find_first_non_whitespace_node.node_name == "html_start_tag" && find_last_non_whitespace_node.node_name == "html_end_tag"  )
       if( find_first_non_whitespace_node.tag_name.text_value == find_last_non_whitespace_node.tag_name.text_value )
@@ -57,7 +57,61 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
   end
 
   def explode
-    return nodes
+    nested_level = nesting_level
+    to_return = []
+    current_nest = 0
+    new_node_list = nil
+    
+    # Go through and try to build rolled up nodes for all of the node
+    # contents that are below the nested list level
+    nodes.each do |current_node|
+      if( current_node.node_name == "html_start_tag" )
+        current_nest += 1
+        if( new_node_list.nil? )
+          to_return << current_node
+        else
+          new_node_list << current_node
+        end
+        if( current_nest == nesting_level + 1 )
+          new_node_list = []
+        end
+      elsif( current_node.node_name == "html_end_tag" )
+        if( current_nest == nesting_level + 1 )          
+          to_return << build_correct_node_retaining_node( new_node_list )
+          to_return << current_node
+          new_node_list = nil
+        elsif( new_node_list.nil? )
+          to_return << current_node
+        else
+          new_node_list << current_node
+        end
+        current_nest -= 1
+      elsif( new_node_list.nil? )
+        to_return << current_node
+      elsif( !new_node_list.nil?)
+        new_node_list << current_node
+      end
+
+    end
+    to_return << build_correct_node_retaining_node( new_node_list ) unless new_node_list.nil?   
+    
+    return to_return
+  end
+
+  def build_correct_node_retaining_node( array_of_nodes )
+    text_retaining_node = false
+    array_of_nodes.each do |node|
+      text_retaining_node = true if node.is_a?(TextNode) && node.contains_alpha_characters?
+    end
+
+    if( text_retaining_node )
+      to_return = HerbNodeRetainingTextNode.new
+      to_return.add_all( array_of_nodes )
+    else
+      to_return = HerbNodeRetainingNonTextNode.create_from_nodes( array_of_nodes )
+    end
+
+    to_return
   end
   
   def can_be_exploded?
