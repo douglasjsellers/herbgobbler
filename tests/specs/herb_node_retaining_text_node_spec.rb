@@ -157,8 +157,33 @@ describe HerbNodeRetainingTextNode do
     node.add_all( erb_file.nodes )
 
     node.can_be_exploded?.should == false
-    
   end
+
+  it "should be able to detect that something with pipe separators should be exploded" do
+    erb_file = ErbFile.from_string( "\n<a href='blah'>stuff</a>\n|\n<a href='two'>more</a>\n" )
+    node = HerbNodeRetainingTextNode.new
+    node.add_all( erb_file.nodes )
+
+    node.can_be_exploded?.should == true
+  end
+
+  it "should be able to detect that a list wrapped in a span should be exploded" do
+    erb_file = ErbFile.from_string( "<span>\n<a href='blah'>stuff</a>\n|\n<a href='two'>more</a>\n</span>" )
+    node = HerbNodeRetainingTextNode.new
+    node.add_all( erb_file.nodes )
+
+    node.can_be_exploded?.should == true
+  end
+
+  it "should be able to detect that a list containing a mixed html and text should not be exploded" do
+
+    erb_file = ErbFile.from_string( "<span>\n<strong>Register today</strong> to save your progress.\n</span>" )
+    node = HerbNodeRetainingTextNode.new
+    node.add_all( erb_file.nodes )
+
+    node.can_be_exploded?.should == false
+  end
+  
   
 end
 

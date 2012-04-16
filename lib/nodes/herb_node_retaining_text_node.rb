@@ -59,7 +59,7 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
   def can_be_exploded?
     # it is possible that this node contains only non text nodes.  If
     # there is no text within this combined node then this should be uncombined
-    find_all_non_matched_tags_and_white_space(nodes).empty? || contains_only_non_text_and_non_method_nodes?
+    contains_list_of_elements? || contains_only_non_text_and_non_method_nodes?
   end
   
   def can_be_combined?
@@ -89,10 +89,45 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
     found_text = false
     nodes.each do |current_node|
       found_text = true if current_node.is_a?( TextNode ) && !current_node.is_a?(MethodCallNode)
-      
     end
     !found_text
   end
+
+  def contains_list_of_elements?
+    # Two cases, first there could be an outer element that wraps the
+    # list, if this is true we want to strip it.
+    # After the outer elements are stripped then we want to walk
+    # through and find all of the top level elements - where a top
+    # level element is defined as anything that isn't nested further.
+
+    nested_level = 0
+    nested_nodes = [ [] ]
+    nodes.each do |current_node|
+      if( current_node.node_name == "html_start_tag" )
+        nested_nodes[nested_level] << current_node
+        nested_level += 1
+        nested_nodes[ nested_level ] = [] if nested_nodes[nested_level].nil?
+      elsif( current_node.node_name == "html_end_tag" )
+        nested_level -= 1
+        nested_nodes[ nested_level ] << current_node
+      elsif( current_node.is_a?( TextNode ) && current_node.contains_alpha_characters? )
+        nested_nodes[ nested_level ] << current_node
+      end
+    end
+    
+    nested_level = 0
+    to_return = true
+    while( nested_nodes[nested_level].size == 2 && nested_nodes[nested_level].first.node_name == "html_start_tag" && nested_nodes[nested_level].last.node_name == "html_end_tag" )
+      nested_level += 1
+    end
+
+    nested_nodes[nested_level].each do |node_at_node_level|
+      to_return = false if node_at_node_level.is_a?(TextNode)
+    end
+
+    return to_return
+  end
+
   
   def extract_leading_tag
     node = find_first_non_whitespace_node
@@ -116,27 +151,5 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
     end
     
   end
-  
-  def find_all_non_matched_tags_and_white_space( nodes )
-    to_return = []
-    search_node_name = nil
-    nodes.each do |current_node|
-      if( !current_node.respond_to?( :node_name ) )
-        to_return << current_node
-      elsif( search_node_name.nil? && current_node.node_name == "html_start_tag" )
-        search_node_name = current_node.tag_name.text_value
-      elsif( !search_node_name.nil? && current_node.node_name == "html_end_tag" )
-        search_node_name = nil if search_node_name == current_node.tag_name.text_value
-      elsif( search_node_name.nil? && current_node.is_a?(TextNode ) )
-        if( current_node.contains_alpha_characters? )
-          to_return << current_node
-        end
-      end
-    end
-    
-    return to_return
-  end
-
-  
   
 end

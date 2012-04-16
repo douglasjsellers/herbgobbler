@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        self_contained_span_followed_by_text_filled_span:
+          register_today: "<strong>Register today</strong> to save your progress."
