@@ -262,7 +262,11 @@ grammar ERBGrammer
              start_tag:'<' tag_name:([a-zA-Z])+ tag_contents:(!'/>' (erb_string / .))* end_tag:'/>' <NonTextNode> 
              {
                 def can_be_combined?
-                   true
+                   if( tag_name.text_value.downcase == 'br' )
+                       false
+                   else
+                       true
+                   end
                 end
 
                 def node_name

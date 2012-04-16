@@ -1,0 +1,2 @@
+    <%= t '.you_rsquo_ve' %><br/>
+    <%= t '.register_today' %>

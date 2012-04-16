@@ -3,4 +3,5 @@ en:
     integration:
       test:
         tag_with_erb_string:
-          ads_stuff_you: "ADS / STUFF <br/> YOU'VE CREATED"
+          ads_stuff: "ADS / STUFF"
+          you_ve_created: "YOU'VE CREATED"

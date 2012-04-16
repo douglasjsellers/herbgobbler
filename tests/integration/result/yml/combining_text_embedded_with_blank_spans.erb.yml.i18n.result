@@ -1,0 +1,7 @@
+en:
+  tests:
+    integration:
+      test:
+        combining_text_embedded_with_blank_spans:
+          you_rsquo_ve: "You&rsquo;ve earned <span class=\"emphasis\"><span id='guest_accomplishments'></span> badges</span> with <span id='guest_points' class=\"emphasis\"></span> points!"
+          register_today: "<strong>Register today</strong> to save your progress."

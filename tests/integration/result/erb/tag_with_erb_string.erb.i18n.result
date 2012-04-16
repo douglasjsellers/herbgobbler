@@ -2,7 +2,7 @@
 
   <div id="ad_box" class="span-5 stack-<%= @card_height - 3 %>">
      <div id="ads_text">
-       <%= t '.ads_stuff_you' %>
+       <%= t '.ads_stuff' %> <br/> <%= t '.you_ve_created' %>
      </div>
    </div>
 
