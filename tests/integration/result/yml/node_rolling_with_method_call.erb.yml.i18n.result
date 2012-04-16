@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        node_rolling_with_method_call:
+          member_since: "<strong>Member Since:</strong> %{medium_format}"

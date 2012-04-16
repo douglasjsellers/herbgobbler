@@ -1,0 +1,1 @@
+<li><%= t '.member_since', :medium_format => (medium_format_date @user.created_at) %></li>
