@@ -1,0 +1,7 @@
+<p id='guest_accomplishment_upsell' class="media" style='display:none'>
+  <span class="stars spritehome spriteall img"> </span>
+  <span class="bd">
+    <%= tr( "You{rsquo}ve earned [span: [span_1: ] badges] with [span_2: ] points!", nil, { :span => "<span class="emphasis">{$0}</span>", :span_1 => "<span id='guest_accomplishments'>{$1}</span>", :span_2 => "<span id='guest_points' class="emphasis">{$2}</span>" } ) %><br/>
+    <%= tr( "[strong: Register today] to save your progress.", nil, { :strong => "<strong>{$0}</strong>" } ) %>
+  </span>
+</p>

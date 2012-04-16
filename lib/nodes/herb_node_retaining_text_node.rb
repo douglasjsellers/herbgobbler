@@ -11,6 +11,8 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
     if( find_first_non_whitespace_node.node_name == "html_start_tag" && find_last_non_whitespace_node.node_name == "html_end_tag"  )
       if( find_first_non_whitespace_node.tag_name.text_value == find_last_non_whitespace_node.tag_name.text_value )
         true
+      elsif( last_tag_does_not_match_first_tag? )
+        true
       else
         false
       end
@@ -22,9 +24,17 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
     
   end
 
+  def last_tag_does_not_match_first_tag?
+    find_last_non_whitespace_node.node_name == "html_end_tag" && find_first_non_whitespace_node.node_name == "html_start_tag" && find_last_non_whitespace_node.tag_name.text_value.downcase != find_first_non_whitespace_node.tag_name.text_value.downcase
+  end
+  
   def break_out_start_and_end_tags
-    if( find_first_non_whitespace_node.node_name == "html_start_tag" && find_last_non_whitespace_node.node_name == "html_end_tag"  )
-( can_remove_starting_or_ending_html_tags? )
+    if( last_tag_does_not_match_first_tag? )
+      end_tag = extract_trailing_tag
+      start_tag = HerbNodeRetainingTextNode.new
+      start_tag.add_all( nodes[0..nodes.length - (end_tag.nodes.length + 1 ) ] )
+      [start_tag, end_tag]          
+    elsif( find_first_non_whitespace_node.node_name == "html_start_tag" && find_last_non_whitespace_node.node_name == "html_end_tag"  ) && ( can_remove_starting_or_ending_html_tags? )
       start_tag = extract_leading_tag
       end_tag = extract_trailing_tag
       middle_tag = HerbNodeRetainingTextNode.new
