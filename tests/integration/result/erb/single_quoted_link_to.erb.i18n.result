@@ -1,0 +1,1 @@
+<span class="tos_msg"><%= t '.by_clicking', :link_to_terms => (link_to (t '.terms_of'), page_path('terms'), :popup => true) %></span>

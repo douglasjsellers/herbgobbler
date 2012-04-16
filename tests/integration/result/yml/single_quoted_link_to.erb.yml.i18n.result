@@ -1,0 +1,7 @@
+en:
+  tests:
+    integration:
+      test:
+        single_quoted_link_to:
+          terms_of: "Terms of Service"
+          by_clicking: "By clicking &quot;Sign Up&quot;, you agree to adhere to our %{link_to_terms}"
