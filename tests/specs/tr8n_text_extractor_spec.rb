@@ -27,14 +27,6 @@ describe Tr8nTextExtractor do
     erb_file.nodes.first.text_value.should == '<%= tr( "This is only {nbsp} a test" ) %>'
   end
 
-  it "should remove the <br/> tags and replace them with {br}" do
-    erb_file = ErbFile.from_string( "This is only <br/> a test" )
-    text_extractor = Tr8nTextExtractor.new
-    erb_file.extract_text( text_extractor )
-    erb_file.nodes.size.should == 1
-    erb_file.nodes.first.text_value.should == '<%= tr( "This is only {br} a test" ) %>'
-  end
-
 
   it "should do simple variable replacement" do
     erb_file = ErbFile.from_string( "This is <%= @user %> a test" )

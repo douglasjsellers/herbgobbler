@@ -35,19 +35,6 @@ describe ErbFile do
     terminals.last.text_value.should == "D"
   end
 
-  it "should be able to gather all of the top level elements when there are three and one of them is an html element" do
-    erb_file = ErbFile.from_string( "<%= \"doug is great\" %><br/>D" )
-    terminals = erb_file.flatten_elements
-    terminals.size.should == 7
-
-    terminals[5].top_level?.should == true
-    terminals[5].text_value.should == "<br/>"
-    
-    terminals.last.top_level?.should == true
-    terminals.last.text_value.should == "D"
-    
-  end
-
   it "should be able to roll up multiple characters into a single top level element" do
     erb_file = ErbFile.from_string( "Doug" )
     terminals = erb_file.flatten_elements
@@ -57,27 +44,6 @@ describe ErbFile do
     
   end
   
-  it "should be able to roll up multiple characters into a single top level element when surrounded by <br/> tags" do
-    erb_file = ErbFile.from_string( "<br/>Doug<br/>" )
-    terminals = erb_file.flatten_elements
-    terminals.size.should == 3
-    
-    terminals[0].top_level?.should == true
-    terminals[0].text?.should == false
-    terminals[0].node_name.should == "html_self_contained"
-    terminals[0].text_value.should == "<br/>" 
-    
-    terminals[1].top_level?.should == true
-    terminals[1].text?.should == true
-    terminals[1].node_name.should == "text"
-    terminals[1].text_value.should == "Doug" 
-
-    terminals[2].top_level?.should == true
-    terminals[2].text?.should == false
-    terminals[2].node_name.should == "html_self_contained"    
-    terminals[2].text_value.should == "<br/>" 
-  end
-
   it "should be able to correctly roll up text when that text is surrounded by html tags" do
     
     erb_file = ErbFile.from_string( "<b>Doug</b>" )
