@@ -56,6 +56,10 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
     end
   end
 
+  def explode
+    return nodes
+  end
+  
   def can_be_exploded?
     # it is possible that this node contains only non text nodes.  If
     # there is no text within this combined node then this should be uncombined
@@ -99,7 +103,17 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
     # After the outer elements are stripped then we want to walk
     # through and find all of the top level elements - where a top
     # level element is defined as anything that isn't nested further.
+    nested_level = nesting_level
+    nested_nodes = nested_nodes_list
+    to_return = true    
+    nested_nodes[nested_level].each do |node_at_node_level|
+      to_return = false if node_at_node_level.is_a?(TextNode)
+    end
 
+    return to_return
+  end
+
+  def nested_nodes_list
     nested_level = 0
     nested_nodes = [ [] ]
     nodes.each do |current_node|
@@ -114,20 +128,20 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
         nested_nodes[ nested_level ] << current_node
       end
     end
-    
+
+    return nested_nodes
+  end
+  
+  def nesting_level
+    nested_nodes = nested_nodes_list
     nested_level = 0
-    to_return = true
     while( nested_nodes[nested_level].size == 2 && nested_nodes[nested_level].first.node_name == "html_start_tag" && nested_nodes[nested_level].last.node_name == "html_end_tag" )
       nested_level += 1
     end
 
-    nested_nodes[nested_level].each do |node_at_node_level|
-      to_return = false if node_at_node_level.is_a?(TextNode)
-    end
-
-    return to_return
+    return nested_level
   end
-
+  
   
   def extract_leading_tag
     node = find_first_non_whitespace_node

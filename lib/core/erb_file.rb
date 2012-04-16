@@ -111,7 +111,7 @@ class ErbFile
     nodes.each do |node|
       if( node.is_a?( HerbNodeRetainingTextNode ) )
         if( node.can_be_exploded? )
-          to_return += node.nodes
+          to_return += node.explode
         else
           to_return << node
         end
