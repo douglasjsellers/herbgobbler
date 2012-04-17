@@ -1,0 +1,7 @@
+en:
+  tests:
+    integration:
+      test:
+        span_with_br:
+          foo: "<span>Foo"
+          bar: "bar</span>\n</a>"
