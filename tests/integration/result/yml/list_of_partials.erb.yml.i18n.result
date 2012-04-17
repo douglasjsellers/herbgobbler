@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        list_of_partials:
+          loading: "<span id=\"recommended_badges_pod_spinner\" class=\"spinner spinner_big\" style=\"display:none\">Loading...</span>"

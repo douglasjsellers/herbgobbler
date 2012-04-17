@@ -101,7 +101,7 @@ grammar ERBGrammer
              (!erb_block_end .)* <ErbStringNonTextContent>
              {
                 def can_be_combined?
-                    true
+                    self.text_value.nil? || self.text_value.strip!.nil? || !self.text_value.strip!.match(/^render/)
                 end
                         
                 def node_name
