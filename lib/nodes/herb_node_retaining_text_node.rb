@@ -186,10 +186,10 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
         nested_level += 1
         nested_nodes[ nested_level ] = [] if nested_nodes[nested_level].nil?
       elsif( current_node.node_name == "html_end_tag" )
-        nested_level -= 1
+        nested_level -= 1 unless nested_level == 0
         nested_nodes[ nested_level ] << current_node
       elsif( current_node.is_a?( TextNode ) && current_node.contains_alpha_characters? )
-        nested_nodes[ nested_level ] << current_node
+        nested_nodes[nested_level] << current_node
       end
     end
 

@@ -1,0 +1,7 @@
+<span>
+  <strong>
+    <%- if true -%>
+    <%- end -%>
+  </strong>
+  <%= link_to((t '.sign_in'), '#') %>
+</span>

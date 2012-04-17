@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        span_with_blank_if:
+          sign_in: "Sign in"
