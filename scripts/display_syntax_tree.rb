@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require 'backports'
 require_relative '../lib/herbgobbler'
 
