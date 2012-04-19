@@ -1,3 +1,3 @@
   <p id="won_both_badge_and_botd_content" class="botd_content regtext">
-    <%= tr( "You just earned the {achievement} Badge and [achievement_1 || 'point'] {break}    [strong: + [achievement_2 || 'point'] for Badge of the Day!]", nil, { :achievement => achievement.badge.name, :achievement_1 => achievement.reward_points, :achievement_2 => achievement.reward_points, :strong => "<strong>{$0}</strong>" } ) %>
+    <%= tr( "You just earned the {achievement} Badge and [achievement_1 || 'point'] {br}    [strong: + [achievement_2 || 'point'] for Badge of the Day!]", nil, { :achievement => achievement.badge.name, :achievement_1 => achievement.reward_points, :achievement_2 => achievement.reward_points, :strong => "<strong>{$0}</strong>" } ) %>
   </p>

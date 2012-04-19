@@ -1,1 +1,1 @@
-<%= tr( "[strong: {number_with}{break}downloads] of {number_with_1} gems cut since july 2009", nil, { :number_with_1 => number_with_delimiter(@rubygems_count), :number_with => number_with_delimiter(@downloads_count), :strong => "<strong>{$0}</strong>" } ) %>
+<%= tr( "[strong: {number_with}{br}downloads] of {number_with_1} gems cut since july 2009", nil, { :number_with_1 => number_with_delimiter(@rubygems_count), :number_with => number_with_delimiter(@downloads_count), :strong => "<strong>{$0}</strong>" } ) %>

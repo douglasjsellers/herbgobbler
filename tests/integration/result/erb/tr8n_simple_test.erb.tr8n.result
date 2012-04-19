@@ -1,6 +1,6 @@
 <div class="bullet"> 
   <div class="description"> 
-     <%= tr( "If you're on an old version of Rubygems{break}     (before 1.3.6)" ) %>
+     <%= tr( "If you're on an old version of Rubygems{br}     (before 1.3.6)" ) %>
   </div> 
   <pre class='sunburst'><%= tr( "Run: $ gem update --system" ) %>
 </pre> 

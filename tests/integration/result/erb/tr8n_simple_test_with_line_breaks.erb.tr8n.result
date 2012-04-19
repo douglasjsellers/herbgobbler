@@ -1,7 +1,7 @@
 <div class="bullet"> 
   <div class="description"> 
-     <%= tr( "If you're on an old version of Rubygems{break}     (before 1.3.6)" ) %>
+     <%= tr( "If you're on an old version of Rubygems{br}     (before 1.3.6)" ) %>
   </div> 
-  <pre class='sunburst'><%= tr( "Run: $ gem update --system{break}  Run: $ gem install herbgobbler{break}  Run: $ gem install tr8n" ) %>
+  <pre class='sunburst'><%= tr( "Run: $ gem update --system{br}  Run: $ gem install herbgobbler{br}  Run: $ gem install tr8n" ) %>
 </pre> 
 <div> 
