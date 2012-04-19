@@ -22,6 +22,10 @@ class TextExtractor
   def translate_text( text_node_to_translate )
     raise "Please impelement me (translate_text)"
   end
+
+  def translate_method_call_text( method_to_translate )
+    raise "Please implement me (method_to_translate)"
+  end
   
   def end_html_text
     raise "Please implement me (end_html_text)"

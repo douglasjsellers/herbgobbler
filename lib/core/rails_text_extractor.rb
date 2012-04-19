@@ -63,7 +63,12 @@ class RailsTextExtractor < BaseTextExtractor
     @translation_store.add_translation( call_node.key_value, call_node.original_text )
     call_node
   end
+
+  def translate_method_call_text( method_to_translate )
+    translate_text( text_to_translate )
+  end
   
+    
   # This takes in a text node and returns one or more nodes that will
   # then be output.  The nodes that are output should implement
   # node_name and text_value

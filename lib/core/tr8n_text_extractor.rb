@@ -22,6 +22,10 @@ class Tr8nTextExtractor < BaseTextExtractor
     @current_node.add_variable( variable_name, variable_value )
   end
 
+  def translate_method_call_text( method_to_translate )
+    translate_text( text_to_translate )
+  end
+  
   def translate_text( text_node_to_translate )
     puts "Translating text: #{text_node_to_translate}" if @debug
     # This should just return a node that responds to text_value
