@@ -93,7 +93,7 @@ class HerbTr8nTextCallNode
 
   def variable_string( html_end_tag, count )
     to_return = "\""
-    to_return += @html_start_tag.text_value 
+    to_return += escape_double_quotes( @html_start_tag.text_value )
     to_return += "{$#{count}}"
     to_return += html_end_tag.text_value
     to_return += "\""
@@ -142,5 +142,10 @@ class HerbTr8nTextCallNode
     @text_values << ( HerbTr8nStringNode.new( white_space_text ) ).to_s
   end
 
+  private
+  def escape_double_quotes( text )
+    text.gsub( "\"", "\\\"" )
+  end
+  
 end
 
