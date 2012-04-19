@@ -5,6 +5,9 @@ module MethodCallNode
     text_string = ''
     self.elements.each do |node|      
       if( node.is_a?( TextNode ) )
+
+        # If this method call is part of a string, then translate it
+        # as a method call otherwise just translate it is regular text
         if( surrounding_nodes.nil? || !surrounded_by_text?( surrounding_nodes ) )
           translated_node = text_extractor.translate_text( node.text_value )          
         else
