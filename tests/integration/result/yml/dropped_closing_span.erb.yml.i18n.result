@@ -2,5 +2,5 @@ en:
   tests:
     integration:
       test:
-        list_of_partials:
+        dropped_closing_span:
           loading: "Loading..."

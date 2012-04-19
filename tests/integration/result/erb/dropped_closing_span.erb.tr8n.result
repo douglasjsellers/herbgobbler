@@ -1,3 +1,2 @@
-<%= render :partial => 'homepage/tip' %>
 <%= render :partial => 'homepage/levelup' %>
 <span id="recommended_badges_pod_spinner" class="spinner spinner_big" style="display:none"><%= tr( "Loading..." ) %></span>

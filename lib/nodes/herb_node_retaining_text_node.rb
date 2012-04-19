@@ -16,7 +16,7 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
       else
         false
       end
-    elsif( find_last_non_whitespace_node.node_name == "html_start_tag" || find_first_non_whitespace_node.node_name == "html_end_tag" )
+    elsif( find_last_non_whitespace_node.node_name == "html_start_tag" || find_first_non_whitespace_node.node_name == "html_end_tag" || find_first_non_whitespace_node.node_name == "erb_block_end" )
       true
     else
       false
@@ -45,7 +45,7 @@ class HerbNodeRetainingTextNode < HerbNodeRetainingNode
       start_tag = HerbNodeRetainingTextNode.new
       start_tag.add_all( nodes[0..nodes.length - (end_tag.nodes.length + 1 ) ] )
       [start_tag, end_tag]
-    elsif(find_first_non_whitespace_node.node_name == "html_end_tag" )
+    elsif(find_first_non_whitespace_node.node_name == "html_end_tag" || find_first_non_whitespace_node.node_name == "erb_block_end")
       start_tag = extract_leading_tag
       end_tag = HerbNodeRetainingTextNode.new
       end_tag.add_all( nodes[start_tag.nodes.length..nodes.length ] )
