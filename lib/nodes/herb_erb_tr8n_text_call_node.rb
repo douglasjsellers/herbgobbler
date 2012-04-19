@@ -9,6 +9,10 @@ class HerbErbTr8nTextCallNode < HerbTr8nTextCallNode
     mark_as_called_and_push_whitespace
     super( name, value )
   end
+  def add_lambda( variable_name, variable_value, lambda_call_node )
+    mark_as_called_and_push_whitespace
+    super( variable_name, variable_value, lambda_call_node )
+  end
 
   def add_pluralization( variable_name, singular, variable )
     mark_as_called_and_push_whitespace

@@ -19,6 +19,12 @@ class HerbTr8nTextCallNode
     @child_nodes << child_node
     @text_values << child_node
   end
+
+  def add_lambda( variable_name, variable_value, lambda_call_node )
+    @variable_names_and_values << [variable_name, lambda_call_node.generate_lambda( variable_value )]
+    @text_values << generate_block_variable( variable_name, lambda_call_node.original_text )
+
+  end
   
   def add_variable( name, value )
     @variable_names_and_values << [name, value]
@@ -40,12 +46,16 @@ class HerbTr8nTextCallNode
   end
   
   def block_variable
-    to_return = "[#{variable_name_being_assigned_to}: "
-    to_return += text_values_as_concated_string
-    to_return += "]"
-    to_return
+    generate_block_variable( variable_name_being_assigned_to, text_values_as_concated_string )
   end
 
+  def generate_block_variable( variable, text )
+    to_return = "[#{variable}: "
+    to_return += text
+    to_return += "]"
+    to_return    
+  end
+  
   def empty?
     @text_values.empty? && @variable_names_and_values.empty?
   end

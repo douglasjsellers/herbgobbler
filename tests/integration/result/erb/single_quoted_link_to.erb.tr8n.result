@@ -1,1 +1,1 @@
-<span class="tos_msg"><%= tr( "By clicking {quot}Sign Up{quot}, you agree to adhere to our {link_to_terms}", nil, { :link_to_terms => link_to (tr( "Terms of Service" )), page_path('terms'), :popup => true } ) %></span>
+<span class="tos_msg"><%= tr( "By clicking {quot}Sign Up{quot}, you agree to adhere to our [link_to_terms: Terms of Service]", nil, { :link_to_terms => lambda {|text| link_to ("#{text}"), page_path('terms'), :popup => true} } ) %></span>

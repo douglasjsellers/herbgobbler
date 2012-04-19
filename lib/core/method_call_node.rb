@@ -5,7 +5,12 @@ module MethodCallNode
     text_string = ''
     self.elements.each do |node|      
       if( node.is_a?( TextNode ) )
-        translated_node = text_extractor.translate_text( node.text_value )
+        if( surrounding_nodes.nil? || !surrounded_by_text?( surrounding_nodes ) )
+          translated_node = text_extractor.translate_text( node.text_value )          
+        else
+          translated_node = text_extractor.translate_method_call_text( node.text_value )
+        end
+        
         text_string << "(#{translated_node.text_value})"
       else
         text_string << node.text_value

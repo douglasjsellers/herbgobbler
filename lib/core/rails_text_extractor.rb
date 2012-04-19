@@ -65,7 +65,7 @@ class RailsTextExtractor < BaseTextExtractor
   end
 
   def translate_method_call_text( method_to_translate )
-    translate_text( text_to_translate )
+    translate_text( method_to_translate )
   end
   
     

@@ -6,6 +6,7 @@ class Tr8nTextExtractor < BaseTextExtractor
     @key_store = []
     @debug = false
     @html_tag_count = 0
+    @lambda_call = nil
   end
   
   # This is called when text extraction has begun
@@ -19,11 +20,17 @@ class Tr8nTextExtractor < BaseTextExtractor
 
   def add_variable( variable_name, variable_value )
     puts "Adding variable: #{variable_name} = #{variable_value}" if @debug
-    @current_node.add_variable( variable_name, variable_value )
+    if( @lambda_call.nil? )
+      @current_node.add_variable( variable_name, variable_value )
+    else
+      @current_node.add_lambda( variable_name, variable_value, @lambda_call )
+      @lambda_call = nil
+    end      
   end
 
   def translate_method_call_text( method_to_translate )
-    translate_text( text_to_translate )
+    @lambda_call = HerbTr8nLambdaCallNode.new( method_to_translate )
+    @lambda_call
   end
   
   def translate_text( text_node_to_translate )
