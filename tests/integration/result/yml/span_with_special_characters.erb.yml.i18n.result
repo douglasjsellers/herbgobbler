@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        span_with_special_characters:
+          på_dansk: "På dansk"

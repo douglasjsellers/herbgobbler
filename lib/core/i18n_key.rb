@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class I18nKey
 
   DEFAULT_KEY_NAME = "key"
@@ -12,7 +13,7 @@ class I18nKey
     if( @key_value.nil? )
       to_return = remove_html_tags( @text )
       to_return = to_return.gsub( /[%{].*?[}]/, '' )
-      to_return = to_return.gsub( /[^a-zA-Z0-9]/, ' ' )
+      to_return = to_return.gsub( /[^a-zA-Z0-9À-ÿ]/, ' ' )
       to_return = to_return.gsub( /[ ]+/, ' ' )
       to_return = to_return.strip.downcase.chomp
       to_return = to_return.gsub( / /, '_' )
