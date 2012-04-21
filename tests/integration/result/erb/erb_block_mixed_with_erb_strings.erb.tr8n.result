@@ -5,7 +5,7 @@
            <%= version.platform %>
         <% end -%>
       </strong>
-<%= tr( "{time_ago_in} ago", nil, { :time_ago_in => time_ago_in_words(version.created_at) } ) %></div>
+<%= tr( "{time_ago_in} ago", nil, { :time_ago_in => (time_ago_in_words(version.created_at)) } ) %></div>
 
 <div <%= style='foo' if bar  %>>
 </div>

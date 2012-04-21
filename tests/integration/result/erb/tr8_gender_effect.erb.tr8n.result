@@ -1,3 +1,3 @@
 <div>
-	<%= tr( "{h_actor} started playing {h_game_name}.", nil, { :h_actor => h(@actor.username), :h_game_name => h(@game.name) } ) %>
+	<%= tr( "{h_actor} started playing {h_game_name}.", nil, { :h_actor => (h(@actor.username)), :h_game_name => (h(@game.name)) } ) %>
 </div>

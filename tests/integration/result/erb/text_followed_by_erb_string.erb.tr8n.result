@@ -1,1 +1,1 @@
-<div><%= tr( "Company Name: {f_text_field}", nil, { :f_text_field => f.text_field :company_name } ) %></div>
+<div><%= tr( "Company Name: {f_text_field}", nil, { :f_text_field => (f.text_field :company_name) } ) %></div>

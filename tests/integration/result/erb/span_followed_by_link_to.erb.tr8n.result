@@ -1,0 +1,2 @@
+<span class="browse_developer"><%= tr( "by {br}{link_to_game}", nil, { :link_to_game => (link_to game.uploaded_by.username, account_url(game.uploaded_by), :class => 'spritesite') } ) %>
+</span>

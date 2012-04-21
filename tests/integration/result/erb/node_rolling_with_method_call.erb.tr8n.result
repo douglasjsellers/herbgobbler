@@ -1,1 +1,1 @@
-<li><%= tr( "[strong: Member Since:] {medium_format}", nil, { :medium_format => medium_format_date @user.created_at, :strong => "<strong>{$0}</strong>" } ) %></li>
+<li><%= tr( "[strong: Member Since:] {medium_format}", nil, { :medium_format => (medium_format_date @user.created_at), :strong => ("<strong>{$0}</strong>") } ) %></li>

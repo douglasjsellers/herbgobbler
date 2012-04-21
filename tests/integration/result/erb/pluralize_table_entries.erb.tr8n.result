@@ -1,5 +1,5 @@
 <table>
         <tr>
-                <td><%= tr( "[accomplishments || 'Achievements']", nil, { :accomplishments => accomplishments.size } ) %></td>
+                <td><%= tr( "[accomplishments || 'Achievements']", nil, { :accomplishments => (accomplishments.size) } ) %></td>
         </tr>
 </table>

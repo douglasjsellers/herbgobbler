@@ -1,1 +1,1 @@
-<%= tr( "[number_with || 'person']", nil, { :number_with => number_with_delimiter(@online_users_count.to_i) } ) %>
+<%= tr( "[number_with || 'person']", nil, { :number_with => (number_with_delimiter(@online_users_count.to_i)) } ) %>

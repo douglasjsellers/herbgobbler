@@ -1,3 +1,3 @@
 <div>
-  <%= tr( "This is a [a: test] of the emergency Twitter system!  TWEEEEEETTTTT", nil, { :a => "<a href=\"/test\">{$0}</a>" } ) %>
+  <%= tr( "This is a [a: test] of the emergency Twitter system!  TWEEEEEETTTTT", nil, { :a => ("<a href=\"/test\">{$0}</a>") } ) %>
 </div>

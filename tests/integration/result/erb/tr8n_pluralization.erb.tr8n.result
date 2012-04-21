@@ -1,4 +1,4 @@
 <div>
-	<%= tr( "You have {count} [message_count || "message"].", nil, { :count => count, :message_count => @message_count } ) %>
+	<%= tr( "You have {count} [message_count || "message"].", nil, { :count => (count), :message_count => (@message_count) } ) %>
 </div>
 

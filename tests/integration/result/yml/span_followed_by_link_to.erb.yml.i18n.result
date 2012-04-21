@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        span_followed_by_link_to:
+          by: "by \n%{link_to_game}"

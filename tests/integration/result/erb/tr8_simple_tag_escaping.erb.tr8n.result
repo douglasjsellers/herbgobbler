@@ -1,1 +1,1 @@
-<%= tr( "I had a [b: dream] and it would not die", nil, { :b => "<b>{$0}</b>" } ) %>
+<%= tr( "I had a [b: dream] and it would not die", nil, { :b => ("<b>{$0}</b>") } ) %>

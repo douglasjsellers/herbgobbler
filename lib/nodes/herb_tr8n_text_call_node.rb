@@ -128,7 +128,7 @@ class HerbTr8nTextCallNode
       unless( self.variables.empty? )
         to_return += ", nil, { "
         self.variables.each do |variable_name_value|
-          to_return += ":#{variable_name_value.first} => #{variable_name_value.last}"
+          to_return += ":#{variable_name_value.first} => (#{variable_name_value.last})"
           to_return += ", " unless variable_name_value == variables.last
         end
         to_return += " }"
