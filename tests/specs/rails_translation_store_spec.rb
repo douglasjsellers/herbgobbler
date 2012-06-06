@@ -143,6 +143,20 @@ SIMPLE_KEY_VALUE
     
   end
 
+  it "should be able to handle underscore prefixed templates following rails i18n conventions" do
+    store = RailsTranslationStore.new
+    store.start_new_context( "test/_test" )
+    store.add_translation( "key", "value" )
+
+    resulting_string =<<SIMPLE_KEY_VALUE
+en:
+  test:
+    test:
+      key: "value"
+SIMPLE_KEY_VALUE
+    store.serialize.should == resulting_string.strip
+  end
+
   it "should be able to handle multiple contexts with multiple keys" do
     store = RailsTranslationStore.new
     store.start_new_context( "test" )
