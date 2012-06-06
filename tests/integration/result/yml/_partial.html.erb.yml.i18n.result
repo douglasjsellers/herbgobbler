@@ -2,5 +2,5 @@ en:
   tests:
     integration:
       test:
-        _partial:
+        partial:
           i_am_a_partial: "I am a partial"

@@ -17,7 +17,10 @@ class BaseTranslationStore
   end
   
   def start_new_context( new_context )
-    @context = new_context
+    # Rails does not allow contexts that begin with an underscore. If we are
+    # converting erb partials that start with underscores we want to ensure
+    # we strip those so that we handle Rails i18n conventions properly.
+    @context = new_context.gsub(/(^|\/)_/, '\1')
   end
   
   def add_translation( key, value )
