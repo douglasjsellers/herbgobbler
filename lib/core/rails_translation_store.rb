@@ -50,16 +50,28 @@ class RailsTranslationStore < BaseTranslationStore
   # and serialize the hash
   def serialize
     to_return = "#{@language}:\n"
-    last_context = nil
+    last_context_array = []
     self.each do |context, key, value|
       whitespace_depth = 2
+      new_context_array = []
       context_array = context.split('/')
-      context_array.each do |split_context|
-        to_return << "#{build_whitespace( whitespace_depth )}#{split_context}:\n" 
+
+      context_array.zip(last_context_array) do |new, old|
+        if new != old || new_context_array.any?
+          new_context_array << new
+        else
+          new_context_array << nil
+        end
+      end
+
+      new_context_array.each do |split_context|
+        if split_context != nil
+          to_return << "#{build_whitespace( whitespace_depth )}#{split_context}:\n"
+        end
         whitespace_depth += 2
-      end unless context == last_context
-        to_return << "#{build_whitespace( 2 + 2 * context_array.length )}#{key}: \"#{escape(value)}\"\n"
-      last_context = context
+      end
+      to_return << "#{build_whitespace( 2 + 2 * context_array.length )}#{key}: \"#{escape(value)}\"\n"
+      last_context_array = context_array
     end
     
     to_return.chomp
