@@ -29,7 +29,7 @@ describe I18nKey do
 
   it "should remove the extra html tags" do
     text_call = I18nKey.new( ' Doug<a href="www.google">is great</a>yay!' )
-    text_call.key_value.should == "doug_is_great"
+    text_call.key_value.should == "doug_is_great_html"
   end
 
   it "should handle line breaks correctly" do
@@ -39,7 +39,7 @@ Doug
                                 yay!
 TEXT
     text_call = I18nKey.new( text )
-    text_call.key_value.should == "doug_is_great"
+    text_call.key_value.should == "doug_is_great_html"
   end
 
   it "should be able to eliminate the pipe character as a possible character" do
