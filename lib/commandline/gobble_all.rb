@@ -48,7 +48,7 @@ class GobbleAll
     rails_view_directory = "#{@rails_root}/app/views"
     full_yml_file_path = "#{@rails_root}/config/locales/#{locale_file_name}"
     
-    rails_translation_store = RailsTranslationStore.new
+    rails_translation_store = RailsTranslationStore.load_from_file( full_yml_file_path )
     text_extractor = RailsTextExtractor.new( rails_translation_store )
     
     Dir["#{rails_view_directory}/**/*html.erb" ].each do |full_erb_file_path|
