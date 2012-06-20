@@ -83,7 +83,7 @@ class ErbFile
   end
   
   def ErbFile.load( file_path )
-    ErbFile.parse( File.read( file_path ) )
+    ErbFile.parse( File.read( file_path, encoding: Encoding::UTF_8 ) )
   end
 
   def serialize
