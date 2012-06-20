@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        link_tag_combining:
+          remove_project: "Remove project"

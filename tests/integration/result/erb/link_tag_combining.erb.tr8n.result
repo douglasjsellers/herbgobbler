@@ -1,0 +1,6 @@
+<%= link_to project_path(@project),
+      :method => :delete,
+      :confirm => 'Remove project?',
+      :id => 'remove_project' do %>
+  <span class='remove_project'><%= tr( "Remove project" ) %></span>
+<% end -%>
