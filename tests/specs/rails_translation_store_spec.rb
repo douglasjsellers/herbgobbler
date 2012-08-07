@@ -265,13 +265,17 @@ VALUE_STRING
   it "should be able to load an existing yml file" do
     yaml_string =<<YAML_STRING
 en:
-  test:
-    key: "value"
+  key1:
+    key1-1:
+      key1-1-1: value1
+    key1-2:
+      key1-2-1: value2
 YAML_STRING
 
     store = RailsTranslationStore.load_from_string( yaml_string )
     yaml_result = YAML.load( store.serialize )    
-    yaml_result['en']['test']['key'].should == 'value'
+    yaml_result['en']['key1']['key1-1']['key1-1-1'].should == 'value1'
+    yaml_result['en']['key1']['key1-2']['key1-2-1'].should == 'value2'
   end
 
   it "should be able to load an existing yml file with much deeper nesting of files" do
