@@ -27,9 +27,10 @@ class RailsTranslationStore < BaseTranslationStore
     to_return
   end
 
-  def self.process_yaml_pair( translation_store, key, value, directory_like_key )
+  def self.process_yaml_pair( translation_store, key, value, base_directory_like_key )
     if( value.is_a?( Hash ) )
       value.each_pair do |key, value|
+        directory_like_key = base_directory_like_key
         if( value.is_a?( Hash ) )
           directory_like_key = "#{directory_like_key}/" unless directory_like_key.empty?
           directory_like_key = "#{directory_like_key}#{key}"
@@ -38,7 +39,7 @@ class RailsTranslationStore < BaseTranslationStore
       end
       translation_store
     else
-      translation_store.start_new_context( directory_like_key )      
+      translation_store.start_new_context( base_directory_like_key )
       translation_store.add_translation( key, value )
       translation_store
     end
