@@ -1,0 +1,7 @@
+<div>
+    <%= t '.laquo' %>
+    <% if true %>
+        <%= t '.text' %>
+    <% end %>
+    <%= t '.raquo' %>
+</div>
