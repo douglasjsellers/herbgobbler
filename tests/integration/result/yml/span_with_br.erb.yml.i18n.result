@@ -3,5 +3,5 @@ en:
     integration:
       test:
         span_with_br:
-          foo: "<span>Foo"
-          bar: "bar</span>\n</a>"
+          foo_html: "<span>Foo"
+          bar_html: "bar</span>\n</a>"

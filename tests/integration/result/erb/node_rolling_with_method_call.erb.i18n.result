@@ -1,1 +1,1 @@
-<li><%= t '.member_since', :medium_format => (medium_format_date @user.created_at) %></li>
+<li><%= t '.member_since_html', :medium_format => (medium_format_date @user.created_at) %></li>

@@ -1,2 +1,2 @@
-    <%= t '.you_rsquo_ve' %><br/>
-    <%= t '.register_today' %>
+    <%= t '.you_rsquo_ve_html' %><br/>
+    <%= t '.register_today_html' %>

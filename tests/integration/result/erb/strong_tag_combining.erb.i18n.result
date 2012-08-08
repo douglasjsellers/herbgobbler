@@ -1,1 +1,1 @@
-<%= t '.downloads_of', :number_with => (number_with_delimiter(@downloads_count)), :number_with_1 => (number_with_delimiter(@rubygems_count)) %>
+<%= t '.downloads_of_html', :number_with => (number_with_delimiter(@downloads_count)), :number_with_1 => (number_with_delimiter(@rubygems_count)) %>

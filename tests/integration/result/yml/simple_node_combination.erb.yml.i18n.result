@@ -3,4 +3,4 @@ en:
     integration:
       test:
         simple_node_combination:
-          this_is_a_test: "This is a <a href=\"/test\">test</a> of the emergency Twitter system!  TWEEEEEETTTTT"
+          this_is_a_test_html: "This is a <a href=\"/test\">test</a> of the emergency Twitter system!  TWEEEEEETTTTT"

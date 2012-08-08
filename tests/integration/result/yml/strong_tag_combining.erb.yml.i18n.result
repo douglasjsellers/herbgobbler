@@ -3,4 +3,4 @@ en:
     integration:
       test:
         strong_tag_combining:
-          downloads_of: "<strong>%{number_with}\ndownloads</strong> of %{number_with_1} gems cut since july 2009"
+          downloads_of_html: "<strong>%{number_with}\ndownloads</strong> of %{number_with_1} gems cut since july 2009"

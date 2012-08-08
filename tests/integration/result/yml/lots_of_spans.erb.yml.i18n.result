@@ -3,5 +3,5 @@ en:
     integration:
       test:
         lots_of_spans:
-          you_rsquo_ve: "You&rsquo;ve earned <span class=\"emphasis\"><span id='guest_accomplishments'></span> badges</span> with <span id='guest_points' class=\"emphasis\"></span> points!"
-          register_today: "<strong>Register today</strong> to save your progress."
+          you_rsquo_ve_html: "You&rsquo;ve earned <span class=\"emphasis\"><span id='guest_accomplishments'></span> badges</span> with <span id='guest_points' class=\"emphasis\"></span> points!"
+          register_today_html: "<strong>Register today</strong> to save your progress."

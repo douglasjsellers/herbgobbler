@@ -322,7 +322,7 @@ grammar ERBGrammer
         end
 
         rule tag_text
-            (!'>' ( tag_to_process / erb_block / erb_string / . ) )* <NonTextNode>
+            (!'>' !'/>' ( tag_to_process / erb_block / erb_string / . ) )* <NonTextNode>
             {
                def node_name
                    "tag_text"

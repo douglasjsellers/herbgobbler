@@ -3,4 +3,4 @@ en:
     integration:
       test:
         multiple_tags_of_same_name:
-          message_queue: "Message Queue:\n  <span class=\"health-numbers-number-highlighted health-mqsize-current\">\n    %{servervalue}\n  </span>\n  <span class=\"health-numbers-label\">in queue</span>"
+          message_queue_html: "Message Queue:\n  <span class=\"health-numbers-number-highlighted health-mqsize-current\">\n    %{servervalue}\n  </span>\n  <span class=\"health-numbers-label\">in queue</span>"
