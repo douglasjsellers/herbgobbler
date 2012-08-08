@@ -34,7 +34,7 @@ describe RailsTextExtractor do
     text_extractor = RailsTextExtractor.new    
     erb_file.extract_text( text_extractor )
     erb_file.nodes.size.should == 1
-    erb_file.nodes.first.text_value.should == "<%= t '.blah_yay' %>"
+    erb_file.nodes.first.text_value.should == "<%= t '.blah_yay_html' %>"
   end
 
   it "should be able to combine several text nodes passed in to a single value" do
