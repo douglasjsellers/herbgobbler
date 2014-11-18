@@ -359,7 +359,7 @@ grammar ERBGrammer
         end
 
         rule text_html_entity
-             !non_breaking_space ('&' ([a-zA-Z0-9])+ ';') <TextNode>
+             !non_breaking_space ('&' ([a-zA-Z0-9])+ ';') <NonTextNode>
              {
                 def can_be_combined?
                     true

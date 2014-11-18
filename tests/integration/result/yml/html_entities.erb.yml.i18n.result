@@ -3,6 +3,4 @@ en:
     integration:
       test:
         html_entities:
-          laquo: "&laquo;"
           text: "text"
-          raquo: "&raquo;"

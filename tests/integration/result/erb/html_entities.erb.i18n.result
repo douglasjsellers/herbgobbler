@@ -1,7 +1,7 @@
 <div>
-    <%= t '.laquo' %>
+    &laquo;
     <% if true %>
         <%= t '.text' %>
     <% end %>
-    <%= t '.raquo' %>
+    &raquo;
 </div>

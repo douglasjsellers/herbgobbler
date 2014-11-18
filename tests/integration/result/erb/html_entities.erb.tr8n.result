@@ -1,7 +1,7 @@
 <div>
-    <%= tr( "{laquo}" ) %>
+    &laquo;
     <% if true %>
         <%= tr( "text" ) %>
     <% end %>
-    <%= tr( "{raquo}" ) %>
+    &raquo;
 </div>
