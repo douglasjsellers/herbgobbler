@@ -39,7 +39,7 @@ Getting started with the HerbGobbler is easy:
 
           $ gem install herbgobbler
 
-If you're on an ald version of Rubygems (before 1.3.6)
+If you're on an old version of Rubygems (before 1.3.6)
           
           $ gem update --system
 
