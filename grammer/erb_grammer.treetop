@@ -10,11 +10,13 @@ grammar ERBGrammer
                html_start_tag / 
                html_self_contained / 
                text_html_entity / 
+               paren / 
                whitespace / 
                text 
              ) (erb)*
          end
 
+         
         rule method_names             
              "link_to_function" / "link_to" / "button_to" <NonTextNode>
              {
@@ -26,6 +28,20 @@ grammar ERBGrammer
                 end
              }
         end
+
+        rule paren
+            "(" <TextNode>
+            {
+                def node_name
+                    "text"
+                end
+
+                def can_be_combined?
+                    true
+                end
+
+            }
+        end 
 
         rule comma
             "," <NonTextNode>

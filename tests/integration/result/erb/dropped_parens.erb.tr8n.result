@@ -1,0 +1,1 @@
+<%= tr( "({minimum} characters minimum)", nil, { :minimum => (@minimum_password_length) } ) %>

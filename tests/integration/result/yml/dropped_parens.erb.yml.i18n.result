@@ -1,0 +1,6 @@
+en:
+  tests:
+    integration:
+      test:
+        dropped_parens:
+          characters: "(%{minimum} characters minimum)"
