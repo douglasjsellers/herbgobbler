@@ -52,8 +52,7 @@ class GobbleAll
     text_extractor = RailsTextExtractor.new( rails_translation_store )
     
     Dir["#{rails_view_directory}/**/*html.erb" ].each do |full_erb_file_path|
-      
-      erb_file = full_erb_file_path.gsub( @rails_root, '' )
+      erb_file = full_erb_file_path[@rails_root.length,full_erb_file_path.length]
       rails_translation_store.start_new_context( convert_path_to_key_path( erb_file.to_s ) )
       erb_file = ErbFile.load( full_erb_file_path )
       erb_file.extract_text( text_extractor )
