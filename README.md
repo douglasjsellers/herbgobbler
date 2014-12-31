@@ -58,6 +58,13 @@ The Herbgobbler also has experimental <a href="https://github.com/tr8n/tr8n">tr8
 
 The Herbgobbler will rewrite your erb files with tr8n embed (tr) tags.  This is a more beta feature than the rest of the Herbgobbler.  If you discover any problems please submit a bug through github being sure to include the block of erb that is causing problems.
 
+Command Line Options
+--------------------
+HerbGobbler provides several command line options to make text extraction simppler
+* -a / --path : Defines the root of the Rails project
+* -e / --extension : Defines the extension of the files that will be converted, without a preceeding period.
+* -f / --file : Defines a single file to extract text from
+
 Customizing the HerbGobbler
 ----------------------------
 If you are interested in exporting text to a different data store than the default rails i18n format (en.yml), this can be done by implementing a <a href="https://github.com/douglasjsellers/herbgobbler/blob/master/lib/core/base_translation_store.rb">TranslationStore</a>.  
