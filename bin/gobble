@@ -1,42 +1,50 @@
 #!/usr/bin/env ruby
 require 'herbgobbler'
+require 'optparse'
 
 def print_usage
   puts " ***** HerbGobbler Usage ***** "
   puts
   puts "Options "
   puts "tr8n | i18n : Use the normal rails i18n output format or use tr8n output"
-  puts "-a : Process an entire Rails Code Base"
+  puts "-a : Process an entire Rails Code Base : Default is the current directory"
   puts "-e : Use a custom file extension : Default is .html.erb"
   puts "-f <full path to file> : Process a single file"
   puts
   puts "Usage: gobble tr8n -a <rails root>"
 end
 
-if( ARGV.length < 3 )
+options = {}
+OptionParser.new do |opts|
+  opts.on("-e", "--extension EXTENSION", "Custom extension") do |v|
+    options[:extension] = v
+  end
+
+  opts.on("-a", "--path RAILSROOT", "Specify the root of the rails project") do |v|
+    options[:path] = v
+  end
+
+  opts.on("-f", "--file FILEPATH", "Specify a single file to process") do |v|
+    options[:file] = v
+  end
+end.parse!
+
+type = ARGV.pop
+ext = options[:extension] || "html.erb"
+path = options[:path] || "."
+file = options[:file]
+
+if !type
   print_usage
 else
-  type = ARGV.shift
-  option = ARGV.shift
-  rails_root = ARGV.pop
-  case option
-  when "-a"
-    command_line_object = GobbleAll.new( rails_root, type, ext, ARGV )    
-  when "-f"
-    command_line_object = GobbleSingleFile.new( rails_root, type, ARGV )
+  if path
+    command_line_executable = GobbleAll.new( path, type, ext, ARGV ) 
+  elsif file
+    command_line_executable = GobbleSingleFile.new( path, type, ARGV )
   else
     print_usage
   end
-  
-  
-  if( !command_line_object.nil? && command_line_object.valid? )
-    command_line_object.execute    
-  else
-    print_usage
+  if !command_line_executable.nil? && command_line_executable.valid?
+    command_line_executable.execute
   end
-  
-
-
-  
 end
-
