@@ -53,10 +53,17 @@ The HerbGobbler is very much beta software.  It attempts to implement the best p
 
 Experimental TR8N Support
 -------------------------
-The Herbgobbler also has experimental <a href="http://www.tr8n.net/">tr8n</a> support.  By running:
+The Herbgobbler also has experimental <a href="https://github.com/tr8n/tr8n">tr8n</a> support.  By running:
           $ gobble -tr8n -a ~/my/rails/root
 
 The Herbgobbler will rewrite your erb files with tr8n embed (tr) tags.  This is a more beta feature than the rest of the Herbgobbler.  If you discover any problems please submit a bug through github being sure to include the block of erb that is causing problems.
+
+Command Line Options
+--------------------
+HerbGobbler provides several command line options to make text extraction simppler
+* -a / --path : Defines the root of the Rails project
+* -e / --extension : Defines the extension of the files that will be converted, without a preceeding period.
+* -f / --file : Defines a single file to extract text from
 
 Customizing the HerbGobbler
 ----------------------------
