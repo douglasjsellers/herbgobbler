@@ -37,14 +37,14 @@ file = options[:file]
 if !type
   print_usage
 else
-  if path
-    command_line_executable = GobbleAll.new( path, type, ext, ARGV ) 
-  elsif file
-    command_line_executable = GobbleSingleFile.new( path, type, ARGV )
+  if file
+    command_line_executable = GobbleSingleFile.new( path, type, file, ARGV )
+  elsif path
+    command_line_executable = GobbleAll.new( path, type, ext, ARGV )
   else
     print_usage
   end
-  if !command_line_executable.nil? && command_line_executable.valid?
+  if !command_line_executable.nil?
     command_line_executable.execute
   end
 end
